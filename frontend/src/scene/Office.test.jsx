@@ -1,16 +1,32 @@
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { afterEach, expect, test, vi } from 'vitest'
+import { afterEach, beforeEach, expect, test, vi } from 'vitest'
 import Office from './Office'
 
-const simulation = vi.hoisted(() => ({ webgl: false }))
+const simulation = vi.hoisted(() => ({ webgl: false, error: null, onCreated: null }))
 // Exercise orchestration without a GPU; real GLB deformation is verified separately.
-vi.mock('@react-three/fiber', () => ({ Canvas: ({ fallback, children, shadows, dpr, frameloop }) => simulation.webgl ? <div data-testid="scene" data-mode={children.props.mode} data-shadows={String(shadows)} data-dpr={String(dpr)} data-loop={frameloop}><button onClick={children.props.character.onReady}>Model ready</button><button onClick={children.props.character.onArrive}>Character arrived</button></div> : fallback }))
+vi.mock('@react-three/fiber', () => ({ Canvas: ({ fallback, children, shadows, dpr, frameloop, onCreated }) => {
+  simulation.onCreated = onCreated
+  if (simulation.error) throw simulation.error
+  return <><canvas data-testid="native-canvas">{fallback}</canvas>{simulation.webgl && <div data-testid="scene" data-stage={children.props.stage || 'cube'} data-mode={children.props.mode} data-shadows={String(shadows)} data-dpr={String(dpr)} data-loop={frameloop}><button onClick={children.props.character?.onReady || children.props.onReady}>Model ready</button><button onClick={children.props.character?.onArrive}>Character arrived</button></div>}</>
+} }))
 vi.mock('@react-three/drei', () => ({ Image: () => null, OrbitControls: () => null }))
-afterEach(() => { cleanup(); simulation.webgl = false; vi.useRealTimers(); vi.unstubAllGlobals() })
+beforeEach(() => { vi.spyOn(console, 'info').mockImplementation(() => {}); vi.spyOn(console, 'error').mockImplementation(() => {}) })
+afterEach(() => { cleanup(); simulation.webgl = false; simulation.error = null; simulation.onCreated = null; window.history.replaceState({}, '', '/'); vi.useRealTimers(); vi.unstubAllGlobals(); vi.restoreAllMocks() })
+
+test('native canvas fallback content mounting must not mark a working renderer as failed', () => {
+  simulation.webgl = true
+  render(<Office/> )
+  expect(screen.getByTestId('native-canvas')).toBeInTheDocument()
+  expect(screen.getByTestId('scene')).toBeInTheDocument()
+  fireEvent.click(screen.getByRole('button', { name: 'Model ready' }))
+  expect(screen.getByTestId('scene')).toHaveAttribute('data-mode', 'walking')
+})
 
 test('every office destination remains available when WebGL is unsupported', () => {
+  simulation.error = new Error('WebGL2 context creation failed')
   render(<Office/> )
-  expect(screen.getByText(/WebGL unavailable/)).toBeVisible()
+  expect(screen.getByText(/^3D unavailable\. Use/)).toBeVisible()
+  expect(console.error).toHaveBeenCalledWith('[portfolio:3d] scene-render', simulation.error, expect.objectContaining({ componentStack: expect.any(String) }))
   for (const [object, link, href] of [
     ['Monitor', 'View project areas', '#projects'],
     ['Portrait', 'Read about me', '#about'],
@@ -66,7 +82,33 @@ test('a stalled model load releases the loading screen and retains destinations'
   act(() => vi.advanceTimersByTime(25000))
   fireEvent.click(screen.getByRole('button', { name: /Books/ }))
   expect(screen.queryByText('Loading the 3D workspace')).not.toBeInTheDocument()
+  expect(screen.getByText(/load-timeout:/)).toBeVisible()
+  expect(console.error).toHaveBeenCalledWith('[portfolio:3d] load-timeout', expect.any(Error), expect.objectContaining({ canvasCreated: false }))
   expect(screen.getByRole('link', { name: /View my education/ })).toHaveAttribute('href', '#education')
+})
+
+test('context loss is caught before the character loads and reports its reason', () => {
+  simulation.webgl = true
+  render(<Office/> )
+  const canvas = screen.getByTestId('native-canvas')
+  act(() => simulation.onCreated({ gl: { domElement: canvas, getContext: () => ({ isContextLost: () => false }) }, size: { width: 800, height: 460 } }))
+  const event = new Event('webglcontextlost', { cancelable: true })
+  act(() => canvas.dispatchEvent(event))
+  expect(event.defaultPrevented).toBe(true)
+  expect(screen.getByText(/context-lost:/)).toBeVisible()
+  expect(console.error).toHaveBeenCalledWith('[portfolio:3d] context-lost', expect.any(Error), expect.objectContaining({ modelUrl: '/models/businesswoman.glb' }))
+  // A subsequent teardown event must not produce a second misleading failure.
+  act(() => canvas.dispatchEvent(new Event('webglcontextlost')))
+  expect(console.error.mock.calls.filter(([label]) => label === '[portfolio:3d] context-lost')).toHaveLength(1)
+})
+
+test.each(['cube', 'office'])('development isolation stage %s selects only the requested scene', stage => {
+  simulation.webgl = true
+  window.history.replaceState({}, '', `/?scene=${stage}`)
+  render(<Office/> )
+  expect(screen.getByTestId('scene')).toHaveAttribute('data-stage', stage)
+  fireEvent.click(screen.getByRole('button', { name: 'Model ready' }))
+  expect(screen.getByRole('heading', { name: /Building a future/ })).toBeVisible()
 })
 
 test('rendering pauses outside the viewport and resumes when visible', () => {

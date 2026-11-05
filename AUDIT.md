@@ -1,3 +1,27 @@
+# Fallback correction - 2026-11-05
+
+Confirmed root cause: `Unsupported` called `onFailure()` when native Canvas
+fallback children mounted, even on a working WebGL renderer. The installed R3F
+Canvas always includes those DOM children. A regression using those semantics
+failed before the fix. The fallback is now inert markup; only genuine errors,
+context events or a readiness timeout can activate the application fallback.
+
+Added development-only reason/error/stack logs, actual application renderer/context
+inspection, asset boundaries, and isolated cube/office/character diagnostic URLs.
+Context-loss listeners attach before character readiness and detach before teardown.
+The first error is retained. There is no localStorage/sessionStorage preference
+persistence. Verified model filename and URL: businesswoman.glb at
+/models/businesswoman.glb. Fixed favicon separately with SVG, ICO and explicit links.
+
+Validation: 19 frontend tests passed, including a real R3F reconciler cube draw with
+a substituted renderer backend, fallback mounting regression, error paths, context
+loss and production logging guards. Lint and the real GLTFLoader asset check passed.
+Production build passed; the optional 3D chunk still exceeds the 500 KB advisory.
+Browser host unavailable, so no actual Chrome GPU/rendered verification is claimed.
+See DEBUGGING_3D.md for every fallback condition and Chrome verification steps.
+
+---
+
 # Phase 3 verification - 2026-11-05
 
 Incremental character/entrance milestone; previous audit entries below are historical.

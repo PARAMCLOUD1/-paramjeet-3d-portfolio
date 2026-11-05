@@ -4,10 +4,11 @@ import { useAnimations, useGLTF } from '@react-three/drei'
 import { clone } from 'three/addons/utils/SkeletonUtils.js'
 import { MathUtils, Vector3 } from 'three'
 import { CAMERA_END, CAMERA_START, CAMERA_TARGET, ROUTE, sampleRoute, smoothstep, WALK_DURATION } from './entrance'
+import { CHARACTER_URL, reportScene } from './diagnostics'
 
 export default function Character({ mode, run, active, reducedMotion, compact, controls, onReady, onArrive }) {
   // Local, uncompressed GLB: no remote decoder, texture or animation dependency.
-  const { scene, animations } = useGLTF('/models/businesswoman.glb', false, false)
+  const { scene, animations } = useGLTF(CHARACTER_URL, false, false)
   const model = useMemo(() => {
     const copy = clone(scene)
     copy.traverse(object => {
@@ -27,7 +28,10 @@ export default function Character({ mode, run, active, reducedMotion, compact, c
   const { camera, invalidate } = useThree()
   const vectors = useMemo(() => ({ from: new Vector3(...CAMERA_START), to: new Vector3(...CAMERA_END), target: new Vector3(...CAMERA_TARGET), look: new Vector3() }), [])
 
-  useEffect(() => { onReady() }, [onReady])
+  useEffect(() => {
+    reportScene('character-loaded', { url: CHARACTER_URL, clips: animations.map(clip => clip.name) })
+    onReady()
+  }, [onReady, animations])
   useEffect(() => {
     elapsed.current = 0
     arrived.current = false

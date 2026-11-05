@@ -5,7 +5,7 @@ const Office = lazy(() => import('./scene/Office'))
 
 export default function App() {
   const [menu, setMenu] = useState(false)
-  const [workspace, setWorkspace] = useState(false)
+  const [workspace, setWorkspace] = useState(() => import.meta.env.DEV && ['cube', 'office', 'character'].includes(new URLSearchParams(window.location.search).get('scene')))
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
     <header><a className="brand" href="#main">PARAMJEET<span>.DEV</span></a><button className="menu-button" aria-expanded={menu} aria-controls="navigation" onClick={() => setMenu(!menu)}>Menu {menu ? '−' : '+'}</button><nav id="navigation" className={menu ? 'open' : ''} aria-label="Main navigation">{[['Workspace', 'workspace'], ['Projects', 'projects'], ['About', 'about'], ['Skills', 'skills'], ['Contact', 'contact']].map(([label, id]) => <a key={id} href={'#' + id} onClick={() => setMenu(false)}>{label}</a>)}<a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub ↗</a></nav></header>

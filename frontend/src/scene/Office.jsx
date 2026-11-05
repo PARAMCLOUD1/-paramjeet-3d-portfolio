@@ -1,10 +1,14 @@
-import { Component, Suspense, useCallback, useEffect, useRef, useState } from 'react'
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Image, OrbitControls } from '@react-three/drei'
 import { destinations } from '../content'
 import Character from './Character'
 import useScenePreferences from './useScenePreferences'
 import { CAMERA_END, CAMERA_START, CAMERA_TARGET } from './entrance'
+import { CHARACTER_URL, PORTRAIT_URL, createOfficeRenderer, diagnosticStage, reportScene } from './diagnostics'
+import CanvasFallback from './CanvasFallback'
+import SceneBoundary from './SceneBoundary'
+import DiagnosticCube from './DiagnosticCube'
 
 function Box({ position, size, color, ...props }) {
   return <mesh position={position} castShadow receiveShadow {...props}><boxGeometry args={size}/><meshStandardMaterial color={color} roughness={0.7}/></mesh>
@@ -12,7 +16,12 @@ function Box({ position, size, color, ...props }) {
 function Hotspot({ id, onSelect, children }) {
   return <group onClick={event => { event.stopPropagation(); onSelect(id) }}>{children}</group>
 }
-function Room({ onSelect, controls, mode, compact, character }) {
+function Room({ onSelect, controls, mode, compact, character, stage, onFailure }) {
+  const { onReady } = character
+  useEffect(() => {
+    reportScene('office-mounted', { stage })
+    if (stage === 'office') onReady()
+  }, [stage, onReady])
   return <>
     <color attach="background" args={['#111c2a']}/>
     <hemisphereLight args={['#d7e9f3', '#45413b', 1.6]}/><directionalLight position={[2, 7, 5]} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.035} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5}/>
@@ -56,7 +65,7 @@ function Room({ onSelect, controls, mode, compact, character }) {
     </Hotspot>
     <Hotspot id="about" onSelect={onSelect}>
       <Box position={[-1.7, 2.6, -2.55]} size={[1.04, 1.2, 0.1]} color="#b29370"/>
-      <Suspense fallback={null}><Image url="/images/profile.webp" position={[-1.7, 2.6, -2.485]} scale={[0.9, 1.05]} toneMapped={false}/></Suspense>
+      {stage === 'character' && <SceneBoundary stage="portrait-load" onFailure={onFailure}><Suspense fallback={null}><Image url={PORTRAIT_URL} position={[-1.7, 2.6, -2.485]} scale={[0.9, 1.05]} toneMapped={false}/></Suspense></SceneBoundary>}
     </Hotspot>
     <Box position={[1.6, 2.5, -2.4]} size={[1.5, 0.08, 0.45]} color="#b29370"/>
     <Hotspot id="education" onSelect={onSelect}>
@@ -64,7 +73,7 @@ function Room({ onSelect, controls, mode, compact, character }) {
     </Hotspot>
     <mesh position={[2.8, 0.36, -0.8]} castShadow><cylinderGeometry args={[0.28, 0.22, 0.7, 12]}/><meshStandardMaterial color="#9d866c"/></mesh>
     {[0, 1, 2].map(i => <mesh key={i} position={[2.8 + (i - 1) * 0.14, 0.95 + i * 0.12, -0.8]} rotation={[0, i, (i - 1) * 0.3]} castShadow><sphereGeometry args={[0.23, 12, 8]}/><meshStandardMaterial color="#526e58"/></mesh>)}
-    <Suspense fallback={null}><Character {...character} mode={mode} compact={compact} controls={controls}/></Suspense>
+    {stage === 'character' && <SceneBoundary stage="character-load-or-animation" onFailure={onFailure}><Suspense fallback={null}><Character {...character} mode={mode} compact={compact} controls={controls}/></Suspense></SceneBoundary>}
     <OrbitControls ref={controls} makeDefault enabled={mode !== 'walking' && mode !== 'loading'} enableDamping={false} enablePan={false} minDistance={5} maxDistance={13} minPolarAngle={0.4} maxPolarAngle={1.5} target={CAMERA_TARGET}/>
   </>
 }
@@ -81,33 +90,49 @@ function CloudDiagram() {
   </group>
 }
 
-class Boundary extends Component {
-  state = { failed: false }
-  static getDerivedStateFromError() { return { failed: true } }
-  componentDidCatch() { this.props.onFailure() }
-  render() { return this.state.failed ? <p className="scene-fallback" role="status">3D is unavailable on this device. Use the workspace links below or explore the portfolio sections.</p> : this.props.children }
-}
-function Unsupported({ onFailure }) {
-  useEffect(() => { onFailure() }, [onFailure])
-  return <p className="scene-fallback" role="status">WebGL unavailable. Use the workspace links below.</p>
-}
 export default function Office() {
   const [selected, setSelected] = useState(null)
   const [mode, setMode] = useState('loading')
   const [ready, setReady] = useState(false)
   const [run, setRun] = useState(0)
-  const [failed, setFailed] = useState(false)
+  const [failure, setFailure] = useState(null)
+  const [stage] = useState(() => diagnosticStage(window.location.search))
   const [lightweight, setLightweight] = useState(false)
   const container = useRef()
   const controls = useRef()
   const canvas = useRef()
+  const detachContextEvents = useRef(() => {})
   const { reducedMotion, compact, active } = useScenePreferences(container)
   const lowQuality = compact || lightweight
   const walking = mode === 'walking' && !reducedMotion
+  const failed = Boolean(failure)
   const showIntroduction = mode === 'idle' || reducedMotion || failed
-  const onReady = useCallback(() => { setReady(true); setMode(current => current === 'loading' ? reducedMotion ? 'idle' : 'walking' : current) }, [reducedMotion])
+  const onReady = useCallback(() => { setReady(true); setMode(current => current === 'loading' ? reducedMotion || stage !== 'character' ? 'idle' : 'walking' : current) }, [reducedMotion, stage])
   const onArrive = useCallback(() => setMode('idle'), [])
-  const onFailure = useCallback(() => setFailed(true), [])
+  const onFailure = useCallback((error, reason = 'scene-render', detail = {}) => {
+    reportScene(reason, { stage, modelUrl: CHARACTER_URL, portraitUrl: PORTRAIT_URL, ...detail }, error)
+    // Renderer teardown may intentionally lose its context. Preserve the original
+    // failure and detach before unmount so teardown cannot masquerade as its cause.
+    detachContextEvents.current()
+    setFailure(current => current || { reason, message: error?.message || String(error) })
+  }, [stage])
+  const onCreated = useCallback(({ gl, size }) => {
+    canvas.current = gl.domElement
+    detachContextEvents.current()
+    const lost = event => {
+      event.preventDefault()
+      onFailure(new Error(event.statusMessage || 'The application WebGL context was lost.'), 'context-lost')
+    }
+    const creationError = event => onFailure(new Error(event.statusMessage || 'WebGL context creation failed.'), 'context-creation-error')
+    gl.domElement.addEventListener('webglcontextlost', lost)
+    gl.domElement.addEventListener('webglcontextcreationerror', creationError)
+    detachContextEvents.current = () => {
+      gl.domElement.removeEventListener('webglcontextlost', lost)
+      gl.domElement.removeEventListener('webglcontextcreationerror', creationError)
+    }
+    reportScene('canvas-created', { stage, width: size.width, height: size.height, contextLost: gl.getContext().isContextLost() })
+  }, [onFailure, stage])
+  const createRenderer = useCallback(defaults => createOfficeRenderer({ ...defaults, antialias: !lowQuality, powerPreference: 'low-power' }), [lowQuality])
   const resetView = () => {
     if (!controls.current) return
     controls.current.object.position.set(...CAMERA_END)
@@ -116,29 +141,26 @@ export default function Office() {
   }
   useEffect(() => {
     if (ready || failed) return
-    const timeout = window.setTimeout(() => setFailed(true), 25000)
+    const timeout = window.setTimeout(() => onFailure(new Error(`The ${stage} scene did not become ready within 25 seconds.`), 'load-timeout', { canvasCreated: Boolean(canvas.current) }), 25000)
     return () => window.clearTimeout(timeout)
-  }, [ready, failed])
+  }, [ready, failed, onFailure, stage])
   useEffect(() => {
-    const element = canvas.current
-    if (!element) return
-    const lost = event => { event.preventDefault(); setFailed(true) }
-    element.addEventListener('webglcontextlost', lost)
-    return () => element.removeEventListener('webglcontextlost', lost)
-  }, [ready])
+    reportScene('scene-start', { stage, modelUrl: CHARACTER_URL, reducedMotion, compact, storedPreferences: 'none; no localStorage or sessionStorage is read' })
+  }, [stage, reducedMotion, compact])
+  useEffect(() => () => detachContextEvents.current(), [])
   const destination = destinations.find(item => item.id === selected)
   return <>
     <div ref={container} className="office-experience">
       <div className="entrance-toolbar"><p role="status">{failed ? '3D unavailable — explore the portfolio below' : !ready ? 'Preparing the office and character…' : walking ? 'Entering the cloud workspace' : 'The workspace is yours to explore'}</p><div>{walking || mode === 'loading' ? <button onClick={onArrive}>Skip entrance</button> : <button disabled={!ready || failed || reducedMotion} onClick={() => { setRun(value => value + 1); setMode('walking') }}>Replay entrance</button>}<button aria-pressed={lightweight} onClick={() => setLightweight(value => !value)}>Low graphics</button></div></div>
       <p className="character-caption">CC0 placeholder character · Personalized likeness pending{reducedMotion ? ' · Reduced motion enabled' : ''}</p>
-      <Boundary onFailure={onFailure}><div className="canvas-wrap" role="group" aria-label="Interactive 3D office with an animated female placeholder, laptop, cloud diagram, monitor, portrait, server and books. Equivalent controls follow.">
-        {failed ? <p className="scene-fallback" role="status">WebGL unavailable, the model could not load, or the graphics context was lost. Use the workspace links below. Switch to 2D and reload the workspace to retry.</p> : <>
+      <div className="canvas-wrap" role="group" aria-label="Interactive 3D office with an animated female placeholder, laptop, cloud diagram, monitor, portrait, server and books. Equivalent controls follow.">
+        {failed ? <p className="scene-fallback" role="status">3D unavailable. Use the workspace links below. Switch to 2D and reload the workspace to retry.{import.meta.env.DEV && <><br/><small>{failure.reason}: {failure.message}</small></>}</p> : <SceneBoundary onFailure={onFailure}>
           {!ready && <div className="office-loading" role="status"><p>Loading the 3D workspace</p><span>Preparing character, lighting and materials</span><a href="#about">Continue to the introduction ↓</a></div>}
-          <Canvas shadows={!lowQuality} frameloop={active ? 'demand' : 'never'} dpr={lowQuality ? 1 : [1, 1.5]} gl={{ antialias: !lowQuality, powerPreference: 'low-power' }} camera={{ position: reducedMotion || mode === 'idle' ? CAMERA_END : CAMERA_START, fov: 40 }} onCreated={({ gl }) => { canvas.current = gl.domElement }} fallback={<Unsupported onFailure={onFailure}/>}>
-            <Room onSelect={setSelected} controls={controls} mode={reducedMotion ? 'idle' : mode} compact={lowQuality} character={{ run, active, reducedMotion, onReady, onArrive }}/>
+          <Canvas shadows={stage !== 'cube' && !lowQuality} frameloop={active ? 'demand' : 'never'} dpr={lowQuality ? 1 : [1, 1.5]} gl={createRenderer} camera={{ position: stage === 'cube' ? [3, 2, 4] : reducedMotion || mode === 'idle' ? CAMERA_END : CAMERA_START, fov: 40 }} onCreated={onCreated} fallback={<CanvasFallback/>}>
+            {stage === 'cube' ? <DiagnosticCube onReady={onReady}/> : <Room onSelect={setSelected} controls={controls} mode={reducedMotion ? 'idle' : mode} compact={lowQuality} character={{ run, active, reducedMotion, onReady, onArrive }} stage={stage} onFailure={onFailure}/>}
           </Canvas>
-        </>}
-      </div></Boundary>
+        </SceneBoundary>}
+      </div>
       {showIntroduction && <div className="workspace-introduction"><div><p className="eyebrow">Paramjeet Kaur</p><h3>Building a future in Cloud & DevOps.</h3><p>MCA student working with Python, Linux and Flask, and developing skills in cloud infrastructure and automation.</p></div><a className="text-link" href="#about">Meet Paramjeet ↗</a><a className="text-link" href="#projects">Explore the work ↗</a></div>}
     </div>
     <div className="workspace-controls" role="group" aria-label="Explore office objects">{destinations.map(item => <button key={item.id} aria-pressed={selected === item.id} aria-controls="workspace-detail" onClick={() => setSelected(item.id)}>{item.object}<span>{item.title}</span></button>)}<button disabled={walking} onClick={resetView}>Reset view</button></div>

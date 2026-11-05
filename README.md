@@ -50,6 +50,10 @@ This is a generic licensed placeholder, **not Paramjeet's likeness**. It has rea
 
 ## Verify
 
+For fallback root cause, development-only context/error logs and the cube ->
+office -> character isolation URLs, see [DEBUGGING_3D.md](DEBUGGING_3D.md).
+Native Canvas fallback content is passive; mounting it never disables WebGL.
+
 From `frontend`:
 
 ```powershell
