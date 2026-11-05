@@ -1,6 +1,6 @@
-# Paramjeet 3D Portfolio — Phase 1
+# Paramjeet 3D Portfolio — Phase 2 in progress
 
-PARAMJEET.DEV, the portfolio of Paramjeet Kaur. Phase 1 only; no deployment has been performed.
+PARAMJEET.DEV, the portfolio of Paramjeet Kaur. Phase 1 is implemented and Phase 2 development is approved. No deployment has been performed. The mandatory personalized animated character is blocked, not complete; see [CHARACTER.md](CHARACTER.md).
 
 ## Run on Windows PowerShell
 
@@ -76,4 +76,10 @@ paramjeet-3d-portfolio/
 
 The new project has its own repository; the inherited home-folder repository is untouched. Only this project is staged. A commit saves a reviewed snapshot locally; a push publishes it to the configured origin. The only configured destination is https://github.com/PARAMCLOUD1/paramjeet-3d-portfolio.git. Never force push. GitHub CLI was unavailable and remote lookup returned Repository not found; creation requires your approval and authenticated access.
 
-Phase 2 waits for your confirmation. Later phases cover the full office, framed photograph, portfolio project gallery, education timeline, skills, certifications, validated contact delivery, GSAP intro, Blender/character assets, Docker, CI, and deployment. LinkedIn and resume are omitted until real assets are provided. Deployment requires separate approval.
+Phase 2 is approved and underway. The office now includes four selectable destinations (monitor/projects, portrait/about, server/skills, books/education), equivalent keyboard controls, reset view, room details, and bounded orbit/zoom. The framed photograph is office decoration and does not satisfy the mandatory human character requirement.
+
+Project-area filters summarize only the existing biography; individual repository URLs, results, and screenshots are not invented. Skills distinguish practical experience from ongoing learning. Education contains only the supplied MCA entry. Certifications, earlier education, LinkedIn and resume await real details/assets.
+
+The character remains a required Phase 2 deliverable: real volumetric, recognizable, rigged human geometry, optimized GLB, editable source when made in Blender, Walk/Idle clips, and a camera-follow entrance. Tools and references needed to unblock it are recorded in CHARACTER.md. Phase 2 cannot be marked complete while this is missing.
+
+Contact delivery, GSAP polish, Docker, CI and deployment remain later work. The user authorizes verified milestone commits and pushes to the configured origin; deployment is separate. Run lint, frontend tests and production build, conduct the supported Unslop review, then commit and push. Record failed remote access honestly; never force push.

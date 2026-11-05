@@ -1,5 +1,36 @@
 # Phase 1 audit
 
+## Phase 2 milestone review — 2026-11-05
+
+Phase 1's last completed commit before this work was `b629bc0`. Phase 2 is approved and in progress. The mandatory personalized human character is blocked and is not represented by the framed photograph; see CHARACTER.md for references, missing tooling and acceptance criteria.
+
+Supported Unslop review used the installed skill and its signs, tokens, visual and reference documentation directly. No invented CLI or automated audit service is claimed. Credit remains unslop by Damir Sokolovsky (@heydamir), CC BY 4.0, https://heydamir.design/unslop.
+
+Direction: a recruiter's introduction to Paramjeet's Cloud & DevOps work; precise, calm, approachable; a developer's night-shift office; the real portrait and an explorable workstation carry the visual detail; terminal captions remain the signature. Existing palette and layout retained.
+
+Findings and nine-pass review:
+
+1. Spacing: project rows share 32px padding and 24px on mobile; section rhythm retained; new controls have at least 44px touch height.
+2. Color: existing navy neutrals and blue accent retained. Selection uses a quiet surface step. No gradients or glows added.
+3. Icons: no emoji or new icon families. Directional text glyphs remain consistent.
+4. Copy: project areas derive only from the supplied biography. No invented repository links, credentials, performance figures or project screenshots. Character completion is not claimed.
+5. Type: existing system sans/mono retained; headings 400–500; small captions have no negative tracking.
+6. Layout: project rows replace repetitive cards; skills use two parallel groups that stack on mobile. Long email wraps. Header gaps adapt to narrower screens.
+7. Details: semantic project filters expose pressed state and result count. Office controls expose selection state and matching anchor destinations even without WebGL. A dismiss control and reset view are included.
+8. Visuals: office gets walls, window, doorway, shelves/books, plant and a framed original portrait derivative. Simple geometry has depth and receives lighting/shadows. This is a procedural room, not a realistic human model. No new generated bitmap assets are needed for this milestone.
+9. Motion: no autoplay, camera travel or looping animation introduced. Demand rendering and capped DPR retained. Reduced-motion CSS remains in place. Future character cinematic must additionally honor reduced motion in JavaScript.
+
+Verification:
+
+- ESLint passed.
+- Vitest: 3 files, 4 tests passed, including project filtering and all office destinations with simulated unavailable WebGL.
+- Production build passed: main JS 233.10 KB / 72.75 KB gzip; lazy office 909.28 KB / 246.61 KB gzip. Vite's 500 KB chunk warning remains; this is not a failed build.
+- Live frontend returned HTTP 200; frontend `/api/health` returned status ok.
+- Browser host unavailable. Native Chrome fallback was stopped by Computer Use because it could not determine the current URL confidently enough to enforce policy. No rendered desktop/mobile or GPU interaction verification is claimed. This remains an acceptance limitation.
+- GitHub remote check outside sandbox returned Repository not found for the exact authorized repository. No repository creation or deployment was attempted. Local commit and push outcome are reported to the user.
+
+Remaining: recognizable rigged character, Walk/Idle clips, editable source and optimized GLB, camera-follow entrance and integration into office/About/workstation; rendered verification; real project links and certifications when provided. Phase 2 is not complete.
+
 ## Direction
 
 - Product: a recruiter's introduction to Paramjeet Kaur and her developing Cloud & DevOps skills.
