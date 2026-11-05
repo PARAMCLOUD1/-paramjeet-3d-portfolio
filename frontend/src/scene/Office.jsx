@@ -1,7 +1,10 @@
-import { Component, Suspense, useRef, useState } from 'react'
+import { Component, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Image, OrbitControls } from '@react-three/drei'
 import { destinations } from '../content'
+import Character from './Character'
+import useScenePreferences from './useScenePreferences'
+import { CAMERA_END, CAMERA_START, CAMERA_TARGET } from './entrance'
 
 function Box({ position, size, color, ...props }) {
   return <mesh position={position} castShadow receiveShadow {...props}><boxGeometry args={size}/><meshStandardMaterial color={color} roughness={0.7}/></mesh>
@@ -9,10 +12,10 @@ function Box({ position, size, color, ...props }) {
 function Hotspot({ id, onSelect, children }) {
   return <group onClick={event => { event.stopPropagation(); onSelect(id) }}>{children}</group>
 }
-function Room({ onSelect, controls }) {
+function Room({ onSelect, controls, mode, compact, character }) {
   return <>
     <color attach="background" args={['#111c2a']}/>
-    <ambientLight intensity={0.9}/><directionalLight position={[2, 7, 5]} intensity={2.6} castShadow shadow-mapSize={[1024, 1024]} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5}/>
+    <hemisphereLight args={['#d7e9f3', '#45413b', 1.6]}/><directionalLight position={[2, 7, 5]} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.035} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5}/>
     <Box position={[0, -0.15, 0]} size={[8, 0.3, 6]} color="#35414b"/>
     <Box position={[0, 1.8, -2.7]} size={[8, 3.6, 0.15]} color="#1d2d3b"/>
     <Box position={[-3.9, 1.8, -0.8]} size={[0.15, 3.6, 3.8]} color="#263746"/>
@@ -21,6 +24,7 @@ function Room({ onSelect, controls }) {
     <Box position={[-3.75, 2.2, -0.5]} size={[0.06, 0.06, 2.2]} color="#263746"/>
     <Box position={[2.8, 1.4, -2.57]} size={[1, 2.8, 0.08]} color="#101b26"/>
     <Box position={[3.16, 1.4, -2.49]} size={[0.07, 0.07, 0.08]} color="#b29370"/>
+    <group scale={[1, .72, 1]}>
     <Box position={[0, 1.3, 0]} size={[3.7, 0.16, 1.5]} color="#b29370"/>
     {[-1.5, 1.5].map(x => <Box key={x} position={[x, 0.6, 0]} size={[0.13, 1.2, 1.2]} color="#131d28"/>)}
     <Hotspot id="projects" onSelect={onSelect}>
@@ -34,6 +38,18 @@ function Room({ onSelect, controls }) {
     <Box position={[0, 0.8, 1.4]} size={[1.15, 0.18, 1]} color="#222c38"/>
     <Box position={[0, 1.45, 1.85]} size={[1.15, 1.3, 0.16]} color="#222c38"/>
     <Box position={[0, 0.4, 1.4]} size={[0.12, 0.8, 0.12]} color="#657080"/>
+    </group>
+    <Hotspot id="projects" onSelect={onSelect}>
+      <group position={[1.15, 1.02, -.05]} rotation={[0, -.18, 0]}>
+        <Box position={[0, 0, 0]} size={[.72, .035, .48]} color="#82909a"/>
+        <group position={[0, .025, -.23]} rotation={[-.22, 0, 0]}>
+          <Box position={[0, .22, 0]} size={[.72, .44, .028]} color="#82909a"/>
+          <Box position={[0, .22, .018]} size={[.64, .36, .01]} color="#173e53"/>
+          {[0, 1, 2].map(i => <Box key={i} position={[-.06, .30 - i * .07, .026]} size={[.35 - i * .06, .014, .006]} color="#71bed8"/>)}
+        </group>
+      </group>
+    </Hotspot>
+    <CloudDiagram/>
     <Hotspot id="skills" onSelect={onSelect}>
       <Box position={[-2.7, 0.7, -1.5]} size={[0.8, 1.4, 0.9]} color="#111827"/>
       {[0, 1, 2, 3].map(i => <Box key={i} position={[-2.7, 0.3 + i * 0.27, -1.03]} size={[0.6, 0.1, 0.025]} color="#567688"/>)}
@@ -48,21 +64,84 @@ function Room({ onSelect, controls }) {
     </Hotspot>
     <mesh position={[2.8, 0.36, -0.8]} castShadow><cylinderGeometry args={[0.28, 0.22, 0.7, 12]}/><meshStandardMaterial color="#9d866c"/></mesh>
     {[0, 1, 2].map(i => <mesh key={i} position={[2.8 + (i - 1) * 0.14, 0.95 + i * 0.12, -0.8]} rotation={[0, i, (i - 1) * 0.3]} castShadow><sphereGeometry args={[0.23, 12, 8]}/><meshStandardMaterial color="#526e58"/></mesh>)}
-    <OrbitControls ref={controls} makeDefault enablePan={false} minDistance={5} maxDistance={13} minPolarAngle={0.4} maxPolarAngle={1.5} target={[0, 1, 0]}/>
+    <Suspense fallback={null}><Character {...character} mode={mode} compact={compact} controls={controls}/></Suspense>
+    <OrbitControls ref={controls} makeDefault enabled={mode !== 'walking' && mode !== 'loading'} enableDamping={false} enablePan={false} minDistance={5} maxDistance={13} minPolarAngle={0.4} maxPolarAngle={1.5} target={CAMERA_TARGET}/>
   </>
 }
+function CloudDiagram() {
+  return <group position={[.7, 1.65, -2.55]}>
+    <Box position={[0, 0, 0]} size={[1.65, 1.05, .035]} color="#142330"/>
+    <group position={[0, .22, .05]}>
+      {[[0, .04, .15], [-.17, -.03, .11], [.17, -.03, .11]].map(([x, y, r], i) => <mesh key={i} position={[x, y, 0]} scale={[1, .85, .2]}><sphereGeometry args={[r, 12, 8]}/><meshStandardMaterial color="#71bed8" roughness={.8}/></mesh>)}
+      <Box position={[0, -.08, 0]} size={[.34, .09, .025]} color="#71bed8"/>
+    </group>
+    <Box position={[0, -.04, .05]} size={[.018, .16, .02]} color="#7196a5"/>
+    <Box position={[0, -.12, .05]} size={[.96, .018, .02]} color="#7196a5"/>
+    {[-.48, 0, .48].map(x => <group key={x} position={[x, -.27, .05]}><Box position={[0, .07, 0]} size={[.018, .16, .02]} color="#7196a5"/><Box position={[0, -.04, 0]} size={[.27, .16, .03]} color="#567688"/></group>)}
+  </group>
+}
+
 class Boundary extends Component {
   state = { failed: false }
   static getDerivedStateFromError() { return { failed: true } }
+  componentDidCatch() { this.props.onFailure() }
   render() { return this.state.failed ? <p className="scene-fallback" role="status">3D is unavailable on this device. Use the workspace links below or explore the portfolio sections.</p> : this.props.children }
+}
+function Unsupported({ onFailure }) {
+  useEffect(() => { onFailure() }, [onFailure])
+  return <p className="scene-fallback" role="status">WebGL unavailable. Use the workspace links below.</p>
 }
 export default function Office() {
   const [selected, setSelected] = useState(null)
+  const [mode, setMode] = useState('loading')
+  const [ready, setReady] = useState(false)
+  const [run, setRun] = useState(0)
+  const [failed, setFailed] = useState(false)
+  const [lightweight, setLightweight] = useState(false)
+  const container = useRef()
   const controls = useRef()
+  const canvas = useRef()
+  const { reducedMotion, compact, active } = useScenePreferences(container)
+  const lowQuality = compact || lightweight
+  const walking = mode === 'walking' && !reducedMotion
+  const showIntroduction = mode === 'idle' || reducedMotion || failed
+  const onReady = useCallback(() => { setReady(true); setMode(current => current === 'loading' ? reducedMotion ? 'idle' : 'walking' : current) }, [reducedMotion])
+  const onArrive = useCallback(() => setMode('idle'), [])
+  const onFailure = useCallback(() => setFailed(true), [])
+  const resetView = () => {
+    if (!controls.current) return
+    controls.current.object.position.set(...CAMERA_END)
+    controls.current.target.set(...CAMERA_TARGET)
+    controls.current.update()
+  }
+  useEffect(() => {
+    if (ready || failed) return
+    const timeout = window.setTimeout(() => setFailed(true), 25000)
+    return () => window.clearTimeout(timeout)
+  }, [ready, failed])
+  useEffect(() => {
+    const element = canvas.current
+    if (!element) return
+    const lost = event => { event.preventDefault(); setFailed(true) }
+    element.addEventListener('webglcontextlost', lost)
+    return () => element.removeEventListener('webglcontextlost', lost)
+  }, [ready])
   const destination = destinations.find(item => item.id === selected)
   return <>
-    <Boundary><div className="canvas-wrap" role="img" aria-label="Interactive 3D office with a desk, monitor, framed portrait, server and books. Equivalent controls follow the scene."><Canvas shadows frameloop="demand" dpr={[1, 1.5]} camera={{ position: [7, 4.8, 8], fov: 40 }} fallback={<p className="scene-fallback">WebGL unavailable. Use the workspace links below.</p>}><Room onSelect={setSelected} controls={controls}/></Canvas></div></Boundary>
-    <div className="workspace-controls" role="group" aria-label="Explore office objects">{destinations.map(item => <button key={item.id} aria-pressed={selected === item.id} aria-controls="workspace-detail" onClick={() => setSelected(item.id)}>{item.object}<span>{item.title}</span></button>)}<button onClick={() => controls.current?.reset()}>Reset view</button></div>
+    <div ref={container} className="office-experience">
+      <div className="entrance-toolbar"><p role="status">{failed ? '3D unavailable — explore the portfolio below' : !ready ? 'Preparing the office and character…' : walking ? 'Entering the cloud workspace' : 'The workspace is yours to explore'}</p><div>{walking || mode === 'loading' ? <button onClick={onArrive}>Skip entrance</button> : <button disabled={!ready || failed || reducedMotion} onClick={() => { setRun(value => value + 1); setMode('walking') }}>Replay entrance</button>}<button aria-pressed={lightweight} onClick={() => setLightweight(value => !value)}>Low graphics</button></div></div>
+      <p className="character-caption">CC0 placeholder character · Personalized likeness pending{reducedMotion ? ' · Reduced motion enabled' : ''}</p>
+      <Boundary onFailure={onFailure}><div className="canvas-wrap" role="group" aria-label="Interactive 3D office with an animated female placeholder, laptop, cloud diagram, monitor, portrait, server and books. Equivalent controls follow.">
+        {failed ? <p className="scene-fallback" role="status">WebGL unavailable, the model could not load, or the graphics context was lost. Use the workspace links below. Switch to 2D and reload the workspace to retry.</p> : <>
+          {!ready && <div className="office-loading" role="status"><p>Loading the 3D workspace</p><span>Preparing character, lighting and materials</span><a href="#about">Continue to the introduction ↓</a></div>}
+          <Canvas shadows={!lowQuality} frameloop={active ? 'demand' : 'never'} dpr={lowQuality ? 1 : [1, 1.5]} gl={{ antialias: !lowQuality, powerPreference: 'low-power' }} camera={{ position: reducedMotion || mode === 'idle' ? CAMERA_END : CAMERA_START, fov: 40 }} onCreated={({ gl }) => { canvas.current = gl.domElement }} fallback={<Unsupported onFailure={onFailure}/>}>
+            <Room onSelect={setSelected} controls={controls} mode={reducedMotion ? 'idle' : mode} compact={lowQuality} character={{ run, active, reducedMotion, onReady, onArrive }}/>
+          </Canvas>
+        </>}
+      </div></Boundary>
+      {showIntroduction && <div className="workspace-introduction"><div><p className="eyebrow">Paramjeet Kaur</p><h3>Building a future in Cloud & DevOps.</h3><p>MCA student working with Python, Linux and Flask, and developing skills in cloud infrastructure and automation.</p></div><a className="text-link" href="#about">Meet Paramjeet ↗</a><a className="text-link" href="#projects">Explore the work ↗</a></div>}
+    </div>
+    <div className="workspace-controls" role="group" aria-label="Explore office objects">{destinations.map(item => <button key={item.id} aria-pressed={selected === item.id} aria-controls="workspace-detail" onClick={() => setSelected(item.id)}>{item.object}<span>{item.title}</span></button>)}<button disabled={walking} onClick={resetView}>Reset view</button></div>
     <div id="workspace-detail" className="workspace-detail" aria-live="polite">{destination ? <><div><h3>{destination.title}</h3><p>{destination.description}</p></div><a className="text-link" href={'#' + destination.id}>{destination.link} ↗</a><button className="dismiss-note" aria-label="Dismiss office detail" onClick={() => setSelected(null)}>×</button></> : <p>Select an office object or use the controls above to explore.</p>}</div>
   </>
 }

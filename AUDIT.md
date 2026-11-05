@@ -1,3 +1,74 @@
+# Phase 3 verification - 2026-11-05
+
+Incremental character/entrance milestone; previous audit entries below are historical.
+User explicitly authorized a generic placeholder, and minor/major commits on GitHub.
+
+## Direction and review
+
+- Product: a recruiter's introduction to Paramjeet's developing Cloud & DevOps work.
+- Character: precise, calm, approachable.
+- World: the existing navy developer workstation with warm desk material.
+- Moments: a suited human entering the workstation, with a laptop and cloud architecture diagram.
+- Signature: existing terminal-style technical captions.
+
+Unslop's nine passes were applied to the additions: shared spacing and touch targets;
+existing navy surfaces and blue accent; no new icon family; factual placeholder and
+biography copy; existing sans/mono type; wrapping mobile toolbar and introduction;
+keyboard skip/replay/reset and persistent object links; real licensed human geometry;
+and a single purposeful entrance with reduced-motion support. Existing sections and
+photograph are preserved. This was a source-level design review; rendered checks were
+blocked by the tools described below. Credit: Unslop by Damir Sokolovsky (@heydamir),
+CC BY 4.0, https://heydamir.design/unslop.
+
+## Assets and runtime
+
+- Innerscene's Mara businesswoman / MakeHuman CC0 asset. Source and embedded CC0
+  metadata verified; provenance and derivative details in public/models/LICENSE.md.
+- Original source preserved outside public. Procedural approximate rig and Walk/Idle
+  clips are editable through the build script. No Blender source or personalized
+  likeness is claimed. No user photograph was sent to an external service.
+- Runtime GLB: 3,561,764 bytes, 46,997 triangles, 31,857 weighted vertices, 14 joints.
+  Source: 15,594,944 bytes. Textures capped at 1024px; no external decoders/CDN.
+- Demand rendering targets 30 FPS, 24 for compact graphics; hidden/offscreen rendering
+  pauses. Reduced motion removes walking, camera travel and animated idle. Compact
+  screens/CPU hints or the manual low graphics control use DPR 1 with no shadows.
+- Existing Phase 2 controls, API proxy, project filters and all 2D sections retained.
+  Context loss, loader errors, unsupported WebGL and a 25-second loading timeout retain
+  semantic navigation. New per-clone skeleton resources are released on unmount.
+
+## Verification results
+
+- ESLint passed.
+- Vitest: 4 files / 9 tests passed. Includes existing navigation/filter behavior,
+  entrance/arrival/skip/replay, low graphics, reduced motion, loading timeout,
+  no-WebGL destinations, viewport pause/resume, and furniture-clear route sampling.
+- Real Three.js GLTFLoader asset check passed: skeleton, normalized weights,
+  finite skinned vertices, animation deformation, Walk-to-Idle crossfade and budgets.
+- Flask tests: 3 passed, run from backend as documented.
+- Production build passed: initial JS 233.14 KB / 72.77 KB gzip; optional office JS
+  990.22 KB / 270.85 KB gzip. Vite still reports its >500 KB advisory chunk warning.
+- Live frontend HTTP 200; frontend /api/health reports status ok; local optimized
+  model endpoint returns 3,561,764 bytes.
+- Browser host unavailable. The native Computer Use fallback stopped because it
+  could not confidently verify Chrome's current URL. No screenshots, GPU/mobile
+  FPS, natural foot contacts, joint/clothing quality or rendered likeness are certified.
+- During verification: Vite tests initially hit sandbox ancestor-directory denial;
+  rerunning outside the sandbox worked. An initial pytest command from the project
+  root failed import collection; running from backend passed. Regression assertions
+  were updated for persistent introduction links and floating-point route endpoints.
+
+## Git
+
+Actual configured origin is https://github.com/PARAMCLOUD1/-paramjeet-3d-portfolio.git.
+Existing main access verified. Asset milestone: 7b8be83. Integration milestone and
+push outcome are reported in the session response. No force push or deployment.
+
+Remaining: human rendered review; artist-refined skinning/foot contacts; a recognizable
+personalized model and appropriate editable artwork when supplied. The Phase 3
+placeholder experience is implemented; final personalized character artwork is pending.
+
+---
+
 # Phase 1 audit
 
 ## Phase 2 milestone review — 2026-11-05
