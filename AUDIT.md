@@ -43,14 +43,17 @@ Flask health tests and live direct/proxied health checks pass. No contact endpoi
 exists; no fake submission UI was added. The supplied additional electricity demo
 could not be independently opened and is explicitly labelled user supplied.
 
-## Earlier audit history
-
 Final V8 checks: ESLint passed without warnings; 51 frontend tests passed across
 12 files. The final framing adjustment passed all 6 scene regressions; production
 build passed in 10.71s. Initial JS 125.77KB gzip / CSS 7.47KB gzip; optional office
 252.82KB gzip. Vite's existing optional chunk size advisory remains. Flask 3/3;
 direct/proxied live health status ok; frontend HTTP 200; diff whitespace check clean.
 Changes reviewed against the supplied brief and the existing uncommitted V7 work.
+
+Implementation commit 35bdb64106173de79cf8ea331eb15959f99d8e77 was pushed normally
+to origin/main; git ls-remote matched local HEAD. No force push or deployment.
+
+## Earlier audit history
 
 # V7 milestone 1/2 — audit and executive theme
 

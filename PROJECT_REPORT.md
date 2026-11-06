@@ -79,7 +79,8 @@ actual device frame rates and final visual approval remain unverified.
 
 ## Git and delivery
 
-This milestone is intended for a normal Conventional Commit and non-force push to
-the supplied origin after checks pass. No hosting deployment is part of this work.
-See PROGRESS.md for the actual commit/push outcome, rather than treating intent as
-a completed operation.
+Implementation commit: 35bdb64106173de79cf8ea331eb15959f99d8e77
+(`feat(portfolio): refine proportions and unify accessible office panels`).
+Normal push to origin/main succeeded. git ls-remote returned the same SHA as local
+HEAD. All checks above passed before commit. A separate documentation receipt
+records this verified outcome. No force push or hosting deployment was performed.
