@@ -1,3 +1,50 @@
+# Cinematic redesign baseline — 2026-11-06
+
+Source-level baseline and local video inspection completed; rendered app review pending.
+Unslop is installed at the local skills/unslop/SKILL.md path. Its supported skill
+workflow, signs and tokens were read directly; no Unslop CLI is claimed.
+Credit: Unslop by Damir Sokolovsky (@heydamir), CC BY 4.0,
+https://heydamir.design/unslop.
+
+Findings to resolve after reference inspection:
+
+- Hero: current constrained split layout and 20px name heading do not deliver the
+  requested full-screen introduction or requested copy/action hierarchy.
+- Typography: existing restrained system sans/mono has a useful foundation;
+  editorial display scale and consistent content hierarchy need implementation.
+- Surfaces: existing navy palette has no decorative hue gradients/glows to remove.
+  Keep that restraint; video shows cream-to-charcoal change, adapted as deliberate section contrast.
+- Content: three generic project areas, one education item and no certification
+  section omit content supplied in the new brief. Do not fabricate missing visuals.
+- Character: existing rigged businesswoman is a generic short-haired placeholder.
+  It cannot satisfy the personalized long-haired character requirement. Preserve
+  prior work, but do not promote it as the new hero's personalized visual.
+- Contact: email/phone/GitHub anchors exist; Flask contains only a health endpoint.
+  A working contact form cannot be claimed from the current backend.
+- Accessibility: existing skip link, focus rings, mobile menu state, filter pressed
+  states and reduced-motion rules should survive the redesign. New GSAP effects
+  need JavaScript reduced-motion handling and cleanup, with readable default DOM.
+- Performance: office already loads on demand and supports compact graphics;
+  the optional bundle advisory and actual mobile/GPU rendering need further review.
+- CSS: historical phase blocks and repeated header/media overrides complicate
+  changes; consolidate affected rules during implementation without unrelated churn.
+
+Reference video inspected before application changes; timestamped observations and
+limitations are in DESIGN_REFERENCE.md. Direction: assured, precise and human;
+workstation world, real portrait and office as visual moments, terminal captions as
+signature. The user already authorized hero redesign, so no additional design
+approval is required. Requested greeting/bold display copy takes precedence over
+Unslop's default advice against greeting headlines.
+
+Browser Use timed out. Native Computer Use stopped because it could not determine
+the current browser URL confidently enough to enforce policy. No further UI actions
+were taken; rendered app verification is not claimed. Source/tests/build checks
+remain available. Milestone A changes are documentation only.
+Baseline validation is recorded in PROGRESS.md. Historical entries below describe
+earlier work and do not establish completion of the new cinematic redesign.
+
+---
+
 # Fallback correction - 2026-11-05
 
 Confirmed root cause: `Unsupported` called `onFailure()` when native Canvas
