@@ -1,5 +1,10 @@
 # 3D fallback investigation
 
+Current cinematic redesign (2026-11-06): the default scene is `workspace`, an
+interactive office with the real framed portrait and no generic character.
+Explicit dev diagnostics below are retained; `?scene=character` is the historical
+placeholder/entrance preview only. Production ignores all scene overrides.
+
 ## Confirmed root cause
 
 The `Unsupported` component passed to `Canvas.fallback` called `onFailure()` in

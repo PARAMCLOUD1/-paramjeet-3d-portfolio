@@ -10,7 +10,12 @@ vi.mock('@react-three/fiber', () => ({ Canvas: ({ fallback, children, shadows, d
   return <><canvas data-testid="native-canvas">{fallback}</canvas>{simulation.webgl && <div data-testid="scene" data-stage={children.props.stage || 'cube'} data-mode={children.props.mode} data-shadows={String(shadows)} data-dpr={String(dpr)} data-loop={frameloop}><button onClick={children.props.character?.onReady || children.props.onReady}>Model ready</button><button onClick={children.props.character?.onArrive}>Character arrived</button></div>}</>
 } }))
 vi.mock('@react-three/drei', () => ({ Image: () => null, OrbitControls: () => null }))
-beforeEach(() => { vi.spyOn(console, 'info').mockImplementation(() => {}); vi.spyOn(console, 'error').mockImplementation(() => {}) })
+beforeEach(() => {
+  // Existing entrance regressions explicitly exercise the retained dev preview.
+  window.history.replaceState({}, '', '/?scene=character')
+  vi.spyOn(console, 'info').mockImplementation(() => {})
+  vi.spyOn(console, 'error').mockImplementation(() => {})
+})
 afterEach(() => { cleanup(); simulation.webgl = false; simulation.error = null; simulation.onCreated = null; window.history.replaceState({}, '', '/'); vi.useRealTimers(); vi.unstubAllGlobals(); vi.restoreAllMocks() })
 
 test('native canvas fallback content mounting must not mark a working renderer as failed', () => {
@@ -20,6 +25,18 @@ test('native canvas fallback content mounting must not mark a working renderer a
   expect(screen.getByTestId('scene')).toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: 'Model ready' }))
   expect(screen.getByTestId('scene')).toHaveAttribute('data-mode', 'walking')
+})
+
+test('normal office opens without the generic character or entrance controls', () => {
+  window.history.replaceState({}, '', '/')
+  simulation.webgl = true
+  render(<Office/> )
+  expect(screen.getByTestId('scene')).toHaveAttribute('data-stage', 'workspace')
+  fireEvent.click(screen.getByRole('button', { name: 'Model ready' }))
+  expect(screen.getByTestId('scene')).toHaveAttribute('data-mode', 'idle')
+  expect(screen.queryByRole('button', { name: /entrance/i })).not.toBeInTheDocument()
+  expect(screen.queryByText(/placeholder character/)).not.toBeInTheDocument()
+  expect(screen.getByRole('button', { name: /Monitor/ })).toBeVisible()
 })
 
 test('every office destination remains available when WebGL is unsupported', () => {

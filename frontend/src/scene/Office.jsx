@@ -20,7 +20,7 @@ function Room({ onSelect, controls, mode, compact, character, stage, onFailure }
   const { onReady } = character
   useEffect(() => {
     reportScene('office-mounted', { stage })
-    if (stage === 'office') onReady()
+    if (stage !== 'character') onReady()
   }, [stage, onReady])
   return <>
     <color attach="background" args={['#111c2a']}/>
@@ -65,7 +65,7 @@ function Room({ onSelect, controls, mode, compact, character, stage, onFailure }
     </Hotspot>
     <Hotspot id="about" onSelect={onSelect}>
       <Box position={[-1.7, 2.6, -2.55]} size={[1.04, 1.2, 0.1]} color="#b29370"/>
-      {stage === 'character' && <SceneBoundary stage="portrait-load" onFailure={onFailure}><Suspense fallback={null}><Image url={PORTRAIT_URL} position={[-1.7, 2.6, -2.485]} scale={[0.9, 1.05]} toneMapped={false}/></Suspense></SceneBoundary>}
+      {['workspace', 'character'].includes(stage) && <SceneBoundary stage="portrait-load" onFailure={onFailure}><Suspense fallback={null}><Image url={PORTRAIT_URL} position={[-1.7, 2.6, -2.485]} scale={[0.9, 1.05]} toneMapped={false}/></Suspense></SceneBoundary>}
     </Hotspot>
     <Box position={[1.6, 2.5, -2.4]} size={[1.5, 0.08, 0.45]} color="#b29370"/>
     <Hotspot id="education" onSelect={onSelect}>
@@ -97,6 +97,7 @@ export default function Office() {
   const [run, setRun] = useState(0)
   const [failure, setFailure] = useState(null)
   const [stage] = useState(() => diagnosticStage(window.location.search))
+  const characterPreview = stage === 'character'
   const [lightweight, setLightweight] = useState(false)
   const container = useRef()
   const controls = useRef()
@@ -151,12 +152,12 @@ export default function Office() {
   const destination = destinations.find(item => item.id === selected)
   return <>
     <div ref={container} className="office-experience">
-      <div className="entrance-toolbar"><p role="status">{failed ? '3D unavailable — explore the portfolio below' : !ready ? 'Preparing the office and character…' : walking ? 'Entering the cloud workspace' : 'The workspace is yours to explore'}</p><div>{walking || mode === 'loading' ? <button onClick={onArrive}>Skip entrance</button> : <button disabled={!ready || failed || reducedMotion} onClick={() => { setRun(value => value + 1); setMode('walking') }}>Replay entrance</button>}<button aria-pressed={lightweight} onClick={() => setLightweight(value => !value)}>Low graphics</button></div></div>
-      <p className="character-caption">CC0 placeholder character · Personalized likeness pending{reducedMotion ? ' · Reduced motion enabled' : ''}</p>
-      <div className="canvas-wrap" role="group" aria-label="Interactive 3D office with an animated female placeholder, laptop, cloud diagram, monitor, portrait, server and books. Equivalent controls follow.">
+      <div className="entrance-toolbar"><p role="status">{failed ? '3D unavailable — explore the portfolio below' : !ready ? 'Preparing the office…' : walking ? 'Entering the cloud workspace' : 'The workspace is yours to explore'}</p><div>{characterPreview && (walking || mode === 'loading' ? <button onClick={onArrive}>Skip entrance</button> : <button disabled={!ready || failed || reducedMotion} onClick={() => { setRun(value => value + 1); setMode('walking') }}>Replay entrance</button>)}<button aria-pressed={lightweight} onClick={() => setLightweight(value => !value)}>Low graphics</button></div></div>
+      {characterPreview && <p className="character-caption">Development preview: CC0 placeholder character · Personalized likeness pending{reducedMotion ? ' · Reduced motion enabled' : ''}</p>}
+      <div className="canvas-wrap" role="group" aria-label={`Interactive 3D office with ${characterPreview ? 'a development placeholder, ' : ''}laptop, cloud diagram, monitor, portrait, server and books. Equivalent controls follow.`}>
         {failed ? <p className="scene-fallback" role="status">3D unavailable. Use the workspace links below. Switch to 2D and reload the workspace to retry.{import.meta.env.DEV && <><br/><small>{failure.reason}: {failure.message}</small></>}</p> : <SceneBoundary onFailure={onFailure}>
-          {!ready && <div className="office-loading" role="status"><p>Loading the 3D workspace</p><span>Preparing character, lighting and materials</span><a href="#about">Continue to the introduction ↓</a></div>}
-          <Canvas shadows={stage !== 'cube' && !lowQuality} frameloop={active ? 'demand' : 'never'} dpr={lowQuality ? 1 : [1, 1.5]} gl={createRenderer} camera={{ position: stage === 'cube' ? [3, 2, 4] : reducedMotion || mode === 'idle' ? CAMERA_END : CAMERA_START, fov: 40 }} onCreated={onCreated} fallback={<CanvasFallback/>}>
+          {!ready && <div className="office-loading" role="status"><p>Loading the 3D workspace</p><span>Preparing lighting and materials</span><a href="#about">Continue to the introduction ↓</a></div>}
+          <Canvas shadows={stage !== 'cube' && !lowQuality} frameloop={active ? 'demand' : 'never'} dpr={lowQuality ? 1 : [1, 1.5]} gl={createRenderer} camera={{ position: stage === 'cube' ? [3, 2, 4] : !characterPreview || reducedMotion || mode === 'idle' ? CAMERA_END : CAMERA_START, fov: 40 }} onCreated={onCreated} fallback={<CanvasFallback/>}>
             {stage === 'cube' ? <DiagnosticCube onReady={onReady}/> : <Room onSelect={setSelected} controls={controls} mode={reducedMotion ? 'idle' : mode} compact={lowQuality} character={{ run, active, reducedMotion, onReady, onArrive }} stage={stage} onFailure={onFailure}/>}
           </Canvas>
         </SceneBoundary>}

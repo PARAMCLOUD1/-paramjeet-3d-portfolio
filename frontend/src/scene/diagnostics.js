@@ -10,9 +10,10 @@ export function reportScene(stage, detail = {}, error) {
 }
 
 export function diagnosticStage(search, development = import.meta.env.DEV) {
-  if (!development) return 'character'
+  if (!development) return 'workspace'
   const requested = new URLSearchParams(search).get('scene')
-  return ['cube', 'office'].includes(requested) ? requested : 'character'
+  // The old generic character remains available only as an explicit dev preview.
+  return ['cube', 'office', 'character'].includes(requested) ? requested : 'workspace'
 }
 
 // R3F calls this with its own canvas. Test the actual renderer/context rather

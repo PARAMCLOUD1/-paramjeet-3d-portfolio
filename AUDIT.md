@@ -1,3 +1,66 @@
+# Milestone B — cinematic hero, 2026-11-06
+
+Implementation and automated validation complete; rendered acceptance remains pending.
+Applied the installed Unslop workflow to the approved redesign. Credit: Unslop by
+Damir Sokolovsky (@heydamir), CC BY 4.0, https://heydamir.design/unslop.
+User-requested greeting, punctuation and bold typography override the skill defaults.
+
+## Nine-pass review and meaningful fixes
+
+1. Spacing: consistent 24/32/48/64px hero rhythm, 52px hero actions, fluid grid and
+   lower status/scroll row. New hero rules live together; superseded hero/portrait
+   rules were removed from historical CSS instead of adding competing overrides.
+2. Color: navy/white surfaces, blue display accent, quiet white primary action.
+   No gradient text, neon, glass, glow, promotional badges or decorative blobs.
+   Measured contrast: white/navy 17.89:1, muted/navy 7.30:1, blue/navy 8.74:1,
+   muted portrait caption/light surface 7.24:1.
+3. Icons: restrained directional text glyphs, hidden from accessible action names.
+   No icon package or emoji added.
+4. Copy: exact requested introduction/career/action statements; internship and
+   location facts preserved. Removed stale instruction to follow a character from
+   the normal office. No fabricated screenshots, employment, metrics or links.
+5. Type: fluid 46–100px display scale, 600 weight, tight tracking limited to display
+   text; system sans and mono kept. Supporting role is readable text, not a
+   continuously rotating label that hides the career focus.
+6. Layout: asymmetric text/portrait composition, full-height desktop intent and
+   natural mobile stacking. Short desktop viewport rule reduces the portrait/type.
+   Real image dimensions are reserved. No absolute positioning or fixed content
+   height that clips the hero on mobile. Rendered breakpoint checks still required.
+7. Details: semantic labelled hero, one h1, real project/office/scroll anchors,
+   preserved skip link/focus/menu/filter controls. Office remains opt-in with 2D
+   fallback and equivalent object controls. No backend or personal content removed.
+8. Visuals: existing real portrait is the sole hero image; no generated likeness.
+   Generic rigged model and entrance preserved only behind explicit development
+   preview. Production ignores diagnostic overrides and loads no generic model.
+9. Motion: one GSAP stagger across five elements, 16px travel, 0.8-second duration
+   with 0.07-second stagger and power3.out. Transform/opacity only; inline styles
+   cleared on completion. MatchMedia reverts on preference change/unmount and
+   leaves reduced-motion/default markup readable. No loop or scroll hijacking.
+
+## Validation and limits
+
+- All 23 frontend tests / 7 files passed, including real GSAP preference cleanup
+  under React StrictMode and retained office/fallback regressions.
+- ESLint and production build passed. No dependencies or lockfile changed.
+- Initial JS 305.35 KB / 101.37 KB gzip, CSS 17.55 KB / 4.64 KB gzip;
+  optional office 992.01 KB / 271.59 KB gzip. Vite's >500 KB optional-chunk advisory
+  remains. Initial JS budget for this iteration: <=120 KB gzip; real laptop/mobile
+  performance and the office cost remain later acceptance work.
+- Baseline Flask 3 tests and real GLTFLoader deformation/Walk-to-Idle check passed
+  in this session; backend and GLB files unchanged in this milestone.
+- Diff/whitespace reviewed; no credentials, video frames, source reference video,
+  environment files or generated build output staged.
+- Browser Use timed out; native Computer Use stopped because it could not determine
+  the current browser URL confidently enough to enforce policy. UI automation
+  ended. No screenshot, mobile/GPU, browser-console or Lighthouse result is claimed.
+  This is a source/DOM/animation-lifecycle audit, not final rendered certification.
+
+Remaining: rendered review; ScrollTrigger section work; named project/content/contact
+refinement; verified personalized modeling and entrance integration. The current
+hero is implemented; the full cinematic portfolio is not declared complete.
+
+---
+
 # Cinematic redesign baseline — 2026-11-06
 
 Source-level baseline and local video inspection completed; rendered app review pending.

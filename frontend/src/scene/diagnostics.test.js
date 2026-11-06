@@ -41,13 +41,15 @@ test('diagnostics are silent and isolation queries are ignored in production', (
   reportScene('context-created')
   expect(console.info).not.toHaveBeenCalled()
   expect(console.error).not.toHaveBeenCalled()
-  expect(diagnosticStage('?scene=cube')).toBe('character')
+  expect(diagnosticStage('?scene=cube')).toBe('workspace')
+  expect(diagnosticStage('?scene=character')).toBe('workspace')
 })
 
 test('isolation progresses from cube to asset-free office to the actual character URL', () => {
   expect(diagnosticStage('?scene=cube', true)).toBe('cube')
   expect(diagnosticStage('?scene=office', true)).toBe('office')
   expect(diagnosticStage('?scene=character', true)).toBe('character')
-  expect(diagnosticStage('?scene=invalid', true)).toBe('character')
+  expect(diagnosticStage('?scene=invalid', true)).toBe('workspace')
+  expect(diagnosticStage('', true)).toBe('workspace')
   expect(CHARACTER_URL).toBe('/models/businesswoman.glb')
 })

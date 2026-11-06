@@ -1,3 +1,19 @@
+# Current character status — 2026-11-06
+
+The cinematic redesign requires Paramjeet's recognizable personalized model and
+prohibits a generic substitute. That model is not delivered. The existing generic
+asset, rig, clips and entrance code are preserved, but run only at the explicit
+development URL `/?scene=character#workspace`. Production ignores scene overrides
+and opens the interactive office without a character. The real portrait supports
+the hero. Historical Phase 3 notes below describe the retained preview, not the
+current production experience or completion of the personalized requirement.
+
+Additional front/profile/full-body photo references have been requested. No photo
+was uploaded to an external service. Blender was not found on PATH; availability
+elsewhere and a suitable modeling workflow still need to be established.
+
+---
+
 # Phase 3 character - licensed placeholder implemented
 
 The current user instruction explicitly permits a placeholder while personalized references are pending. The earlier blocked character requirement is superseded for this implementation scope. A custom recognizable likeness is not claimed or completed.

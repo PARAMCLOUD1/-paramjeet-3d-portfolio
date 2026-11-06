@@ -1,61 +1,82 @@
-# Cinematic portfolio progress
+﻿# Cinematic portfolio progress
 
 Updated: 2026-11-06
 
 ## Current milestone
 
-Milestone A — project inspection and reference analysis complete.
-Milestone B — next: cinematic hero implementation. No application code changed yet.
+Milestone A complete. Milestone B implemented and automated checks passed;
+rendered desktop/mobile acceptance pending. Preparing B commit and push.
 
-## Completed inspection
+## Completed
 
-- Confirmed existing project and correct origin on main; initially clean working tree.
-- Local HEAD and GitHub main match `3cfb7160880900297a06b3add4a21ace490ff48f`.
-- Reviewed React composition, CSS, content, project filters, character runtime,
-  Flask API, Vite proxy, regressions and historical audits.
-- Installed Unslop skill verified and read; this is a skill, not an invented CLI.
-- Added DESIGN_REFERENCE.md with timestamped video observations, direction and reuse plan.
-- Found the supplied Downloads video; decoded its 20.2 seconds and inspected a
-  24-frame contact sheet plus full-size hero/doors/project/timeline/contact frames.
+- Inspected the existing project on main without rebuilding or replacing it.
+- Analyzed the supplied 20.2-second Downloads video locally using a 24-frame
+  contact sheet and full-size frames. Timestamped observations, recording limits,
+  design direction and reuse plan are in DESIGN_REFERENCE.md.
+- Full-height portrait-led hero with requested copy, fluid editorial typography,
+  two actions, quiet navigation and scroll indicator.
+- Scoped GSAP entrance with reduced-motion and preference-change/unmount cleanup.
+- Preserved biography, filters, object links, lazy office, error/context/loading
+  fallback, low graphics, renderer preferences, Flask APIs and Git history.
+- Existing generic character is now explicit development preview only at
+  /?scene=character#workspace. Production never selects it, even via that query.
+  Model/rig/Walk/Idle/camera/skip/replay source remains intact for future integration.
+- Unslop installed and applied as a skill; nine-pass audit recorded in AUDIT.md.
 
-## Verification this session
+## Tests and build
 
-- Flask: 3 tests passed.
-- Actual GLTFLoader check passed: 46,997 triangles; 31,857 weighted vertices;
-  3,561,764 bytes; skeleton deformation and Walk-to-Idle verified for the placeholder.
-- Frontend: all 19 tests across 6 files passed; ESLint passed; production build passed.
-- Initial JS: 233.14 KB / 72.77 KB gzip; lazy office: 991.93 KB / 271.54 KB gzip.
-  Vite reports its existing >500 KB optional-chunk advisory.
-- Vite test/build initially failed on sandbox ancestor-directory access. Both passed
-  when rerun with elevated access; no dependency or configuration change needed.
-- PowerShell blocks npm.ps1; use npm.cmd without changing execution policy.
-- Browser Use timed out. Native Computer Use stopped because it could not determine
-  Chrome's current URL confidently enough to enforce policy. No further UI actions
-  taken. No rendered app, GPU performance or personalized likeness verified.
-- OpenCV installed in the ignored existing .venv solely for local video inspection;
-  no production dependency or uploaded photo/video introduced.
+- Frontend: 23 tests across 7 files passed; ESLint passed; production build passed.
+- Tests include actual GSAP cleanup with React StrictMode, changing motion
+  preference, lazy hero actions, normal character-free office, preview entrance,
+  project filters, WebGL fallbacks and context loss.
+- Initial JS 305.35 KB / 101.37 KB gzip; CSS 17.55 KB / 4.64 KB gzip.
+- Lazy office 992.01 KB / 271.59 KB gzip; existing >500 KB advisory remains.
+- Iteration budget: initial JS <=120 KB gzip; office stays opt-in. No FPS guarantee.
+- Baseline Flask: 3 passed. Baseline GLTFLoader check passed for the unchanged
+  placeholder: 46,997 triangles, 31,857 weighted vertices, 3,561,764 bytes,
+  skeleton deformation and Walk-to-Idle crossfade verified.
+- PowerShell blocks npm.ps1; use npm.cmd. Sandbox ancestor-directory access blocks
+  Vite configuration loading; tests/build passed with elevated access.
+- Diff/whitespace checked. No production dependency or lockfile changes.
 
-## Character status
+## Rendered verification limitations
 
-Only the existing generic licensed placeholder is implemented. It has short silver
-hair and does not satisfy the requested likeness or long dark hair. The portrait
-exists at frontend/public/images/profile-original.jpeg and profile.webp. Video found
-in Downloads; no personalized model found. Blender, ffmpeg and ffprobe were not found on PATH;
-this does not establish whether installations exist elsewhere.
-Current instruction prohibits generic substitution; historical placeholder approval
-does not authorize representing that asset as the requested character.
+Browser Use timed out. Native Computer Use stopped because it could not determine
+Chrome's current URL confidently enough to enforce policy; no further UI actions
+were taken. Actual rendered desktop/mobile layout, GPU performance, browser console,
+Lighthouse and personalized likeness have not been verified. Those are remaining
+acceptance tasks, not passing results.
+
+## Character and assets
+
+- Only the real portrait and legacy generic short-silver-haired placeholder exist.
+  No personalized long-dark-haired model is delivered or claimed.
+- Original portrait: frontend/public/images/profile-original.jpeg; optimized hero
+  image: frontend/public/images/profile.webp. Neither was uploaded externally.
+- Requested local front/profile/full-body references; response pending.
+- Blender/ffmpeg/ffprobe were not found on PATH; other installations are unverified.
+- OpenCV installed only in ignored existing .venv for local video analysis.
+  Extracted frames/scripts remain in system Temp, outside Git/public assets.
 
 ## Remaining work
 
-- Complete milestones B–F, with milestone-specific audit/test/build/commit/push verification.
-- Verify project screenshots/links/stacks and obtain additional character references/tools.
-- Add factual BCA/certification content from the brief; no issuing organizations inferred.
-- Existing backend has no contact endpoint; form integration is still required work.
+- Milestone C: ScrollTrigger reveals, section transitions and progress feedback.
+- Milestone D: seven named projects, evidence-based stacks/screenshots/links,
+  editorial About, skills categories, BCA/MCA timeline, certifications and closing.
+- Flask currently exposes health only. A contact form needs real endpoint and
+  delivery/storage integration; existing email/phone/GitHub remain usable.
+- Milestone E: establish modeling workflow and sufficient references, create/review
+  likeness and rig, verify optimized GLB/walking/idle, then integrate entrance.
+- Milestone F: rendered desktop/mobile/accessibility/performance/API checks and
+  final Unslop audit. No full redesign completion claimed.
 
-## Git and next action
+## Git and exact next action
 
-Baseline commit: `3cfb716`; remote equality verified with git ls-remote.
-Milestone A documentation is ready for commit; push verification will be recorded
-after comparing its local SHA with GitHub main.
-Exact next action: commit/push the inspected reference plan, then implement the
-approved hero using the real portrait and gate the legacy generic character.
+- Correct origin: https://github.com/PARAMCLOUD1/-paramjeet-3d-portfolio.git
+- Starting local/remote main matched 3cfb7160880900297a06b3add4a21ace490ff48f.
+- Milestone A: 45592cdf8e33a97f1fc5bdea0f5b3ad0949bcefa committed, pushed normally,
+  and verified equal to GitHub main with git ls-remote.
+- Milestone B: implementation/tests/build/audit reviewed; commit/push verification
+  to be recorded after the actual operation. Never force-push.
+- Exact next action: commit and push B, compare local/remote SHA, then record its
+  verified receipt and continue with rendered review and Milestone C.
