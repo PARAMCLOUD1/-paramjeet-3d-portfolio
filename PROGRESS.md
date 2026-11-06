@@ -4,8 +4,9 @@ Updated: 2026-11-06
 
 ## Current milestone
 
-Milestone A complete. Milestone B implemented and automated checks passed;
-rendered desktop/mobile acceptance pending. B committed, pushed and remote verified.
+Milestones A and B committed, pushed and verified. Milestone C implemented;
+25 tests, lint and final build pass. Preparing C commit/push.
+Rendered desktop/mobile acceptance remains pending.
 
 ## Completed
 
@@ -22,14 +23,19 @@ rendered desktop/mobile acceptance pending. B committed, pushed and remote verif
   /?scene=character#workspace. Production never selects it, even via that query.
   Model/rig/Walk/Idle/camera/skip/replay source remains intact for future integration.
 - Unslop installed and applied as a skill; nine-pass audit recorded in AUDIT.md.
+- C: light hero/navigation, full-width dark/light editorial sections, larger
+  headings and consolidated readable CSS make the redesign visibly distinct.
+- C: GSAP ScrollTrigger section reveals and scroll progress, with layout refresh
+  and actual preference-change/observer/trigger cleanup tests. No scroll hijack.
 
 ## Tests and build
 
-- Frontend: 23 tests across 7 files passed; ESLint passed; production build passed.
+- Frontend: 25 tests across 8 files passed; ESLint and final C production build
+  passed, including the audit's light-surface keyboard-focus contrast fix.
 - Tests include actual GSAP cleanup with React StrictMode, changing motion
   preference, lazy hero actions, normal character-free office, preview entrance,
   project filters, WebGL fallbacks and context loss.
-- Initial JS 305.35 KB / 101.37 KB gzip; CSS 17.55 KB / 4.64 KB gzip.
+- C initial JS 351.00 KB / 119.85 KB gzip; CSS 19.35 KB / 5.09 KB gzip.
 - Lazy office 992.01 KB / 271.59 KB gzip; existing >500 KB advisory remains.
 - Iteration budget: initial JS <=120 KB gzip; office stays opt-in. No FPS guarantee.
 - Baseline Flask: 3 passed. Baseline GLTFLoader check passed for the unchanged
@@ -60,7 +66,7 @@ acceptance tasks, not passing results.
 
 ## Remaining work
 
-- Milestone C: ScrollTrigger reveals, section transitions and progress feedback.
+- Milestone C: final build/audit/commit/push/remote verification in progress.
 - Milestone D: seven named projects, evidence-based stacks/screenshots/links,
   editorial About, skills categories, BCA/MCA timeline, certifications and closing.
 - Flask currently exposes health only. A contact form needs real endpoint and
@@ -79,6 +85,6 @@ acceptance tasks, not passing results.
 - Milestone B: 80bd3f298e71075138e4910572f847c16c0a1f12 committed and pushed normally;
   git ls-remote confirmed GitHub main equals that local SHA. Working tree was clean
   before this documentation receipt. No force push or deployment performed.
-- Exact next action: rendered desktop/mobile hero review when browser tooling is
-  available, followed by Milestone C ScrollTrigger sections and progress feedback.
+- Exact next action: finish C verification and push; then replace generic project
+  areas with verified named projects and complete Milestone D content redesign.
   Obtain additional photo references and a modeling workflow before Milestone E.

@@ -1,3 +1,40 @@
+# Milestone C — visible editorial redesign and scroll, 2026-11-06
+
+The earlier hero kept the original dominant navy/portrait composition and left
+the rest of the page visually unchanged. The local server was verified to serve
+the updated Hero module/CSS and not the old headline; this was not established
+as a cache defect. The corrected direction follows the reference's light opening
+and deliberate dark/light section changes.
+
+- Direction: assured, precise, human; workstation world; real portrait and office
+  as moments; terminal captions as signature. Same product and personal identity.
+- Spacing/layout: full-width sections with shared fluid gutters; larger editorial
+  headings; sticky compact navigation with 44px links; stacked mobile layout and
+  short-viewport hero adaptation. No fixed-width content or decorative filler.
+- Color: warm off-white hero, navy workspace/projects, light About/skills and dark
+  closing. Darker blue ink on light surfaces; quiet hairlines and restrained accents.
+- Type/copy/icons: retained exact hero wording and factual content; display scale
+  replaces weight/noise. No new emoji, icons, font downloads or unverified claims.
+- Details/code: replaced minified, repeated phase CSS with readable shared rules
+  while preserving the office controls/fallback selectors. Standard anchor behavior
+  and keyboard focus stay intact; reduced motion disables native smooth scrolling.
+- Motion: scoped GSAP ScrollTrigger heading/section entrances, 24px y movement,
+  no hidden scroll content; transform-only scroll progress; no pinning or hijacking.
+  ResizeObserver/image-load refresh accounts for office and layout changes. Media
+  changes and unmount remove triggers, inline transforms, observers and listeners.
+- Automated validation: 25 tests / 8 files passed, including actual ScrollTrigger
+  cleanup on motion-preference change; ESLint and final production build passed.
+  Light-surface focus rings corrected to #0369A1. Initial JS 351.00 KB / 119.85 KB
+  gzip; CSS 19.35 KB / 5.09 KB gzip; optional office 992.01 KB / 271.59 KB gzip.
+  The optional office advisory remains; initial JS meets the 120 KB gzip C budget.
+- Browser access host remains unavailable. No rendered screenshot, GPU, mobile or
+  browser-console verification is claimed; those acceptance checks remain open.
+
+Unslop workflow applied from the installed skill (not a CLI). Credit: Unslop by
+Damir Sokolovsky (@heydamir), CC BY 4.0, https://heydamir.design/unslop.
+
+---
+
 # Milestone B — cinematic hero, 2026-11-06
 
 Implementation and automated validation complete; rendered acceptance remains pending.

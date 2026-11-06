@@ -17,7 +17,7 @@ scroll physics and mobile behavior cannot be established from it.
 | Approximate video time | Observed visual design | Adaptation for Paramjeet |
 | --- | --- | --- |
 | 0–1 seconds | Cream hero, compact horizontal nav, large left-aligned greeting, person on right; role on a physical notebook-style panel; two actions and bottom status line | Full-height portrait/type composition with requested identity, static readable role and two actions; preserve navy brand |
-| 1.7–3.5 seconds | Hero changes to charcoal/navy; role panel changes between disciplines; portrait remains the visual anchor | Use dark hero and one short staggered entrance; keep career focus honest instead of cycling unrelated professions |
+| 1.7–3.5 seconds | Hero changes to charcoal/navy; role panel changes between disciplines; portrait remains the visual anchor | Use the cream opening and dark sections for visible contrast, plus one short staggered entrance; keep career focus honest instead of cycling unrelated professions |
 | 4.3–6.1 seconds | Hero scrolls upward; four arched colored doors appear under a large heading; selected door reveals supporting text | Preserve the real office as the interactive destination; adapt doorway transition later, without copying its four-door branding |
 | Around 7 seconds | Door fills a large portion of the viewport before project content appears | A future office transition can move a real camera through its doorway; do not add a CSS imitation or scroll hijack |
 | 7.8–10.4 seconds | Large development heading, wide rounded project panels, text paired with phone previews; changing vertical alignment | Use large project compositions with genuine screenshots when available; no copied apps, phones, project claims or fake previews |
@@ -58,6 +58,10 @@ contains a portrait presentation; it does not prove a rigged 3D character workfl
 - Signature: restrained terminal-style captions connecting build, automate and deploy.
 
 Use the supplied navy palette, clear blue action accent and strategic light sections.
+The opening hero/navigation now use warm off-white; workspace/projects use navy,
+About/skills return to off-white, and education/contact close in dark tones. The
+earlier all-navy opening preserved too much of the previous composition. Light-surface
+blue text uses #0369A1 for accessible contrast; #38BDF8 remains the dark-surface accent.
 Typography should carry the hero, with the requested identity and career statements,
 Explore Projects and Enter 3D Office actions, and a simple scroll indicator.
 Keep the portrait as the truthful supporting visual while personalized artwork is pending.

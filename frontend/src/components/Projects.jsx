@@ -5,7 +5,7 @@ export default function Projects() {
   const [filter, setFilter] = useState('All')
   const visible = projects.filter(project => filter === 'All' || project.category === filter)
   return <section id="projects" className="section projects">
-    <div className="section-heading"><div><p className="eyebrow">02 / Project areas</p><h2>From application logic<br/>to the systems beneath.</h2></div><p>Areas of practical work from my biography. Explore my GitHub for available repositories.</p></div>
+    <div className="section-heading" data-scroll-reveal><div><p className="eyebrow">02 / Project areas</p><h2>From application logic<br/>to the systems beneath.</h2></div><p>Areas of practical work from my biography. Explore my GitHub for available repositories.</p></div>
     <div className="project-filters" role="group" aria-label="Filter project areas">
       {['All', 'Web applications', 'Systems'].map(category => <button key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{category}</button>)}
     </div>
