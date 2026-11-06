@@ -5,7 +5,7 @@ Updated: 2026-11-06
 ## Current milestone
 
 Milestone A complete. Milestone B implemented and automated checks passed;
-rendered desktop/mobile acceptance pending. Preparing B commit and push.
+rendered desktop/mobile acceptance pending. B committed, pushed and remote verified.
 
 ## Completed
 
@@ -76,7 +76,9 @@ acceptance tasks, not passing results.
 - Starting local/remote main matched 3cfb7160880900297a06b3add4a21ace490ff48f.
 - Milestone A: 45592cdf8e33a97f1fc5bdea0f5b3ad0949bcefa committed, pushed normally,
   and verified equal to GitHub main with git ls-remote.
-- Milestone B: implementation/tests/build/audit reviewed; commit/push verification
-  to be recorded after the actual operation. Never force-push.
-- Exact next action: commit and push B, compare local/remote SHA, then record its
-  verified receipt and continue with rendered review and Milestone C.
+- Milestone B: 80bd3f298e71075138e4910572f847c16c0a1f12 committed and pushed normally;
+  git ls-remote confirmed GitHub main equals that local SHA. Working tree was clean
+  before this documentation receipt. No force push or deployment performed.
+- Exact next action: rendered desktop/mobile hero review when browser tooling is
+  available, followed by Milestone C ScrollTrigger sections and progress feedback.
+  Obtain additional photo references and a modeling workflow before Milestone E.
