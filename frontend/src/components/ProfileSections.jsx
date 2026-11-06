@@ -33,6 +33,8 @@ export default function ProfileSections() {
       <ol className="education-timeline">
         <li data-scroll-reveal><p className="eyebrow">2026–2028 · Expected</p><h3>MCA — Cloud Computing &amp; DevOps</h3><p>Chandigarh University</p><span>Pursuing</span></li>
         <li data-scroll-reveal><p className="eyebrow">2026</p><h3>Bachelor of Computer Applications</h3><p>DAV College</p><span>BCA</span></li>
+        <li data-scroll-reveal><p className="eyebrow">2023</p><h3>Class XII</h3><p>Government Model Senior Secondary School</p></li>
+        <li data-scroll-reveal><p className="eyebrow">2021</p><h3>Class X</h3><p>Sir McAuliffe High School</p></li>
         <li data-scroll-reveal><p className="eyebrow">Learning by building</p><h3>From applications to systems</h3><p>Algorithm visualizers, database applications and Linux monitoring projects form the practical side of my learning.</p><a className="text-link" href="#projects">Explore the projects <span aria-hidden="true">↗</span></a></li>
       </ol>
     </section>
@@ -44,10 +46,10 @@ export default function ProfileSections() {
 
     <section id="contact" className="contact section" aria-labelledby="contact-title">
       <p className="eyebrow" data-scroll-reveal>07 / The next conversation</p>
-      <h2 id="contact-title" data-scroll-reveal>Got a project?<br/><span>Let's build it together.</span></h2>
+      <h2 id="contact-title" data-scroll-reveal>LET'S BUILD<br/><span>SOMETHING GREAT.</span></h2>
       <div className="contact-grid" data-scroll-reveal>
         <div><p>Have an idea, an internship opportunity, or a systems problem to explore? I’d like to hear about it.</p><a className="email" href="mailto:param1539064@gmail.com">param1539064@gmail.com <span aria-hidden="true">↗</span></a></div>
-        <dl><div><dt>Call</dt><dd><a href="tel:+917814433864">+91 7814433864</a></dd></div><div><dt>Find my code</dt><dd><a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></dd></div><div><dt>Based in</dt><dd>Punjab, India</dd></div></dl>
+        <dl><div><dt>Call</dt><dd><a href="tel:+917814433864">+91 7814433864</a></dd></div><div><dt>Find my code</dt><dd><a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></dd></div><div><dt>Connect</dt><dd><a href="https://www.linkedin.com/in/paramjeet-kaur-cloud/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></dd></div><div><dt>Based in</dt><dd>Punjab, India</dd></div></dl>
       </div>
     </section>
   </>

@@ -24,16 +24,16 @@ export default function Hero({ onEnterOffice }) {
 
   return <section ref={root} className="hero" aria-labelledby="hero-title">
     <div className="hero-copy">
-      <p className="hero-introduction" data-hero-reveal>Hi, I'm Paramjeet.</p>
+      <p className="hero-introduction" data-hero-reveal>Cloud &amp; DevOps / Portfolio</p>
       <h1 id="hero-title" data-hero-reveal>
-        <span>I Build,</span>{' '}
-        <span>Automate</span>{' '}
-        <span className="hero-title-last">&amp; Deploy.</span>
+        <span>PARAMJEET</span>{' '}
+        <span className="hero-title-last">KAUR</span>
       </h1>
-      <p className="hero-role" data-hero-reveal>Cloud &amp; DevOps Engineer <span>in Progress.</span></p>
+      <p className="hero-role" data-hero-reveal>Cloud &amp; DevOps Engineer <span>in Progress</span></p>
+      <p className="hero-tagline" data-hero-reveal>BUILDING. AUTOMATING. DEPLOYING.</p>
       <div className="actions" data-hero-reveal>
-        <a className="button primary" href="#projects">Explore Projects <span aria-hidden="true">↗</span></a>
-        <a className="button secondary" href="#workspace" onClick={onEnterOffice}>Enter 3D Office <span aria-hidden="true">↗</span></a>
+        <a className="button primary" href="#workspace" onClick={onEnterOffice}>Enter My World <span aria-hidden="true">↗</span></a>
+        <a className="button secondary" href="#projects">Explore Projects <span aria-hidden="true">↗</span></a>
       </div>
     </div>
     <figure className="portrait" data-hero-reveal>

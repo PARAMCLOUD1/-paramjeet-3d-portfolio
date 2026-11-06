@@ -1,4 +1,10 @@
-# PARAMJEET.DEV — cinematic redesign
+# PARAMJEET.DEV — Midnight Executive × Obsidian Cloud
+
+V7 upgrade in progress: supplied midnight/graphite/navy/champagne/blue/ivory palette,
+editorial hero, career wording, LinkedIn and all four education stages implemented.
+Physical double-door entrance and executive office are the next checkpoint, not
+delivered by the theme change alone. See PROGRESS.md for current status. The older
+experience description below will be revised after the V7 scene lands.
 
 The existing React / React Three Fiber portfolio and Flask backend, incrementally redesigned from the supplied local video. See [DESIGN_REFERENCE.md](DESIGN_REFERENCE.md) for timestamped analysis and [PROGRESS.md](PROGRESS.md) for milestone status. No new runtime dependencies or deployment.
 

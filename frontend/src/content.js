@@ -51,6 +51,7 @@ export const skillCategories = [
   { title: 'Linux Administration', description: 'Working with the operating system behind the application.', tools: ['Ubuntu', 'Bash', 'systemd', 'System monitoring'] },
   { title: 'Cloud Computing', description: 'Building my foundation in cloud services and infrastructure.', tools: [], learning: ['AWS'] },
   { title: 'DevOps', description: 'From version control toward automated, repeatable delivery.', tools: ['Git'], learning: ['Docker', 'Kubernetes', 'CI/CD', 'Infrastructure automation'] },
+  { title: 'Git / GitHub', description: 'Version control and source collaboration across my projects.', tools: ['Git', 'GitHub'] },
   { title: 'Backend Development', description: 'Connecting application logic, APIs and persistent data.', tools: ['Flask', 'Spring Boot', 'REST APIs'] },
   { title: 'Databases', description: 'Relational data, stored procedures and application persistence.', tools: ['SQL', 'Oracle', 'PL/SQL', 'H2', 'Hibernate'] },
   { title: 'Web Development', description: 'Interfaces that make systems and algorithms easier to use.', tools: ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind CSS', 'Web deployment'] },

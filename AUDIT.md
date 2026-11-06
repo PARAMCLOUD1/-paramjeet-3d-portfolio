@@ -1,3 +1,28 @@
+# V7 milestone 1/2 — audit and executive theme
+
+Clean main baseline: 623181c. Exact visual gaps in source: uniformly rough box
+materials, a flat back-wall door, no hinge assembly, no architectural camera journey,
+and the former light portrait split. No cache defect was established.
+
+Direction: recruiter-facing Cloud & DevOps portfolio; assured, precise, architectural;
+walnut/metal office and infrastructure world; physical doors and verified projects
+as moments; champagne thresholds and blue technical surfaces as signature.
+
+Installed Unslop skill used directly, not a CLI. Reviewed spacing, supplied palette,
+restrained glyphs, factual copy, editorial type, responsive hierarchy, focus states,
+real portrait/projects and reduced-motion GSAP. No glows, gradients, glass UI or
+fabricated credentials. Requested uppercase copy overrides skill defaults.
+Added supplied LinkedIn and Class X/XII. Preserved projects, certificates, backend
+and legacy preview. Fixed a self-referencing variable during token migration.
+Lint, 29 tests and production build passed. Initial JS 123.51 KB gzip, CSS 6.38 KB
+gzip; optional office 271.59 KB gzip retains the chunk advisory. Browser host remains
+unavailable; rendered/GPU/mobile checks are not claimed. Physical doors/office next.
+
+Credit: Unslop by Damir Sokolovsky (@heydamir), CC BY 4.0,
+https://heydamir.design/unslop. Entries below are historical.
+
+---
+
 # Milestone D — real work and editorial content, 2026-11-06
 
 Applied the installed Unslop skill to the complete visible page. Direction remains

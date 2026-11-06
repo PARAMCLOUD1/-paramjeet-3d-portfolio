@@ -27,5 +27,7 @@ test('education and all supplied course names are retained without invented issu
   expect(within(section).getByText('Word, Excel & PowerPoint')).toBeVisible()
   expect(screen.getByRole('link', { name: /param1539064/ })).toHaveAttribute('href', 'mailto:param1539064@gmail.com')
   expect(screen.getByRole('link', { name: /7814433864/ })).toHaveAttribute('href', 'tel:+917814433864')
-  expect(screen.queryByRole('link', { name: /LinkedIn/i })).not.toBeInTheDocument()
+  expect(screen.getByRole('link', { name: /LinkedIn/i })).toHaveAttribute('href', 'https://www.linkedin.com/in/paramjeet-kaur-cloud/')
+  expect(screen.getByRole('heading', { name: 'Class XII' })).toBeVisible()
+  expect(screen.getByRole('heading', { name: 'Class X' })).toBeVisible()
 })

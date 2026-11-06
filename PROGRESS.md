@@ -2,7 +2,22 @@
 
 Updated: 2026-11-06
 
-## Current milestone
+## V7 current milestone
+
+Milestone 1 inspected at clean baseline 623181c. Milestone 2 theme/content updates
+implemented: supplied palette, hero/contact copy, LinkedIn and Class X/XII. Lint,
+29 tests and production build passed. Initial JS 123.51 KB gzip; CSS 6.38 KB gzip;
+optional office 271.59 KB gzip. Checkpoint commit/push verification next.
+
+Milestones 3/4 next: physical double doors, hinge/handle GSAP sequence, safe camera
+walkthrough, executive architecture and six accessible destinations. Milestone 5
+reuses existing verified projects/certifications/scroll features. Milestone 6 remains
+blocked by missing personalized rigged artwork and sufficient references; assets
+requested. Browser host unavailable; no rendered/GPU/mobile result claimed.
+Milestones 7/8: remaining checks and full PROJECT_REPORT.md after implementation.
+Exact next action: commit/push/verify theme, then implement the door/office sequence.
+
+## Historical previous milestone
 
 A, B and C are committed, pushed and remote verified. D visible content redesign
 is implemented; 29 tests, lint and build pass. D committed, pushed and remote verified.
