@@ -39,6 +39,15 @@ export default function useScrollMotion(root, progress) {
         page.removeEventListener('load', refresh, true)
       }
     }, root)
+    media.add('(min-width: 801px) and (prefers-reduced-motion: no-preference)', () => {
+      root.current.querySelectorAll('[data-portrait-parallax]').forEach(image => {
+        gsap.fromTo(image, { yPercent: -3 }, {
+          yPercent: 3,
+          ease: 'none',
+          scrollTrigger: { trigger: image.parentElement, start: 'top bottom', end: 'bottom top', scrub: .5 },
+        })
+      })
+    }, root)
     return () => media.revert()
   }, [root, progress])
 }

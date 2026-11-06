@@ -35,7 +35,7 @@ light/dark section contrast without a flashing theme switch. Three.js remains li
 to the existing opt-in office and, later, a verified personalized model. The reference
 contains a portrait presentation; it does not prove a rigged 3D character workflow.
 
-## Verified existing project
+## Verified baseline before redesign
 
 - Existing React 19 / Vite application with Tailwind 4, GSAP 3, Three.js, R3F and Drei.
 - Lazy office, object destinations, project filters, responsive navigation,
@@ -69,6 +69,21 @@ Do not introduce the generic businesswoman as Paramjeet's personalized character
 The new instruction prohibiting generic substitution takes precedence over historical
 placeholder permissions in CHARACTER.md and AUDIT.md. Preserve the asset and office code;
 decide how to gate the legacy placeholder during the redesign rather than deleting work.
+
+## Implemented visual adaptation through Milestone D
+
+- Off-white opening/navigation, oversized ink/blue typography and real portrait;
+  navy office/project sections, off-white About/skills, dark timeline, light course
+  list and a large dark contact close.
+- Full-width featured preview from Paramjeet's actual electricity project, followed
+  by a numbered, filterable project index with native expandable notes. No generic
+  phone mockups or fabricated screenshots; verification in PROJECT_SOURCES.md.
+- Seven skills disclosures, factual BCA/MCA timeline, supplied certification names
+  and requested contact headline. Existing office and backend remain intact.
+- GSAP ScrollTrigger content reveals, progress line and small desktop-only portrait
+  parallax with media/observer cleanup. No pinning, looping label or scroll hijack.
+- Personalized character and camera-follow entrance are not claimed delivered.
+  The generic legacy preview is dev-only; rendered app acceptance remains pending.
 
 ## Implementation sequence after inspecting the video
 

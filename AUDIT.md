@@ -1,3 +1,63 @@
+# Milestone D — real work and editorial content, 2026-11-06
+
+Applied the installed Unslop skill to the complete visible page. Direction remains
+assured, precise and human, with the workstation as its world, real portrait/project
+capture as visual moments and restrained terminal captions as the signature.
+Credit: Unslop by Damir Sokolovsky (@heydamir), CC BY 4.0,
+https://heydamir.design/unslop.
+
+## Findings and fixes
+
+- The old three generic project areas were too abstract. Replaced them with all
+  seven supplied titles, six repository/README-verified stacks and source links,
+  a real featured screenshot and verified-available demo. The seventh project
+  has no inferred link, stack or screenshot. Evidence is in PROJECT_SOURCES.md.
+- Repeated small rows lacked hierarchy. The featured project now gets a full-width
+  real preview and split editorial explanation; remaining projects are numbered
+  typographic rows with native expandable notes and filterable categories.
+- About now includes the actual portrait, professional biography and factual
+  education highlights. Skills use seven keyboard-operable native disclosures,
+  with AWS/Docker/Kubernetes/CI-CD/infrastructure automation marked as learning.
+  No percentages or employment claims were added.
+- Education now includes BCA and MCA plus an undated academic-project entry;
+  the large 2028 date refers explicitly to expected graduation. Certifications
+  show the nine supplied names, with Word/Excel/PowerPoint under MS Office.
+  No issuer, credential number or certificate artwork was invented.
+- Contact now uses the requested dramatic headline, real email/phone/GitHub and
+  a large closing wordmark. No LinkedIn or pretend-working submission form. Flask
+  still only has health; contact endpoint/delivery configuration remains future work.
+- Spacing/type/color: consistent gutters and section rhythm, fewer surface treatments,
+  larger calm type, quiet hairlines and one restrained accent. Measured light blue
+  ink/off-white contrast 5.10:1; light muted/off-white 6.52:1; dark muted/navy 6.92:1.
+- Removed obsolete skills/contact CSS and consolidated affected duplicate rules.
+  Replaced the monolithic one-line App content with a small app shell and profile
+  component. Office geometry, character preview, backend and original portrait kept.
+- Motion: featured-image reveal and very small desktop portrait parallax (±3%);
+  no mobile/reduced-motion parallax. All section backgrounds stay stationary;
+  only their content moves. Native details and filters remain usable without motion.
+
+## Verification
+
+- 29 frontend tests / 9 files passed, including real ScrollTrigger/reduced-motion
+  cleanup, preserved lazy office/fallback behavior, filtering with the featured
+  project retained, actual source/demo links, no invented seventh-project link,
+  native details interaction and learning/education/certification/contact content.
+- ESLint, production build and whitespace checks passed.
+- Initial JS 361.74 KB / 123.32 KB gzip; CSS 25.49 KB / 6.23 KB gzip. The D budget
+  is <=130 KB initial JS gzip, allowing the actual project/profile content on top
+  of the 119.85 KB C bundle. No dependency or font downloads added.
+- Lazy office unchanged at 992.01 KB / 271.59 KB gzip; existing advisory remains.
+  New real screenshot: 1280 × 720 WebP, 47,792 bytes, lazy loaded with dimensions.
+  Portrait resource is reused. No new default WebGL/model request introduced.
+- Live frontend serves the redesigned project module; Flask health via Vite proxy
+  responds. Backend/API files were not changed.
+- Browser host unavailable: no rendered desktop/mobile, browser-console, Lighthouse,
+  actual GPU performance or final visual acceptance claimed. Source/DOM/animation
+  tests do not replace those checks. The original mandatory personalized model
+  remains unimplemented pending references and a suitable modeling workflow.
+
+---
+
 # Milestone C — visible editorial redesign and scroll, 2026-11-06
 
 The earlier hero kept the original dominant navy/portrait composition and left

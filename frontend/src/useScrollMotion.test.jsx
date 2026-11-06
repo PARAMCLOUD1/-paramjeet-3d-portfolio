@@ -9,7 +9,7 @@ function Page() {
   const root = useRef(null)
   const progress = useRef(null)
   useScrollMotion(root, progress)
-  return <><div ref={progress} data-testid="progress"/><main ref={root}><h2 data-scroll-reveal>Readable section</h2></main></>
+  return <><div ref={progress} data-testid="progress"/><main ref={root}><h2 data-scroll-reveal>Readable section</h2><figure><img data-portrait-parallax alt="Test portrait"/></figure></main></>
 }
 
 function preference(allowed) {
@@ -40,11 +40,12 @@ test('changing motion preference kills actual scroll triggers and layout observe
   expect(ScrollTrigger.getAll().length).toBeGreaterThan(0)
   expect(screen.getByRole('heading').style.opacity).toBe('')
   act(() => {
-    queries.get('(prefers-reduced-motion: no-preference)').matches = false
+    for (const [query, media] of queries) if (query.includes('no-preference')) media.matches = false
     gsap.matchMediaRefresh()
   })
   expect(ScrollTrigger.getAll()).toHaveLength(0)
   expect(screen.getByRole('heading').style.transform).toBe('')
+  expect(screen.getByAltText('Test portrait').style.transform).toBe('')
   expect(disconnect).toHaveBeenCalled()
   unmount()
 })

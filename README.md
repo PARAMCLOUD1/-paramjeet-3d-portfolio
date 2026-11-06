@@ -21,7 +21,9 @@ Open http://127.0.0.1:5173. Use `npm.cmd` because this machine blocks `npm.ps1`.
 
 ## Current experience
 
-The full-height, portrait-led hero uses the requested identity and career copy, large editorial type, **Explore Projects**, **Enter 3D Office**, and a scroll indicator. One scoped GSAP entrance respects reduced motion and cleans up on preference changes/unmount. It adds no scroll hijacking or looping effects. The real portrait remains the hero visual while personalized character artwork is pending.
+The light, full-height portrait-led opening contrasts with the dark office/project showcase. Large editorial headings, light About/skills sections, date-led education, a certification grid and a dramatic contact close carry the visual direction from the reference. **Explore Projects**, **Enter 3D Office**, scroll progress, scoped GSAP/ScrollTrigger reveals and small desktop portrait parallax respect reduced motion. No scroll hijacking or looping role labels. The real portrait remains the hero visual while personalized character artwork is pending.
+
+The project showcase contains all seven supplied names, six verified source links, a real electricity-dashboard preview and a verified-available demo. Project notes and seven skills categories use native keyboard-operable disclosures. Missing project evidence, issuing organizations and images are not fabricated; see [PROJECT_SOURCES.md](PROJECT_SOURCES.md).
 
 Select **Enter 3D Office** or **Load interactive 3D workspace** to load the optional room. **Low graphics**, **Reset view**, and **Switch to 2D** remain available, along with monitor/laptop, portrait, server and book destinations and equivalent keyboard controls. Project filters, skills, education, contact links and Flask API behavior are preserved.
 
@@ -80,4 +82,4 @@ Build warning: the optional Three.js office chunk exceeds Vite's 500 KB advisory
 
 Configured origin: https://github.com/PARAMCLOUD1/-paramjeet-3d-portfolio.git (note the leading hyphen). Access to its existing `main` branch was verified. Save meaningful verified milestones as minor/major commits and push without force. No hosting deployment is authorized by a Git push alone.
 
-Remaining: ScrollTrigger sections, seven-project showcase, education/certification/contact refinement, personalized model and artist-reviewed rig/foot contacts, and rendered desktop/mobile verification. Generic substitution is prohibited by the current brief. See [AUDIT.md](AUDIT.md) for verification history and limitations.
+Remaining: seventh-project source/stack evidence, contact endpoint/delivery integration if required, personalized model and artist-reviewed rig/foot contacts, and rendered desktop/mobile verification. Generic substitution is prohibited by the current brief. See [AUDIT.md](AUDIT.md) for verification history and limitations.
