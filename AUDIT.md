@@ -1,3 +1,57 @@
+# V8 refinement audit — 2026-11-07
+
+Applied installed Unslop skill directly (SKILL.md, signs, tokens and visual/reference
+guidance); no Unslop CLI exists or was invented. Credit: unslop by Damir Sokolovsky
+(@heydamir), CC BY 4.0, https://heydamir.design/unslop.
+
+## Confirmed source findings and fixes
+
+- Oversized hero (104px), section (80px), contact (112px), project (52px), year
+  (216px) and footer (164px) typography: replaced with the V8 responsive type scale.
+- Excessive 112px section padding and full-width featured media: reduced spacing,
+  capped reading/content width and compact split featured-project presentation.
+- Existing object click state only rendered a short summary under the canvas:
+  replaced with full HTML content in a shared native dialog above the canvas shell.
+- Independent nav anchors and scene state: shared App selection and content source.
+- Closing an exhibit previously flew the camera back to a preset: removed content
+  camera travel; panel state now pauses motion and preserves the explored view.
+- Missing dialog semantics, Escape/focus loop and page-scroll handling: implemented
+  native top layer, named title/region, Close/Escape, focus return and scroll lock.
+- New regression exposed selector results out of DOM order: explicitly sort focus
+  targets in document order. Closed-details descendants stay out of the focus loop.
+- Monitor 1.5m wide and 3.2m desk competed with architecture: independently resized
+  desk to 2.4m, monitor to .75m and adjusted peripherals/racks. Selection uses an
+  outline and HTML controls. No fake large display geometry or giant hit targets.
+- Incomplete education results, skill lists and delivery algorithm list: populated
+  from the user's V8 brief. No fabricated issuer, credential artwork or source URL.
+- Removed About portrait parallax and project-preview hover zoom. Hero/dialog motion
+  is brief and respects reduced motion; physical door sequence remains intact.
+
+Design direction: recruiter-facing Cloud & DevOps portfolio; assured, precise,
+approachable; walnut/metal/infrastructure; real entrance, portrait and project
+preview; champagne architectural details and blue technical interactions.
+
+## Verification limits
+
+See PROGRESS.md for final command results and Git receipt. Real R3F/Three meshes,
+raycasts and GSAP transforms are checked without a GPU. A first raycast test aimed
+at the empty gap between two server cabinets; corrected the test to aim at an actual
+mesh surface. This was a test target issue, not a fabricated raycast fix.
+Browser host unavailable and native discovery timed out. No rendered visual review,
+browser-console clearance, mobile-device result or GPU performance claim is made.
+Flask health tests and live direct/proxied health checks pass. No contact endpoint
+exists; no fake submission UI was added. The supplied additional electricity demo
+could not be independently opened and is explicitly labelled user supplied.
+
+## Earlier audit history
+
+Final V8 checks: ESLint passed without warnings; 51 frontend tests passed across
+12 files. The final framing adjustment passed all 6 scene regressions; production
+build passed in 10.71s. Initial JS 125.77KB gzip / CSS 7.47KB gzip; optional office
+252.82KB gzip. Vite's existing optional chunk size advisory remains. Flask 3/3;
+direct/proxied live health status ok; frontend HTTP 200; diff whitespace check clean.
+Changes reviewed against the supplied brief and the existing uncommitted V7 work.
+
 # V7 milestone 1/2 — audit and executive theme
 
 Clean main baseline: 623181c. Exact visual gaps in source: uniformly rough box

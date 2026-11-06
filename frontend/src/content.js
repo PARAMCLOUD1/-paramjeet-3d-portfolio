@@ -1,11 +1,17 @@
 // Sources and verification limits are recorded in PROJECT_SOURCES.md.
+export const portfolioViews = [
+  ['about', 'About Me'], ['projects', 'Projects'], ['skills', 'Skills'],
+  ['education', 'Education'], ['certifications', 'Certifications'], ['contact', 'Contact'],
+]
+
 export const projects = [
   {
     id: 'electricity', category: 'Algorithms', title: 'Smart Electricity Load Management System',
     description: 'Turning limited electricity supply into better allocation decisions. A browser-based dashboard with algorithm labs and an interactive city view.',
-    tools: ['JavaScript', 'HTML / CSS', 'Chart.js'],
+    tools: ['Python', 'Flask', 'HTML', 'CSS', 'JavaScript', 'Chart.js'],
     repository: 'https://github.com/PARAMCLOUD1/Smart_electricity',
     demo: 'https://paramsmartelectricitysystem.onrender.com/',
+    suppliedDemo: 'https://smart-electricity.onrender.com/',
     image: '/images/projects/electricity.webp',
     notes: 'Explore Greedy allocation, 0/1 Knapsack, Merge Sort and Binary Search, with step playback and measured performance reports. The web edition runs in the browser and stores records locally. The repository also preserves the original Python/Tkinter edition.',
   },
@@ -24,7 +30,7 @@ export const projects = [
   {
     id: 'pathfinding', category: 'Algorithms', title: 'Pathfinding Visualizer',
     description: 'Make an algorithm visible. Explore paths, obstacles, weighted grids and mazes through an interactive browser visualizer.',
-    tools: ['JavaScript', 'HTML', 'CSS'], repository: 'https://github.com/PARAMCLOUD1/Pathfinding-Visualizer',
+    tools: ['JavaScript', 'HTML', 'CSS', 'BFS', 'DFS', 'Dijkstra', 'A*', 'Greedy Best-First Search'], repository: 'https://github.com/PARAMCLOUD1/Pathfinding-Visualizer',
     notes: 'Visualizes BFS, DFS and Dijkstra’s algorithm, with maze generation, obstacle customization and algorithm performance comparison.',
   },
   {
@@ -36,25 +42,40 @@ export const projects = [
   {
     id: 'employees', category: 'Web applications', title: 'Employee Management System',
     description: 'A Java application for managing employee records, with browser and console interfaces sharing the same Hibernate data layer.',
-    tools: ['Java', 'Spring Boot', 'Hibernate', 'H2'], repository: 'https://github.com/PARAMCLOUD1/WorkforceHub',
+    tools: ['Java', 'Spring Boot', 'Hibernate', 'H2', 'Thymeleaf'], repository: 'https://github.com/PARAMCLOUD1/WorkforceHub',
     notes: 'Employee CRUD operations are exposed through REST endpoints and a browser interface. Records persist in the embedded H2 database, with MySQL available through configuration.',
   },
   {
     id: 'delivery', category: 'Algorithms', title: 'Smart Delivery Route Optimizer',
-    description: 'Exploring efficient route planning for delivery journeys.', tools: [],
-    notes: 'A route-optimization project from my academic portfolio.',
+    description: 'Exploring efficient route planning for delivery journeys.', tools: ['Dijkstra', 'Quick Sort', 'AVL Tree', '0/1 Knapsack', 'TSP'],
+    notes: 'Academic route planning using Dijkstra, Quick Sort, AVL Tree, 0/1 Knapsack and TSP. Algorithm details supplied by Paramjeet; repository and screenshot are not yet available.',
   },
 ]
 
 export const skillCategories = [
-  { title: 'Programming', description: 'The languages behind my application and algorithm projects.', tools: ['Python', 'Java', 'JavaScript'] },
-  { title: 'Linux Administration', description: 'Working with the operating system behind the application.', tools: ['Ubuntu', 'Bash', 'systemd', 'System monitoring'] },
+  { title: 'Programming', description: 'The languages behind my application and algorithm projects.', tools: ['Python', 'Java', 'C', 'C++', 'SQL', 'Bash', 'JavaScript'] },
+  { title: 'Linux Administration', description: 'Working with the operating system behind the application.', tools: ['Ubuntu', 'CentOS', 'Linux Administration', 'Shell Scripting', 'systemd', 'System monitoring'] },
   { title: 'Cloud Computing', description: 'Building my foundation in cloud services and infrastructure.', tools: [], learning: ['AWS'] },
   { title: 'DevOps', description: 'From version control toward automated, repeatable delivery.', tools: ['Git'], learning: ['Docker', 'Kubernetes', 'CI/CD', 'Infrastructure automation'] },
   { title: 'Git / GitHub', description: 'Version control and source collaboration across my projects.', tools: ['Git', 'GitHub'] },
-  { title: 'Backend Development', description: 'Connecting application logic, APIs and persistent data.', tools: ['Flask', 'Spring Boot', 'REST APIs'] },
-  { title: 'Databases', description: 'Relational data, stored procedures and application persistence.', tools: ['SQL', 'Oracle', 'PL/SQL', 'H2', 'Hibernate'] },
+  { title: 'Backend Development', description: 'Connecting application logic, APIs and persistent data.', tools: ['Flask', 'Spring Boot', 'Hibernate', 'JDBC', 'JSP', 'Servlets', 'REST APIs'] },
+  { title: 'Databases', description: 'Relational data, stored procedures and application persistence.', tools: ['SQL', 'Oracle', 'MySQL', 'PL/SQL', 'H2'] },
+  { title: 'Tools', description: 'Tools for building, reviewing and managing code.', tools: ['Git', 'GitHub', 'Maven', 'VS Code'] },
   { title: 'Web Development', description: 'Interfaces that make systems and algorithms easier to use.', tools: ['HTML', 'CSS', 'JavaScript', 'React', 'Tailwind CSS', 'Web deployment'] },
+]
+
+export const profile = [
+  'I am an MCA Cloud Computing & DevOps student at Chandigarh University with an interest in backend development, Linux, databases, cloud infrastructure, and automation.',
+  'I enjoy creating practical applications using Python, Java, SQL, Flask, Spring Boot, and Linux tools.',
+  'I am developing my skills in cloud technologies, Docker, Kubernetes, and CI/CD through hands-on learning and projects.',
+  'My career objective is to work as a Cloud & DevOps Engineer.',
+]
+
+export const education = [
+  { date: '2026–2028 (Expected)', title: 'MCA — Cloud Computing & DevOps', school: 'Chandigarh University', result: 'Pursuing' },
+  { date: '2026', title: 'Bachelor of Computer Applications', school: 'DAV College', result: '77%' },
+  { date: '2023', title: 'Class XII', school: 'Government Model Senior Secondary School, Phase 3B1', result: '87.2%' },
+  { date: '2021', title: 'Class X', school: 'Sir McAuliffe High School', result: '87.6%' },
 ]
 
 // Names supplied by Paramjeet; no issuer, credential URL or certificate image inferred.

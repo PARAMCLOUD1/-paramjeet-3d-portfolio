@@ -1,3 +1,11 @@
+# V8 scene refinement note — 2026-11-07
+
+Office furniture now uses a documented metre convention and 50° desktop / 56°
+compact camera framing. The door sequence is preserved. No personalized character
+has been produced or substituted; the legacy model remains development-only.
+Human scale and likeness still require the references and rigged artwork described
+below. No portrait uploads or model processing were performed in this milestone.
+
 # Current character status — 2026-11-06
 
 The cinematic redesign requires Paramjeet's recognizable personalized model and

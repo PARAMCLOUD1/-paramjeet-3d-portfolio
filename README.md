@@ -1,12 +1,21 @@
 # PARAMJEET.DEV — Midnight Executive × Obsidian Cloud
 
-V7 upgrade in progress: supplied midnight/graphite/navy/champagne/blue/ivory palette,
-editorial hero, career wording, LinkedIn and all four education stages implemented.
-Physical double-door entrance and executive office are the next checkpoint, not
-delivered by the theme change alone. See PROGRESS.md for current status. The older
-experience description below will be revised after the V7 scene lands.
+V8 refines the existing portfolio with professional proportions and one shared
+information panel system. Hero text is 48–64px on desktop and 32–40px on mobile;
+sections use 30–40px / 24–30px. Buttons retain 44px touch targets and content is
+capped at 1200px. Projects, skills, education and certificates use compact layouts.
 
-The existing React / React Three Fiber portfolio and Flask backend, incrementally redesigned from the supplied local video. See [DESIGN_REFERENCE.md](DESIGN_REFERENCE.md) for timestamped analysis and [PROGRESS.md](PROGRESS.md) for milestone status. No new runtime dependencies or deployment.
+About, Projects, Skills, Education, Certifications and Contact navigation opens
+the same complete HTML content as the corresponding 3D exhibit. Native modal
+dialogs sit above the canvas, with internal scrolling, Close/Escape, keyboard
+cycling, focus restoration and reduced-motion-aware GSAP transitions. Opening a
+panel pauses the scene and disables orbit controls; closing preserves the view.
+Direct page sections remain available independently of WebGL.
+
+The existing door/handle/camera sequence, verified assets, development-only legacy
+character preview and Flask backend are preserved. Office proportions use metres;
+see PROJECT_REPORT.md for dimensions, architecture and remaining verification.
+No new runtime dependency or hosting deployment is introduced.
 
 ## Run locally (Windows PowerShell)
 
@@ -27,17 +36,29 @@ Open http://127.0.0.1:5173. Use `npm.cmd` because this machine blocks `npm.ps1`.
 
 ## Current experience
 
-The light, full-height portrait-led opening contrasts with the dark office/project showcase. Large editorial headings, light About/skills sections, date-led education, a certification grid and a dramatic contact close carry the visual direction from the reference. **Explore Projects**, **Enter 3D Office**, scroll progress, scoped GSAP/ScrollTrigger reveals and small desktop portrait parallax respect reduced motion. No scroll hijacking or looping role labels. The real portrait remains the hero visual while personalized character artwork is pending.
+The Midnight Executive hero pairs career copy with an interactive office on desktop.
+Mobile and save-data users start with the real portrait; **Enter My World** loads the
+office and begins the entrance. **Explore Projects**, editorial sections, education,
+certifications and direct contact links remain available with reduced-motion support.
 
-The project showcase contains all seven supplied names, six verified source links, a real electricity-dashboard preview and a verified-available demo. Project notes and seven skills categories use native keyboard-operable disclosures. Missing project evidence, issuing organizations and images are not fabricated; see [PROJECT_SOURCES.md](PROJECT_SOURCES.md).
+The project showcase contains all seven supplied names, six verified source links,
+a real electricity-dashboard preview and the previously verified demo. V8 adds
+the supplied stack/algorithm details and a labelled additional demo URL. Project
+notes and nine skills categories use native keyboard-operable disclosures. Missing
+source evidence, issuers and images are not fabricated; see PROJECT_SOURCES.md.
 
-Select **Enter 3D Office** or **Load interactive 3D workspace** to load the optional room. **Low graphics**, **Reset view**, and **Switch to 2D** remain available, along with monitor/laptop, portrait, server and book destinations and equivalent keyboard controls. Project filters, skills, education, contact links and Flask API behavior are preserved.
+The room has physical double doors with animated handles, a workstation, server
+racks, technical display, wall timeline, certificate display and contact terminal.
+Each exhibit has an equivalent keyboard button and complete HTML information
+panel. **Skip Intro**, **Replay Intro**, **Low graphics**, **Reset view**, **Close**
+and **Switch to 2D** support exploration. Reduced motion opens a static
+office. Project filters, content and Flask API behavior are preserved.
 
 The historical generic businesswoman, rig and Walk/Idle entrance remain only in the explicit development preview at `http://127.0.0.1:5173/?scene=character#workspace`, with skip/replay controls. Production ignores this query and displays no substitute character. A personalized likeness is **not delivered**. See [CHARACTER.md](CHARACTER.md) and [asset provenance](frontend/public/models/LICENSE.md).
 
 ## Rendering and fallback
 
-- 3D remains optional and lazy-loaded. No remote model/CDN, texture, font or decoder is requested at runtime.
+- 3D is in a separate module, loaded automatically on desktop and on request on mobile/save-data. Switch to 2D unloads it. No remote model/CDN, texture, font or decoder is requested at runtime.
 - Retained preview GLB: 3,561,764 bytes; 46,997 triangles; 14 joints; named `Walk` and `Idle` clips. It is not fetched by the default office. The 15,594,944-byte source stays outside the public/build directory.
 - Demand rendering; offscreen and hidden scenes stop rendering. The dev character preview targets 30 animation updates per second, or 24 with compact graphics; this is not a universal GPU performance guarantee.
 - DPR capped at 1.5; compact screens, low CPU-core hints and the Low graphics control select DPR 1 and disable shadows. No postprocessing, physics, extra lights with shadows, or new runtime dependencies.
@@ -47,7 +68,13 @@ The historical generic businesswoman, rig and Walk/Idle entrance remain only in 
 
 ## Architecture
 
-- `App.jsx`: existing landing page, sections and lazy workspace toggle.
+- `App.jsx`: shared selected-content state, navigation, responsive office loading and 2D toggle.
+- `components/PortfolioDialog.jsx`: top-layer modal lifecycle, keyboard and focus handling.
+- `components/PortfolioContent.jsx`: complete content for all six destinations.
+- `content.js`: shared profile, education, projects, skills and course names.
+- `scene/ExecutiveOffice.jsx`: entrance state, six accessible exhibits and fallbacks.
+- `scene/ExecutiveRoom.jsx` / `officeMaterials.js`: physical room and local materials.
+- `scene/CinematicRig.jsx` / `doorTimeline.js`: camera and door animation, visibility pause/resume.
 - `components/Hero.jsx` / `Hero.css`: responsive hero and scoped GSAP entrance.
 - `scene/Office.jsx`: existing room/hotspots, new laptop/cloud diagram, loading/error UI and entrance orchestration.
 - `scene/Character.jsx`: local GLB loading, cloned skeleton, animation crossfade and camera/route updates.
@@ -82,7 +109,10 @@ Invoke-RestMethod http://127.0.0.1:5173/api/health
 
 To rebuild the optimized character, run `node scripts/build-character.mjs` from `frontend`.
 
-Build warning: the optional Three.js office chunk exceeds Vite's 500 KB advisory threshold. It stays outside the initial landing bundle. Actual GPU/mobile FPS and the character's visual joint quality still require human browser review; this session's browser host was unavailable and native Computer Use could not verify the current Chrome URL.
+Build warning: the optional Three.js office chunk exceeds Vite's 500 KB advisory
+threshold and stays outside the initial landing bundle. Rendered desktop/mobile
+layout, browser console and GPU performance remain unverified: the browser host is
+unavailable and native app inventory timed out. See PROJECT_REPORT.md for limits.
 
 ## Git and remaining work
 

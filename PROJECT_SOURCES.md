@@ -1,5 +1,18 @@
 # Project content and asset verification — 2026-11-06
 
+## V8 user-supplied additions — 2026-11-07
+
+The V8 brief supplies expanded project stacks/algorithms, including Python/Flask
+for electricity, A* and Greedy Best-First Search for pathfinding, Thymeleaf for
+employee management, and Dijkstra/Quick Sort/AVL/Knapsack/TSP for delivery.
+These additions are attributed to Paramjeet rather than a new repository audit.
+The supplied https://smart-electricity.onrender.com/ could not be opened by the
+web tool. It appears as a labelled additional demo in the panel; the previously
+verified demo and screenshot remain. No delivery repository or image is invented.
+Education percentages and expanded skills also come directly from the V8 brief.
+
+## Earlier independent source review
+
 Read the public GitHub API repository list and the projects' README files. No
 credentials or private repositories were needed. Facts below support the portfolio
 content; they do not certify every feature's runtime behavior. Project screenshots

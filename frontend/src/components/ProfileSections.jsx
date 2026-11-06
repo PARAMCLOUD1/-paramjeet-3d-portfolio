@@ -1,4 +1,4 @@
-import { certifications, skillCategories } from '../content'
+import { certifications, education, profile, skillCategories } from '../content'
 
 export default function ProfileSections() {
   return <>
@@ -7,13 +7,13 @@ export default function ProfileSections() {
         <p className="eyebrow" data-scroll-reveal>03 / The person behind the code</p>
         <h2 id="about-title" data-scroll-reveal>Curious about code.<br/>Focused on<br/>the cloud.</h2>
         <figure className="about-portrait" data-scroll-reveal>
-          <div className="portrait-window"><img src="/images/profile.webp" alt="Portrait of Paramjeet Kaur" width="850" height="990" loading="lazy" decoding="async" data-portrait-parallax/></div>
+          <div className="portrait-window"><img src="/images/profile.webp" alt="Portrait of Paramjeet Kaur" width="850" height="990" loading="lazy" decoding="async"/></div>
           <figcaption>Paramjeet Kaur / Punjab, India</figcaption>
         </figure>
       </div>
       <div className="about-body" data-scroll-reveal>
         <p className="about-lead">An application is only the beginning. I’m learning the systems that keep it running.</p>
-        <p>Motivated MCA Cloud Computing &amp; DevOps student with practical experience in Python, Linux administration, SQL, Git, Flask, backend development, and web application deployment. Experienced in creating database-driven applications, Linux monitoring tools, algorithm visualizers, and interactive web applications. Currently developing knowledge of AWS, Docker, Kubernetes, CI/CD, and infrastructure automation.</p>
+        {profile.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
         <p className="objective">Seeking a Cloud Engineer / DevOps Engineer Internship</p>
         <dl className="about-facts"><div><dt>Studying</dt><dd>MCA Cloud Computing &amp; DevOps<br/>Chandigarh University · Expected 2028</dd></div><div><dt>Foundation</dt><dd>BCA · DAV College · 2026</dd></div></dl>
         <a className="text-link" href="#education">Follow my learning journey <span aria-hidden="true">↓</span></a>
@@ -30,13 +30,7 @@ export default function ProfileSections() {
 
     <section id="education" className="section learning" aria-labelledby="education-title">
       <div data-scroll-reveal><p className="eyebrow">05 / Education &amp; the journey</p><h2 id="education-title">A foundation.<br/>A direction.</h2><p className="timeline-year">2028<span>Expected MCA graduation</span></p></div>
-      <ol className="education-timeline">
-        <li data-scroll-reveal><p className="eyebrow">2026–2028 · Expected</p><h3>MCA — Cloud Computing &amp; DevOps</h3><p>Chandigarh University</p><span>Pursuing</span></li>
-        <li data-scroll-reveal><p className="eyebrow">2026</p><h3>Bachelor of Computer Applications</h3><p>DAV College</p><span>BCA</span></li>
-        <li data-scroll-reveal><p className="eyebrow">2023</p><h3>Class XII</h3><p>Government Model Senior Secondary School</p></li>
-        <li data-scroll-reveal><p className="eyebrow">2021</p><h3>Class X</h3><p>Sir McAuliffe High School</p></li>
-        <li data-scroll-reveal><p className="eyebrow">Learning by building</p><h3>From applications to systems</h3><p>Algorithm visualizers, database applications and Linux monitoring projects form the practical side of my learning.</p><a className="text-link" href="#projects">Explore the projects <span aria-hidden="true">↗</span></a></li>
-      </ol>
+      <ol className="education-timeline">{education.map(item => <li key={item.date} data-scroll-reveal><p className="eyebrow">{item.date}</p><h3>{item.title}</h3><p>{item.school}</p><span>{item.result}</span></li>)}<li data-scroll-reveal><h3>From applications to systems</h3><p>Algorithm visualizers, database applications and Linux monitoring projects form the practical side of my learning.</p><a className="text-link" href="#projects">Explore the projects ↗</a></li></ol>
     </section>
 
     <section id="certifications" className="section certifications" aria-labelledby="certifications-title">

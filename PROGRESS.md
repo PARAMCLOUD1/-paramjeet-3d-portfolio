@@ -1,21 +1,72 @@
+# PARAMJEET.DEV progress
+
+Updated: 2026-11-07
+
+## V8 refinement milestone
+
+- Implemented responsive 1200px layout, compact typography, 44px buttons, smaller
+  sections/project previews, and a balanced hero with GitHub/LinkedIn links.
+- Shared App selection opens one native HTML dialog from all six navigation items
+  and all six office objects. Includes complete content, internal scrolling,
+  Escape/Close, focus cycling/restoration, mobile menu focus return and scroll lock.
+- Highlighted exhibits; panel-open pauses animation and disables scene controls.
+  Closing preserves camera position. Reduced desk/monitor/keyboard/laptop/rack
+  proportions using one scene unit per metre. Door route/hinges are preserved.
+- Expanded user-supplied skills, education results and project algorithm tags;
+  kept real source links, screenshot, portrait and all nine certification names.
+- Installed Unslop skill reviewed. Full report: PROJECT_REPORT.md.
+
+Verification: ESLint passed with no warnings; full frontend suite 51/51 across
+12 files (38.30s). After the final door-framing adjustment, all 6 scene tests passed
+again (6.67s), including raycasts, camera clearance, hinge pivots and frame height.
+Final production build passed (10.71s). Initial JS 125.77KB gzip, CSS 7.47KB gzip,
+executive office 252.82KB gzip, legacy preview 27.95KB gzip. Existing optional
+office chunk-size advisory remains. Flask: 3/3 tests passed. Live direct/proxied API
+health returns status ok, and frontend HTTP returns 200. Diff whitespace check passed.
+
+Browser host unavailable; native discovery timed out. No screenshots, actual mobile
+rendering, browser console audit or measured GPU performance claimed. Personalized
+character remains undelivered. No Flask contact delivery endpoint exists; real
+mailto/tel/social links are provided. No deployment authorized or performed.
+
+Git baseline: 18bba9f; fetched origin/main matches local HEAD before this milestone.
+Existing V7 office changes were uncommitted on entry and are included in this
+incremental milestone. Checks and source audit complete; commit/push receipt follows.
+
+## Earlier checkpoint history
+
 ﻿# Cinematic portfolio progress
 
 Updated: 2026-11-06
 
-## V7 current milestone
+## V7 previous milestone
 
-Milestone 1 inspected at clean baseline 623181c. Milestone 2 theme/content updates
-implemented: supplied palette, hero/contact copy, LinkedIn and Class X/XII. Lint,
-29 tests and production build passed. Initial JS 123.51 KB gzip; CSS 6.38 KB gzip;
-optional office 271.59 KB gzip. Checkpoint commit/push verification next.
+Milestone 2 theme/content checkpoint is committed as 18bba9f. Resumed the existing
+uncommitted milestones 3/4 implementation: physical hinged double doors and handles,
+GSAP camera walkthrough, executive room and six keyboard-accessible exhibits.
+Desktop loads the office module automatically; mobile/save-data starts with the
+portrait and loads the office on request. Switch to 2D remains available.
 
-Milestones 3/4 next: physical double doors, hinge/handle GSAP sequence, safe camera
-walkthrough, executive architecture and six accessible destinations. Milestone 5
-reuses existing verified projects/certifications/scroll features. Milestone 6 remains
-blocked by missing personalized rigged artwork and sufficient references; assets
-requested. Browser host unavailable; no rendered/GPU/mobile result claimed.
-Milestones 7/8: remaining checks and full PROJECT_REPORT.md after implementation.
-Exact next action: commit/push/verify theme, then implement the door/office sequence.
+Fixed a visibility edge case: changing reduced-motion preference while hidden must
+not restart a paused entrance. Added a real R3F/GSAP regression for pause/resume and
+preference changes. Existing tests sample door/camera collision clearance, verify
+hinge pivots and cover skip/replay, reduced motion, panels/focus and fallbacks.
+
+Lint, final production build and all 40 tests passed, including the pause fix.
+Initial JS 123.60 KB gzip; CSS 6.74 KB gzip; executive office 252.89 KB gzip,
+legacy preview 27.95 KB gzip. The optional office chunk retains Vite's size advisory.
+First test run: 37 passed, two existing UI tests exceeded 5 seconds while the build
+was also running. Full rerun: 40 passed across 11 files in 142.79 seconds, using a
+15-second per-test limit now recorded in Vite config. These are CPU/DOM checks,
+not GPU or visual acceptance. Final production rebuild passed in 29.85 seconds.
+
+Browser host remains unavailable. Native Computer Use again stopped because it
+could not determine Chrome's current URL confidently enough to enforce policy.
+No rendered/GPU/mobile result claimed. Personalized character still requires
+sufficient reference photos and rigged artwork; no generic substitution.
+
+Next: rendered desktop/mobile acceptance, personalized artwork and final report.
+Office implementation is local; no commit, push or deployment in this resume session.
 
 ## Historical previous milestone
 
