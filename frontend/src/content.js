@@ -57,7 +57,7 @@ export const projects = [
 ]
 
 export const skillCategories = [
-  { title: 'Programming Languages', description: 'Languages I use in coursework and application projects.', tools: ['Python', 'Java', 'C', 'C++', 'SQL', 'Bash', 'JavaScript'] },
+  { title: 'Programming Languages', description: 'Languages I use in coursework and application projects.', tools: ['Python', 'Java', 'C', 'C++', 'SQL', 'Bash', 'PHP'] },
   { title: 'Backend Development', description: 'Application logic, REST APIs, and database integration.', tools: ['Flask', 'Spring Boot', 'Hibernate', 'JDBC', 'JSP', 'Servlets', 'REST APIs'] },
   { title: 'Databases', description: 'Relational data, stored procedures, and transactions.', tools: ['Oracle', 'MySQL', 'PL/SQL', 'H2'] },
   { title: 'Linux & System Administration', description: 'Shell scripts, service checks, and system monitoring.', tools: ['Ubuntu', 'CentOS', 'Shell Scripting', 'systemd', 'System monitoring'] },

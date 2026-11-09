@@ -197,7 +197,7 @@ footer a { min-height: 44px; }
 .project-row > div:first-child .eyebrow { margin: 0; }
 .about-portrait { max-width: 260px; margin: 40px 0 0; }
 .portrait-window { height: 300px; overflow: hidden; }
-.about-portrait img { display: block; position: relative; top: -5%; width: 100%; height: 110%; object-fit: cover; mix-blend-mode: multiply; }
+.about-portrait img { display: block; position: relative; top: -5%; width: 100%; height: 110%; object-fit: cover; mix-blend-mode: normal; }
 .about-portrait figcaption { font: 11px/1.6 Consolas, monospace; color: var(--text-secondary); padding-top: 12px; }
 .about-body { padding-top: 0; }
 .about .about-lead { color: var(--text-primary); font-size: clamp(18px, 2vw, 22px); line-height: 1.3; letter-spacing: -.025em; margin-bottom: 32px; }
