@@ -41,8 +41,8 @@
 .hero .actions { gap: 12px; }
 .hero .button { min-height: 44px; padding: 8px 16px; gap: 20px; }
 .hero .primary { background: var(--champagne); border-color: var(--champagne); color: var(--midnight); }
-.hero .primary:hover { background: #ddbd8a; border-color: #ddbd8a; }
-.hero .secondary { color: var(--ivory); border-color: #f5f3ee40; }
+.hero .primary:hover { background: var(--text-primary); border-color: var(--text-primary); }
+.hero .secondary { color: var(--ivory); border-color: var(--border-subtle); }
 .hero .secondary:hover { background: var(--graphite); color: var(--ivory); border-color: var(--muted); }
 
 .portrait {
@@ -67,11 +67,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px 16px;
-  border-top: 1px solid #0b122025;
+  border-top: 1px solid var(--border-subtle);
   padding: 16px 0;
   font: 12px/1.5 Consolas, monospace;
 }
-.portrait figcaption span:last-child { color: #475569; }
+.portrait figcaption span:last-child { color: var(--border-subtle); }
 
 header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
 
@@ -83,7 +83,7 @@ header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
   align-items: center;
   justify-content: space-between;
   gap: 16px 24px;
-  border-top: 1px solid #f5f3ee24;
+  border-top: 1px solid var(--border-subtle);
   padding: 16px 0;
   font: 12px/1.6 Consolas, monospace;
   color: var(--muted);

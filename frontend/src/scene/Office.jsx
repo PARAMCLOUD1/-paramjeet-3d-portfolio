@@ -1,3 +1,4 @@
+import { palette } from '../palette'
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Image, OrbitControls } from '@react-three/drei'
@@ -23,70 +24,70 @@ function Room({ onSelect, controls, mode, compact, character, stage, onFailure }
     if (stage !== 'character') onReady()
   }, [stage, onReady])
   return <>
-    <color attach="background" args={['#111c2a']}/>
-    <hemisphereLight args={['#d7e9f3', '#45413b', 1.6]}/><directionalLight position={[2, 7, 5]} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.035} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5}/>
-    <Box position={[0, -0.15, 0]} size={[8, 0.3, 6]} color="#35414b"/>
-    <Box position={[0, 1.8, -2.7]} size={[8, 3.6, 0.15]} color="#1d2d3b"/>
-    <Box position={[-3.9, 1.8, -0.8]} size={[0.15, 3.6, 3.8]} color="#263746"/>
-    <Box position={[-3.8, 2.2, -0.5]} size={[0.05, 1.6, 2.2]} color="#8da3ac"/>
-    <Box position={[-3.75, 2.2, -0.5]} size={[0.06, 1.65, 0.06]} color="#263746"/>
-    <Box position={[-3.75, 2.2, -0.5]} size={[0.06, 0.06, 2.2]} color="#263746"/>
-    <Box position={[2.8, 1.4, -2.57]} size={[1, 2.8, 0.08]} color="#101b26"/>
-    <Box position={[3.16, 1.4, -2.49]} size={[0.07, 0.07, 0.08]} color="#b29370"/>
+    <color attach="background" args={[palette.background]}/>
+    <hemisphereLight args={[palette.text, palette.walnut, 1.6]}/><directionalLight position={[2, 7, 5]} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.035} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5}/>
+    <Box position={[0, -0.15, 0]} size={[8, 0.3, 6]} color={palette.surface}/>
+    <Box position={[0, 1.8, -2.7]} size={[8, 3.6, 0.15]} color={palette.background}/>
+    <Box position={[-3.9, 1.8, -0.8]} size={[0.15, 3.6, 3.8]} color={palette.background}/>
+    <Box position={[-3.8, 2.2, -0.5]} size={[0.05, 1.6, 2.2]} color={palette.muted}/>
+    <Box position={[-3.75, 2.2, -0.5]} size={[0.06, 1.65, 0.06]} color={palette.background}/>
+    <Box position={[-3.75, 2.2, -0.5]} size={[0.06, 0.06, 2.2]} color={palette.background}/>
+    <Box position={[2.8, 1.4, -2.57]} size={[1, 2.8, 0.08]} color={palette.walnut}/>
+    <Box position={[3.16, 1.4, -2.49]} size={[0.07, 0.07, 0.08]} color={palette.accent}/>
     <group scale={[1, .72, 1]}>
-    <Box position={[0, 1.3, 0]} size={[3.7, 0.16, 1.5]} color="#b29370"/>
-    {[-1.5, 1.5].map(x => <Box key={x} position={[x, 0.6, 0]} size={[0.13, 1.2, 1.2]} color="#131d28"/>)}
+    <Box position={[0, 1.3, 0]} size={[3.7, 0.16, 1.5]} color={palette.walnut}/>
+    {[-1.5, 1.5].map(x => <Box key={x} position={[x, 0.6, 0]} size={[0.13, 1.2, 1.2]} color={palette.border}/>)}
     <Hotspot id="projects" onSelect={onSelect}>
-      <Box position={[0, 2, -0.3]} size={[1.85, 1.05, 0.12]} color="#080d14"/>
-      <Box position={[0, 2, -0.23]} size={[1.65, 0.85, 0.02]} color="#173e53"/>
-      {[0, 1, 2, 3].map(i => <Box key={i} position={[-0.2, 2.25 - i * 0.16, -0.21]} size={[0.9 - i * 0.12, 0.035, 0.01]} color={i === 0 ? '#71bed8' : '#7196a5'}/>)}
-      <Box position={[0, 1.5, -0.3]} size={[0.1, 0.35, 0.1]} color="#263343"/>
+      <Box position={[0, 2, -0.3]} size={[1.85, 1.05, 0.12]} color={palette.background}/>
+      <Box position={[0, 2, -0.23]} size={[1.65, 0.85, 0.02]} color={palette.secondary}/>
+      {[0, 1, 2, 3].map(i => <Box key={i} position={[-0.2, 2.25 - i * 0.16, -0.21]} size={[0.9 - i * 0.12, 0.035, 0.01]} color={i === 0 ? palette.accent : palette.muted}/>)}
+      <Box position={[0, 1.5, -0.3]} size={[0.1, 0.35, 0.1]} color={palette.border}/>
     </Hotspot>
-    <Box position={[0, 1.41, 0.4]} size={[1.2, 0.06, 0.4]} color="#263343"/>
-    <Box position={[1, 1.41, 0.4]} size={[0.18, 0.08, 0.28]} color="#263343"/>
-    <Box position={[0, 0.8, 1.4]} size={[1.15, 0.18, 1]} color="#222c38"/>
-    <Box position={[0, 1.45, 1.85]} size={[1.15, 1.3, 0.16]} color="#222c38"/>
-    <Box position={[0, 0.4, 1.4]} size={[0.12, 0.8, 0.12]} color="#657080"/>
+    <Box position={[0, 1.41, 0.4]} size={[1.2, 0.06, 0.4]} color={palette.border}/>
+    <Box position={[1, 1.41, 0.4]} size={[0.18, 0.08, 0.28]} color={palette.border}/>
+    <Box position={[0, 0.8, 1.4]} size={[1.15, 0.18, 1]} color={palette.secondary}/>
+    <Box position={[0, 1.45, 1.85]} size={[1.15, 1.3, 0.16]} color={palette.secondary}/>
+    <Box position={[0, 0.4, 1.4]} size={[0.12, 0.8, 0.12]} color={palette.accent}/>
     </group>
     <Hotspot id="projects" onSelect={onSelect}>
       <group position={[1.15, 1.02, -.05]} rotation={[0, -.18, 0]}>
-        <Box position={[0, 0, 0]} size={[.72, .035, .48]} color="#82909a"/>
+        <Box position={[0, 0, 0]} size={[.72, .035, .48]} color={palette.border}/>
         <group position={[0, .025, -.23]} rotation={[-.22, 0, 0]}>
-          <Box position={[0, .22, 0]} size={[.72, .44, .028]} color="#82909a"/>
-          <Box position={[0, .22, .018]} size={[.64, .36, .01]} color="#173e53"/>
-          {[0, 1, 2].map(i => <Box key={i} position={[-.06, .30 - i * .07, .026]} size={[.35 - i * .06, .014, .006]} color="#71bed8"/>)}
+          <Box position={[0, .22, 0]} size={[.72, .44, .028]} color={palette.border}/>
+          <Box position={[0, .22, .018]} size={[.64, .36, .01]} color={palette.secondary}/>
+          {[0, 1, 2].map(i => <Box key={i} position={[-.06, .30 - i * .07, .026]} size={[.35 - i * .06, .014, .006]} color={palette.accent}/>)}
         </group>
       </group>
     </Hotspot>
     <CloudDiagram/>
     <Hotspot id="skills" onSelect={onSelect}>
-      <Box position={[-2.7, 0.7, -1.5]} size={[0.8, 1.4, 0.9]} color="#111827"/>
-      {[0, 1, 2, 3].map(i => <Box key={i} position={[-2.7, 0.3 + i * 0.27, -1.03]} size={[0.6, 0.1, 0.025]} color="#567688"/>)}
+      <Box position={[-2.7, 0.7, -1.5]} size={[0.8, 1.4, 0.9]} color={palette.background}/>
+      {[0, 1, 2, 3].map(i => <Box key={i} position={[-2.7, 0.3 + i * 0.27, -1.03]} size={[0.6, 0.1, 0.025]} color={palette.surface}/>)}
     </Hotspot>
     <Hotspot id="about" onSelect={onSelect}>
-      <Box position={[-1.7, 2.6, -2.55]} size={[1.04, 1.2, 0.1]} color="#b29370"/>
+      <Box position={[-1.7, 2.6, -2.55]} size={[1.04, 1.2, 0.1]} color={palette.walnut}/>
       {['workspace', 'character'].includes(stage) && <SceneBoundary stage="portrait-load" onFailure={onFailure}><Suspense fallback={null}><Image url={PORTRAIT_URL} position={[-1.7, 2.6, -2.485]} scale={[0.9, 1.05]} toneMapped={false}/></Suspense></SceneBoundary>}
     </Hotspot>
-    <Box position={[1.6, 2.5, -2.4]} size={[1.5, 0.08, 0.45]} color="#b29370"/>
+    <Box position={[1.6, 2.5, -2.4]} size={[1.5, 0.08, 0.45]} color={palette.walnut}/>
     <Hotspot id="education" onSelect={onSelect}>
-      {['#768c9b', '#9d866c', '#b4b9ae', '#536d78'].map((color, i) => <Box key={color} position={[1.1 + i * 0.23, 2.85, -2.4]} size={[0.18, 0.62 - i * 0.04, 0.32]} color={color}/>)}
+      {[palette.surface, palette.accent, palette.text, palette.border].map((color, i) => <Box key={color} position={[1.1 + i * 0.23, 2.85, -2.4]} size={[0.18, 0.62 - i * 0.04, 0.32]} color={color}/>)}
     </Hotspot>
-    <mesh position={[2.8, 0.36, -0.8]} castShadow><cylinderGeometry args={[0.28, 0.22, 0.7, 12]}/><meshStandardMaterial color="#9d866c"/></mesh>
-    {[0, 1, 2].map(i => <mesh key={i} position={[2.8 + (i - 1) * 0.14, 0.95 + i * 0.12, -0.8]} rotation={[0, i, (i - 1) * 0.3]} castShadow><sphereGeometry args={[0.23, 12, 8]}/><meshStandardMaterial color="#526e58"/></mesh>)}
+    <mesh position={[2.8, 0.36, -0.8]} castShadow><cylinderGeometry args={[0.28, 0.22, 0.7, 12]}/><meshStandardMaterial color={palette.accent}/></mesh>
+    {[0, 1, 2].map(i => <mesh key={i} position={[2.8 + (i - 1) * 0.14, 0.95 + i * 0.12, -0.8]} rotation={[0, i, (i - 1) * 0.3]} castShadow><sphereGeometry args={[0.23, 12, 8]}/><meshStandardMaterial color={palette.secondary}/></mesh>)}
     {stage === 'character' && <SceneBoundary stage="character-load-or-animation" onFailure={onFailure}><Suspense fallback={null}><Character {...character} mode={mode} compact={compact} controls={controls}/></Suspense></SceneBoundary>}
     <OrbitControls ref={controls} makeDefault enabled={mode !== 'walking' && mode !== 'loading'} enableDamping={false} enablePan={false} minDistance={5} maxDistance={13} minPolarAngle={0.4} maxPolarAngle={1.5} target={CAMERA_TARGET}/>
   </>
 }
 function CloudDiagram() {
   return <group position={[.7, 1.65, -2.55]}>
-    <Box position={[0, 0, 0]} size={[1.65, 1.05, .035]} color="#142330"/>
+    <Box position={[0, 0, 0]} size={[1.65, 1.05, .035]} color={palette.secondary}/>
     <group position={[0, .22, .05]}>
-      {[[0, .04, .15], [-.17, -.03, .11], [.17, -.03, .11]].map(([x, y, r], i) => <mesh key={i} position={[x, y, 0]} scale={[1, .85, .2]}><sphereGeometry args={[r, 12, 8]}/><meshStandardMaterial color="#71bed8" roughness={.8}/></mesh>)}
-      <Box position={[0, -.08, 0]} size={[.34, .09, .025]} color="#71bed8"/>
+      {[[0, .04, .15], [-.17, -.03, .11], [.17, -.03, .11]].map(([x, y, r], i) => <mesh key={i} position={[x, y, 0]} scale={[1, .85, .2]}><sphereGeometry args={[r, 12, 8]}/><meshStandardMaterial color={palette.accent} roughness={.8}/></mesh>)}
+      <Box position={[0, -.08, 0]} size={[.34, .09, .025]} color={palette.accent}/>
     </group>
-    <Box position={[0, -.04, .05]} size={[.018, .16, .02]} color="#7196a5"/>
-    <Box position={[0, -.12, .05]} size={[.96, .018, .02]} color="#7196a5"/>
-    {[-.48, 0, .48].map(x => <group key={x} position={[x, -.27, .05]}><Box position={[0, .07, 0]} size={[.018, .16, .02]} color="#7196a5"/><Box position={[0, -.04, 0]} size={[.27, .16, .03]} color="#567688"/></group>)}
+    <Box position={[0, -.04, .05]} size={[.018, .16, .02]} color={palette.muted}/>
+    <Box position={[0, -.12, .05]} size={[.96, .018, .02]} color={palette.muted}/>
+    {[-.48, 0, .48].map(x => <group key={x} position={[x, -.27, .05]}><Box position={[0, .07, 0]} size={[.018, .16, .02]} color={palette.muted}/><Box position={[0, -.04, 0]} size={[.27, .16, .03]} color={palette.surface}/></group>)}
   </group>
 }
 

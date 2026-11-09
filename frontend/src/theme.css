@@ -1,13 +1,21 @@
 :root {
-  --midnight: #101114;
-  --graphite: #24262b;
-  --navy: #0b1424;
-  --champagne: #c9a66b;
-  --blue: #4ea8de;
-  --ivory: #f5f3ee;
-  --muted: #a3a8b2;
-  --blue-ink: #256b9a;
-  --paper: var(--ivory);
-  --ink: var(--midnight);
+  --bg-primary: #0D1724;
+  --bg-secondary: #131F2D;
+  --surface: #1D2938;
+  --accent-primary: #B18B60;
+  --text-primary: #F3EDE3;
+  --text-secondary: #ADB5BD;
+  --border-subtle: #354050;
+  --walnut: #382C26;
+  --midnight: var(--bg-primary);
+  --graphite: var(--surface);
+  --navy: var(--bg-secondary);
+  --champagne: var(--accent-primary);
+  --blue: var(--accent-primary);
+  --ivory: var(--text-primary);
+  --muted: var(--text-secondary);
+  --blue-ink: var(--accent-primary);
+  --paper: var(--bg-secondary);
+  --ink: var(--text-primary);
   --display-font: Georgia, 'Times New Roman', serif;
 }

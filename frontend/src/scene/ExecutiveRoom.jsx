@@ -1,3 +1,4 @@
+import { palette } from '../palette'
 import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useThree } from '@react-three/fiber'
 import { RoundedBox } from '@react-three/drei'
@@ -41,7 +42,7 @@ function Exhibit({ id, onSelect, enabled, children, ...props }) {
   useLayoutEffect(() => {
     if (selected !== id && !(hovered && enabled)) return
     group.current.updateWorldMatrix(true, true)
-    const outline = new BoxHelper(group.current, '#4ea8de')
+    const outline = new BoxHelper(group.current, palette.accent)
     outline.name = `${id}-highlight`
     scene.add(outline)
     invalidate()
@@ -73,13 +74,13 @@ export default function ExecutiveRoom({ refs, onReady, compact, onSelect, select
   const m = useOfficeMaterials()
   useEffect(() => { onReady() }, [onReady])
   return <SelectedExhibit.Provider value={selected}>
-    <color attach="background" args={['#101114']}/>
-    <fog attach="fog" args={['#101114', 16, 34]}/>
+    <color attach="background" args={[palette.background]}/>
+    <fog attach="fog" args={[palette.background, 16, 34]}/>
     <Environment compact={compact}/>
-    <hemisphereLight args={['#f5f3ee', '#34302a', 1.15]}/>
-    <directionalLight position={[-2, 5, 3]} color="#fff3dd" intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.03} shadow-camera-left={-6} shadow-camera-right={6} shadow-camera-top={6} shadow-camera-bottom={-6}/>
-    <pointLight position={[-3.8, 3.1, -.8]} color="#e4c28b" intensity={10} distance={8}/>
-    <pointLight position={[3.7, 3.1, -2.5]} color="#f5e0ba" intensity={8} distance={7}/>
+    <hemisphereLight args={[palette.text, palette.walnut, 1.15]}/>
+    <directionalLight position={[-2, 5, 3]} color={palette.text} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.03} shadow-camera-left={-6} shadow-camera-right={6} shadow-camera-top={6} shadow-camera-bottom={-6}/>
+    <pointLight position={[-3.8, 3.1, -.8]} color={palette.accent} intensity={10} distance={8}/>
+    <pointLight position={[3.7, 3.1, -2.5]} color={palette.text} intensity={8} distance={7}/>
     <Box at={[0, -.13, 2.4]} size={[9, .26, 15]} material={m.floor}/>
     <Box at={[0, .012, -1.1]} size={[4.8, .018, 4]} material={m.rug} castShadow={false}/>
     <Box at={[0, 1.9, -5]} size={[9, 3.8, .18]} material={m.navy}/>
