@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { gsap } from 'gsap'
 import PortfolioContent from './PortfolioContent'
+import BrandWordmark from './BrandWordmark'
 import { portfolioViews } from '../content'
 import './PortfolioDialog.css'
 
@@ -49,7 +50,7 @@ export default function PortfolioDialog({ selected, onClose, returnFocus }) {
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
   }
   return createPortal(<dialog ref={dialog} id="portfolio-dialog" className="portfolio-dialog" aria-labelledby="portfolio-dialog-title" onCancel={event => { event.preventDefault(); dismiss() }} onKeyDown={onKeyDown}>
-    <div className="panel-header"><div><p className="panel-meta">Paramjeet.dev / Portfolio</p><h2 id="portfolio-dialog-title">{title}</h2></div><button ref={closeButton} className="panel-close" onClick={dismiss} aria-label="Close information panel">Close <span aria-hidden="true">×</span></button></div>
+    <div className="panel-header"><div><p className="panel-meta"><BrandWordmark/></p><h2 id="portfolio-dialog-title">{title}</h2></div><button ref={closeButton} className="panel-close" onClick={dismiss} aria-label="Close information panel">Close <span aria-hidden="true">×</span></button></div>
     <div className="panel-scroll" tabIndex={0} role="region" aria-label={`${title} content`}><PortfolioContent id={selected}/></div>
   </dialog>, document.body)
 }

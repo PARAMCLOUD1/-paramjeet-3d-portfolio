@@ -2,6 +2,7 @@
 import Health from './components/Health'
 import Projects from './components/Projects'
 import Hero from './components/Hero'
+import BrandWordmark from './components/BrandWordmark'
 import ProfileSections from './components/ProfileSections'
 import useScrollMotion from './useScrollMotion'
 import SceneBoundary from './scene/SceneBoundary'
@@ -33,7 +34,7 @@ export default function App() {
     <div ref={progress} className="scroll-progress" aria-hidden="true"/>
     <a className="skip-link" href="#main">Skip to content</a>
     <header>
-      <a className="brand" href="#main">PARAMJEET<span>.DEV</span></a>
+      <a className="brand" href="#main"><BrandWordmark/></a>
       <button ref={menuButton} className="menu-button" aria-expanded={menu} aria-controls="navigation" onClick={() => setMenu(!menu)}>Menu {menu ? '−' : '+'}</button>
       <nav id="navigation" className={menu ? 'open' : ''} aria-label="Main navigation">
         {navigation.map(([label, id]) => <a key={id} href={'#' + id} aria-haspopup="dialog" aria-controls={selected ? 'portfolio-dialog' : undefined} onClick={event => { event.preventDefault(); openContent(id, event.currentTarget) }}>{label}</a>)}
@@ -52,7 +53,7 @@ export default function App() {
       <ProfileSections/>
     </main>
     <footer>
-      <span className="footer-wordmark" aria-hidden="true">PARAMJEET.DEV</span>
+      <span className="footer-wordmark" aria-hidden="true"><BrandWordmark/></span>
       <div className="footer-bottom"><span>Paramjeet Kaur · MCA Student | Cloud Computing &amp; DevOps</span><a href="#main">Back to top <span aria-hidden="true">↑</span></a></div>
     </footer>
     {selected && <PortfolioDialog key={selected} selected={selected} returnFocus={returnFocus} onClose={() => setSelected(null)}/>}

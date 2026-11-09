@@ -1,4 +1,6 @@
-import { certifications, education, profile, skillCategories, contactIntroduction } from '../content'
+import { certifications, education, profile, skillCategories } from '../content'
+import ContactDescription from './ContactDescription'
+import ContactDetails from './ContactDetails'
 
 export default function ProfileSections() {
   return <>
@@ -41,8 +43,8 @@ export default function ProfileSections() {
       <p className="eyebrow" data-scroll-reveal>07 / Contact</p>
       <h2 id="contact-title" data-scroll-reveal>Get in Touch</h2>
       <div className="contact-grid" data-scroll-reveal>
-        <div><p>{contactIntroduction}</p><p className="panel-meta">Email</p><a className="email" href="mailto:param1539064@gmail.com">param1539064@gmail.com <span aria-hidden="true">↗</span></a></div>
-        <dl><div><dt>Phone</dt><dd><a href="tel:+917814433864">+91 7814433864</a></dd></div><div><dt>GitHub</dt><dd><a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></dd></div><div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/paramjeet-kaur-cloud/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></dd></div></dl>
+        <div><ContactDescription/></div>
+        <ContactDetails/>
       </div>
     </section>
   </>

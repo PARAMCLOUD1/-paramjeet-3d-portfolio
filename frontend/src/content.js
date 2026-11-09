@@ -6,7 +6,12 @@ export const portfolioViews = [
 
 export const professionalTitle = 'MCA Student | Cloud Computing & DevOps'
 export const introduction = 'Developing practical skills in Linux, backend development, cloud infrastructure, and automation.'
-export const contactIntroduction = "I'm open to internship opportunities, technical collaborations, and conversations about cloud infrastructure, Linux, and backend development."
+export const contactIntroduction = {
+  opening: "I'm open to internship opportunities and professional collaborations in ",
+  fields: 'Software Engineering, Backend Development, Full-Stack Development, Cloud Computing, and DevOps',
+  experience: '. With hands-on project experience in application development, database management, Linux, and automation, I aim to contribute to reliable software solutions while strengthening my technical expertise.',
+  callToAction: "Have an opportunity or project in mind? Let's connect and discuss how my skills can support your team's goals.",
+}
 
 export const projects = [
   {

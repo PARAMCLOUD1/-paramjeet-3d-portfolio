@@ -1,4 +1,6 @@
-import { certifications, education, profile, projects, skillCategories, professionalTitle, contactIntroduction } from '../content'
+import { certifications, education, profile, projects, skillCategories, professionalTitle } from '../content'
+import ContactDescription from './ContactDescription'
+import ContactDetails from './ContactDetails'
 
 function SocialLinks() {
   return <div className="panel-links"><a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/paramjeet-kaur-cloud/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
@@ -20,7 +22,7 @@ export default function PortfolioContent({ id }) {
   if (id === 'skills') return <div className="panel-skills">{skillCategories.map(category => <section key={category.title}><h3>{category.title}</h3><p>{category.description}</p><Tags items={category.tools}/>{category.learning && <><p className="panel-meta">Currently learning</p><Tags items={category.learning}/></>}</section>)}</div>
   if (id === 'education') return <ol className="panel-timeline">{education.map(item => <li key={item.date}><p className="panel-meta">{item.date}</p><h3>{item.title}</h3><p>{item.school}</p><p>{item.result}</p></li>)}</ol>
   if (id === 'certifications') return <><ul className="panel-certificates">{certifications.map(name => <li key={name}>{name}</li>)}</ul></>
-  if (id === 'contact') return <><p>{contactIntroduction}</p><div className="panel-contact"><div><p>Email</p><a className="button primary" href="mailto:param1539064@gmail.com">param1539064@gmail.com</a></div><div><p>Phone</p><a className="button secondary" href="tel:+917814433864">+91 7814433864</a></div></div><SocialLinks/></>
+  if (id === 'contact') return <div className="contact-grid contact-grid--panel"><div><ContactDescription/></div><ContactDetails/></div>
   return null
 }
 

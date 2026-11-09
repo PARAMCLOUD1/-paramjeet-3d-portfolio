@@ -22,7 +22,7 @@ function walnutTexture() {
   return texture
 }
 
-function label(text, color = palette.text) {
+function label(text, color = palette.text, accentText = '') {
   // Local type on physical signs; no remote font, credential image or fake metrics.
   if (typeof CanvasRenderingContext2D === 'undefined') return new MeshBasicMaterial({ color })
   const canvas = document.createElement('canvas')
@@ -33,7 +33,15 @@ function label(text, color = palette.text) {
   context.fillStyle = color; context.textAlign = 'center'; context.textBaseline = 'middle'
   context.font = '48px Arial'
   const lines = text.split('\n')
-  lines.forEach((line, i) => context.fillText(line, 512, 128 + (i - (lines.length - 1) / 2) * 72, 960))
+  if (accentText) {
+    const prefix = text.slice(0, -accentText.length)
+    const prefixWidth = context.measureText(prefix).width
+    const start = 512 - (prefixWidth + context.measureText(accentText).width) / 2
+    context.textAlign = 'left'
+    context.fillText(prefix, start, 128)
+    context.fillStyle = palette.accent
+    context.fillText(accentText, start + prefixWidth, 128)
+  } else lines.forEach((line, i) => context.fillText(line, 512, 128 + (i - (lines.length - 1) / 2) * 72, 960))
   const map = new CanvasTexture(canvas)
   map.colorSpace = SRGBColorSpace
   return new MeshBasicMaterial({ map })
@@ -54,7 +62,7 @@ export default function useOfficeMaterials() {
     screen: new MeshStandardMaterial({ color: palette.secondary, emissive: palette.accent, emissiveIntensity: .12, roughness: .35 }),
     blue: new MeshBasicMaterial({ color: palette.accent }),
     warm: new MeshBasicMaterial({ color: palette.accent }),
-    branding: label('PARAMJEET.DEV'),
+    branding: label('PARAMJEET STUDIO', palette.text, 'STUDIO'),
     timeline: label('2021   /   2023   /   2026   /   2028'),
     certificates: label('Certifications'),
     contact: label('Contact\nparam1539064@gmail.com', palette.text),
