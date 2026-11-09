@@ -25,7 +25,6 @@ export default function Hero({ onEnterOffice, world }) {
 
   return <section ref={root} className={world ? 'hero hero--world' : 'hero'} aria-labelledby="hero-title">
     <div className="hero-copy">
-      <p className="hero-introduction" data-hero-reveal>Developer Portfolio</p>
       <h1 id="hero-title" data-hero-reveal>
         <span>Paramjeet</span>{' '}
         <span className="hero-title-last">Kaur</span>

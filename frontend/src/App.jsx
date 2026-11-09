@@ -53,7 +53,7 @@ export default function App() {
     </main>
     <footer>
       <span className="footer-wordmark" aria-hidden="true">PARAMJEET.DEV</span>
-      <div className="footer-bottom"><span>Paramjeet Kaur · MCA Student | Cloud Computing &amp; DevOps</span><span>React / Three.js / Flask</span><a href="#main">Back to top <span aria-hidden="true">↑</span></a></div>
+      <div className="footer-bottom"><span>Paramjeet Kaur · MCA Student | Cloud Computing &amp; DevOps</span><a href="#main">Back to top <span aria-hidden="true">↑</span></a></div>
     </footer>
     {selected && <PortfolioDialog key={selected} selected={selected} returnFocus={returnFocus} onClose={() => setSelected(null)}/>}
   </>

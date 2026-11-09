@@ -3,14 +3,14 @@ import { certifications, education, profile, skillCategories, contactIntroductio
 export default function ProfileSections() {
   return <>
     <section id="about" className="about section" aria-labelledby="about-title">
-      <div>
+      <div className="about-heading">
         <p className="eyebrow" data-scroll-reveal>03 / About</p>
         <h2 id="about-title" data-scroll-reveal>About Me</h2>
-        <figure className="about-portrait" data-scroll-reveal>
-          <div className="portrait-window"><img src="/images/profile.webp" alt="Portrait of Paramjeet Kaur" width="850" height="990" loading="lazy" decoding="async"/></div>
-          <figcaption>Paramjeet Kaur / Punjab, India</figcaption>
-        </figure>
       </div>
+      <figure className="about-portrait" data-scroll-reveal>
+        <div className="portrait-window"><img src="/images/profile.webp" alt="Portrait of Paramjeet Kaur" width="850" height="990" loading="lazy" decoding="async"/></div>
+        <figcaption>Paramjeet Kaur / Punjab, India</figcaption>
+      </figure>
       <div className="about-body" data-scroll-reveal>
         {profile.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
         <p className="objective">Seeking internships in Cloud and DevOps</p>

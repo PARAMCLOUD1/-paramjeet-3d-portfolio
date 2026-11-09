@@ -57,9 +57,8 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 400px;
-  object-fit: cover;
-  object-position: center 24%;
+  object-fit: contain;
+  object-position: center;
   mix-blend-mode: normal;
 }
 .portrait figcaption {
@@ -97,7 +96,6 @@ header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
   .hero { padding-top: 40px; row-gap: 32px; }
   .hero h1 { font-size: clamp(48px, 4.5vw, 64px); }
   .portrait { max-width: 360px; }
-  .portrait img { max-height: 400px; }
   .hero-role { margin-block: 24px; }
 }
 
@@ -111,8 +109,7 @@ header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
   .hero h1 { font-size: clamp(32px, 8vw, 40px); }
   .hero-introduction { margin-bottom: 24px; }
   .hero-role { margin-block: 24px; max-width: 320px; }
-  .portrait { max-width: 340px; margin: 0; }
-  .portrait img { max-height: 360px; }
+  .portrait { max-width: 340px; margin-inline: auto; }
   header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
 
 .hero-bottom { gap: 8px 24px; }
