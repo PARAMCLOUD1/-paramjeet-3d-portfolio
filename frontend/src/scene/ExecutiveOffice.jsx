@@ -97,7 +97,7 @@ function ExecutiveExperience({ entranceRequest = 0, selected = null, onSelect = 
         </Canvas>
       </SceneBoundary>}
       {!failure && !ready && <div className="office-loading" role="status"><p>Loading the 3D office</p><span>Preparing materials and lighting</span><a href="#projects">Continue to projects ↓</a></div>}
-      {!failure && ready && phase === 'closed' && !reducedMotion && <div className="door-welcome"><p style={{ visibility: 'hidden' }}><BrandWordmark/></p><h2>Explore My Portfolio</h2><button className="button" onClick={enter}>Enter Portfolio <span aria-hidden="true">↗</span></button></div>}
+      {!failure && ready && phase === 'closed' && !reducedMotion && <div className="door-welcome"><p style={{ visibility: 'hidden' }}><BrandWordmark/></p><h2>Explore My Portfolio</h2><button className="button" onClick={enter} aria-label="Enter Portfolio"><span style={{ visibility: 'hidden' }}>Enter Portfolio</span> <span aria-hidden="true">↗</span></button></div>}
     </div>
     {(exploring || failure) && <><div className="workspace-controls" role="group" aria-label="Executive office exhibits">
       {officeDestinations.map(item => <button key={item.id} ref={node => { objectButtons.current[item.id] = node }} aria-pressed={selected === item.id} aria-haspopup="dialog" aria-controls={selected ? 'portfolio-dialog' : undefined} onClick={() => select(item.id)}>{item.object}<span>{item.title}</span></button>)}
