@@ -43,9 +43,5 @@ export default function Hero({ onEnterOffice, world }) {
       <figcaption><span>Paramjeet Kaur</span><span>MCA Student</span></figcaption>
     </figure>}
     </div>
-    <div className="hero-bottom">
-      <p>Punjab, India <span aria-hidden="true">/</span> Open to internships</p>
-      <a className="scroll-cue" href="#workspace">Explore the Office <span aria-hidden="true">↓</span></a>
-    </div>
   </section>
 }

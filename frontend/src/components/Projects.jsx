@@ -17,7 +17,7 @@ export default function Projects() {
         <div><p>{featured.description}</p><ul className="tool-list" aria-label={`${featured.title} tools`}>{featured.tools.map(tool => <li key={tool}>{tool}</li>)}</ul><div className="project-links"><a className="text-link" href={featured.repository} target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a><a className="text-link" href={featured.demo} target="_blank" rel="noreferrer">Live demo <span aria-hidden="true">↗</span></a></div><details className="project-details"><summary>Implementation details <span aria-hidden="true">+</span></summary><p>{featured.notes}</p></details></div>
       </div>
     </article>
-    <div className="project-index-heading"><h3>More Projects</h3><p>Applications, systems &amp; algorithms</p></div>
+    <div className="project-index-heading"><h3>More Projects</h3></div>
     <div className="project-filters" role="group" aria-label="Filter projects">
       {['All', ...new Set(collection.map(project => project.category))].map(category => <button key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{category}</button>)}
     </div>

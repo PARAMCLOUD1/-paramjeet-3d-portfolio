@@ -74,24 +74,6 @@
 
 header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
 
-.hero-bottom {
-  grid-column: 1 / -1;
-  align-self: end;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px 24px;
-  border-top: 1px solid var(--border-subtle);
-  padding: 16px 0;
-  font: 12px/1.6 Consolas, monospace;
-  color: var(--muted);
-}
-.hero-bottom p { margin: 0; }
-.hero-bottom p span { margin: 0 12px; }
-.scroll-cue { display: inline-flex; align-items: center; gap: 24px; min-height: 44px; }
-.scroll-cue span { font: 20px/1 Arial, sans-serif; color: var(--champagne); }
-
 @media (min-width: 801px) and (max-height: 740px) {
   .hero { padding-top: 40px; row-gap: 32px; }
   .hero h1 { font-size: clamp(48px, 4.5vw, 64px); }
@@ -112,7 +94,6 @@ header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
   .portrait { max-width: 340px; margin-inline: auto; }
   header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
 
-.hero-bottom { gap: 8px 24px; }
 }
 
 @media (max-width: 360px) {

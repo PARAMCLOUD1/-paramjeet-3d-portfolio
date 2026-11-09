@@ -9,7 +9,7 @@ export default function ProfileSections() {
       </div>
       <figure className="about-portrait" data-scroll-reveal>
         <div className="portrait-window"><img src="/images/profile.webp" alt="Portrait of Paramjeet Kaur" width="850" height="990" loading="lazy" decoding="async"/></div>
-        <figcaption>Paramjeet Kaur / Punjab, India</figcaption>
+        <figcaption>Paramjeet Kaur</figcaption>
       </figure>
       <div className="about-body" data-scroll-reveal>
         {profile.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
@@ -42,7 +42,7 @@ export default function ProfileSections() {
       <h2 id="contact-title" data-scroll-reveal>Get in Touch</h2>
       <div className="contact-grid" data-scroll-reveal>
         <div><p>{contactIntroduction}</p><p className="panel-meta">Email</p><a className="email" href="mailto:param1539064@gmail.com">param1539064@gmail.com <span aria-hidden="true">↗</span></a></div>
-        <dl><div><dt>Phone</dt><dd><a href="tel:+917814433864">+91 7814433864</a></dd></div><div><dt>GitHub</dt><dd><a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></dd></div><div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/paramjeet-kaur-cloud/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></dd></div><div><dt>Location</dt><dd>Punjab, India</dd></div></dl>
+        <dl><div><dt>Phone</dt><dd><a href="tel:+917814433864">+91 7814433864</a></dd></div><div><dt>GitHub</dt><dd><a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a></dd></div><div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/paramjeet-kaur-cloud/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></dd></div></dl>
       </div>
     </section>
   </>

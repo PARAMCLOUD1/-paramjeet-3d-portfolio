@@ -46,8 +46,8 @@ export default function App() {
         <div className="scene-label"><span>Interactive office</span><button onClick={() => { setWorkspace(false); setEntranceRequest(0) }}>Switch to 2D</button></div>
       </div> : null}/>
       {sceneError && <p className="scene-module-error" role="status">The 3D office could not load. You can read all sections below or reload the page to try again.</p>}
-      <div className="discipline-strip"><span>Project-based learning</span><span>Python / Linux / Flask / Git</span><span>MCA Student | Cloud Computing &amp; DevOps</span></div>
-      {import.meta.env.DEV && <div className="backend-note"><Health/></div>}
+      <div className="discipline-strip"><span>MCA Student | Cloud Computing &amp; DevOps</span></div>
+      {import.meta.env.DEV && <Health/>}
       <Projects/>
       <ProfileSections/>
     </main>

@@ -17,7 +17,11 @@ test('hero project link preserves lazy office loading and office action loads it
   expect(await screen.findByText('Office loaded on request')).toBeVisible()
   fireEvent.click(screen.getByRole('button', { name: 'Switch to 2D' }))
   expect(screen.queryByText('Office loaded on request')).not.toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Explore the Office' })).toHaveAttribute('href', '#workspace')
+  expect(screen.getByRole('link', { name: 'Explore Portfolio' })).toHaveAttribute('href', '#workspace')
+  expect(screen.getByText('MCA Student | Cloud Computing & DevOps', { selector: '.hero-role' })).toBeVisible()
+  for (const label of ['Punjab, India', 'Open to internships', 'Explore the Office', 'Project-based learning', 'Python / Linux / Flask / Git', 'Applications, systems & algorithms']) {
+    expect(screen.queryByText(label, { exact: false })).not.toBeInTheDocument()
+  }
 })
 test('real contact links and portrait are accessible without loading WebGL',()=>{render(<App/>);expect(screen.getByRole('link',{name:/param1539064/})).toHaveAttribute('href','mailto:param1539064@gmail.com');expect(screen.getByAltText(/pink sweater/)).toHaveAttribute('src','/images/profile.webp');expect(screen.getByRole('link',{name:'Explore Portfolio'})).toBeVisible()})
 test('navigation toggles and closes after a destination is chosen',()=>{render(<App/>);const menu=screen.getByRole('button',{name:/Menu/});fireEvent.click(menu);expect(menu).toHaveAttribute('aria-expanded','true');fireEvent.click(screen.getByRole('link',{name:'About'}));expect(menu).toHaveAttribute('aria-expanded','false')})
