@@ -3,6 +3,27 @@
 The frontend is prepared for Vercel and the Flask API for Render. Configuration
 files do not create hosting resources or prove a deployment succeeded.
 
+## Live deployment — 2026-11-10
+
+- Website: https://paramjeet-studio.vercel.app
+- API health: https://paramjeet-studio-api.onrender.com/api/health
+- Vercel workspace/project: `paramjeet-kaur/paramjeet-studio`
+- Render service: `srv-dbp300mi0phs73agppg0` (free, Singapore)
+- Application source: `ccb2d714b606b98d967dfe7a978ee926d4d4aa40`
+
+The frontend was published with the Vercel CLI from `frontend`; its production
+alias and portrait returned HTTP 200 without authentication. The API returned
+`status: ok`, with `Access-Control-Allow-Origin` set to
+`https://paramjeet-studio.vercel.app`. Render refreshes its saved CLI login
+automatically; no credential is stored in this repository.
+
+Render is linked to the repository's `main` branch with automatic deployment.
+Vercel currently uses CLI deployments; its Git repository is not linked. To
+publish future frontend changes, run
+`npx.cmd --yes vercel@latest deploy --prod --scope paramjeet-kaur` from `frontend`
+while authenticated and linked to this project.
+Local `.vercel` metadata and environment files are ignored by the root gitignore.
+
 ## Vercel frontend
 
 Import `https://github.com/PARAMCLOUD1/-paramjeet-3d-portfolio` with:
@@ -50,4 +71,7 @@ delivery.
 5. Check the actual Render URL at `/api/health` returns `status: ok`.
 6. Check the API's CORS response allows the actual Vercel origin.
 
-Account authentication and live URLs remain necessary to perform these checks.
+Live HTTP, portrait, API health, and CORS checks passed. Lint, all 51 frontend
+tests, and all 3 backend tests passed before deployment, as did the production
+build. Browser-rendered desktop/mobile review and live 3D interaction checks
+remain unverified because browser automation is unavailable.
