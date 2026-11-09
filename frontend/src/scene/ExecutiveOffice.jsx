@@ -80,7 +80,7 @@ function ExecutiveExperience({ entranceRequest = 0, selected = null, onSelect = 
   const exploring = phase === 'explore' || reducedMotion
   return <div ref={container} className="executive-office">
     <div className="entrance-toolbar">
-      <p role="status">{failure ? '3D unavailable — the portfolio remains open below' : !ready ? 'Preparing your entrance…' : reducedMotion ? 'Office ready · Reduced motion' : phase === 'closed' ? 'Your world is one doorway away' : phase === 'entering' ? 'Opening the doors to my work…' : 'Select an exhibit to explore'}</p>
+      <p role="status">{failure ? '3D unavailable — the portfolio remains open below' : !ready ? 'Loading the office…' : reducedMotion ? 'Office ready · Reduced motion' : phase === 'closed' ? 'Office ready' : phase === 'entering' ? 'Opening the doors…' : 'Select an object to open a section'}</p>
       <div>
         {!exploring && !failure && <button onClick={skip}>Skip Intro</button>}
         {exploring && <button disabled={!ready || Boolean(failure) || reducedMotion} onClick={replay}>Replay Intro</button>}
@@ -95,8 +95,8 @@ function ExecutiveExperience({ entranceRequest = 0, selected = null, onSelect = 
           <OrbitControls ref={controls} makeDefault enabled={exploring && !moving && !selected} enablePan={false} enableDamping={false} minDistance={2.2} maxDistance={7} minPolarAngle={.35} maxPolarAngle={1.45} minAzimuthAngle={-.85} maxAzimuthAngle={.85} target={OFFICE_TARGET} onChange={constrainOrbit}/>
         </Canvas>
       </SceneBoundary>}
-      {!failure && !ready && <div className="office-loading" role="status"><p>Building the entrance</p><span>Preparing materials and lighting</span><a href="#projects">Continue to projects ↓</a></div>}
-      {!failure && ready && phase === 'closed' && !reducedMotion && <div className="door-welcome"><p>PARAMJEET.DEV</p><h2>WELCOME TO<br/>MY DIGITAL WORLD</h2><button className="button" onClick={enter}>ENTER MY WORLD <span aria-hidden="true">↗</span></button></div>}
+      {!failure && !ready && <div className="office-loading" role="status"><p>Loading the 3D office</p><span>Preparing materials and lighting</span><a href="#projects">Continue to projects ↓</a></div>}
+      {!failure && ready && phase === 'closed' && !reducedMotion && <div className="door-welcome"><p>PARAMJEET.DEV</p><h2>Explore My Portfolio</h2><button className="button" onClick={enter}>Enter Portfolio <span aria-hidden="true">↗</span></button></div>}
     </div>
     {(exploring || failure) && <><div className="workspace-controls" role="group" aria-label="Executive office exhibits">
       {officeDestinations.map(item => <button key={item.id} ref={node => { objectButtons.current[item.id] = node }} aria-pressed={selected === item.id} aria-haspopup="dialog" aria-controls={selected ? 'portfolio-dialog' : undefined} onClick={() => select(item.id)}>{item.object}<span>{item.title}</span></button>)}

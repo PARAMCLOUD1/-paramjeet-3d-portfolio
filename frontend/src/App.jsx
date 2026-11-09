@@ -9,7 +9,7 @@ import PortfolioDialog from './components/PortfolioDialog'
 import { portfolioViews } from './content'
 
 const Office = lazy(() => import('./scene/ExecutiveOffice'))
-const navigation = portfolioViews.map(([id, title]) => [id === 'about' ? 'About' : title, id])
+const navigation = portfolioViews.map(([id, title]) => [id === 'about' ? 'About' : id === 'skills' ? 'Skills' : id === 'contact' ? 'Contact' : title, id])
 
 export default function App() {
   const main = useRef(null)
@@ -42,18 +42,18 @@ export default function App() {
     </header>
     <main ref={main} id="main">
       <Hero onEnterOffice={() => { setSceneError(false); setWorkspace(true); setEntranceRequest(value => value + 1) }} world={workspace ? <div className="hero-world">
-        <SceneBoundary onFailure={() => { setSceneError(true); setWorkspace(false) }}><Suspense fallback={<p className="scene-fallback" role="status">Loading the 3D entrance…</p>}><Office entranceRequest={entranceRequest} selected={selected} onSelect={openContent}/></Suspense></SceneBoundary>
+        <SceneBoundary onFailure={() => { setSceneError(true); setWorkspace(false) }}><Suspense fallback={<p className="scene-fallback" role="status">Loading the 3D office…</p>}><Office entranceRequest={entranceRequest} selected={selected} onSelect={openContent}/></Suspense></SceneBoundary>
         <div className="scene-label"><span>Interactive office</span><button onClick={() => { setWorkspace(false); setEntranceRequest(0) }}>Switch to 2D</button></div>
       </div> : null}/>
-      {sceneError && <p className="scene-module-error" role="status">The 3D module could not load. Your portfolio remains available below. Reload this page to retry 3D.</p>}
-      <div className="discipline-strip"><span>Code with purpose</span><span>Python / Linux / Flask / Git</span><span>Cloud &amp; DevOps, in progress</span></div>
+      {sceneError && <p className="scene-module-error" role="status">The 3D office could not load. You can read all sections below or reload the page to try again.</p>}
+      <div className="discipline-strip"><span>Project-based learning</span><span>Python / Linux / Flask / Git</span><span>MCA Student | Cloud Computing &amp; DevOps</span></div>
       {import.meta.env.DEV && <div className="backend-note"><Health/></div>}
       <Projects/>
       <ProfileSections/>
     </main>
     <footer>
       <span className="footer-wordmark" aria-hidden="true">PARAMJEET.DEV</span>
-      <div className="footer-bottom"><span>Paramjeet Kaur · Cloud &amp; DevOps, in progress</span><span>React / Three.js / Flask</span><a href="#main">Back to top <span aria-hidden="true">↑</span></a></div>
+      <div className="footer-bottom"><span>Paramjeet Kaur · MCA Student | Cloud Computing &amp; DevOps</span><span>React / Three.js / Flask</span><a href="#main">Back to top <span aria-hidden="true">↑</span></a></div>
     </footer>
     {selected && <PortfolioDialog key={selected} selected={selected} returnFocus={returnFocus} onClose={() => setSelected(null)}/>}
   </>

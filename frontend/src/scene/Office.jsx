@@ -1,7 +1,7 @@
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Image, OrbitControls } from '@react-three/drei'
-import { destinations } from '../content'
+import { destinations, professionalTitle, introduction } from '../content'
 import Character from './Character'
 import useScenePreferences from './useScenePreferences'
 import { CAMERA_END, CAMERA_START, CAMERA_TARGET } from './entrance'
@@ -152,7 +152,7 @@ export default function Office() {
   const destination = destinations.find(item => item.id === selected)
   return <>
     <div ref={container} className="office-experience">
-      <div className="entrance-toolbar"><p role="status">{failed ? '3D unavailable — explore the portfolio below' : !ready ? 'Preparing the office…' : walking ? 'Entering the cloud workspace' : 'The workspace is yours to explore'}</p><div>{characterPreview && (walking || mode === 'loading' ? <button onClick={onArrive}>Skip entrance</button> : <button disabled={!ready || failed || reducedMotion} onClick={() => { setRun(value => value + 1); setMode('walking') }}>Replay entrance</button>)}<button aria-pressed={lightweight} onClick={() => setLightweight(value => !value)}>Low graphics</button></div></div>
+      <div className="entrance-toolbar"><p role="status">{failed ? '3D unavailable — explore the portfolio below' : !ready ? 'Preparing the office…' : walking ? 'Entering the office' : 'Select an object to open a section'}</p><div>{characterPreview && (walking || mode === 'loading' ? <button onClick={onArrive}>Skip entrance</button> : <button disabled={!ready || failed || reducedMotion} onClick={() => { setRun(value => value + 1); setMode('walking') }}>Replay entrance</button>)}<button aria-pressed={lightweight} onClick={() => setLightweight(value => !value)}>Low graphics</button></div></div>
       {characterPreview && <p className="character-caption">Development preview: CC0 placeholder character · Personalized likeness pending{reducedMotion ? ' · Reduced motion enabled' : ''}</p>}
       <div className="canvas-wrap" role="group" aria-label={`Interactive 3D office with ${characterPreview ? 'a development placeholder, ' : ''}laptop, cloud diagram, monitor, portrait, server and books. Equivalent controls follow.`}>
         {failed ? <p className="scene-fallback" role="status">3D unavailable. Use the workspace links below. Switch to 2D and reload the workspace to retry.{import.meta.env.DEV && <><br/><small>{failure.reason}: {failure.message}</small></>}</p> : <SceneBoundary onFailure={onFailure}>
@@ -162,7 +162,7 @@ export default function Office() {
           </Canvas>
         </SceneBoundary>}
       </div>
-      {showIntroduction && <div className="workspace-introduction"><div><p className="eyebrow">Paramjeet Kaur</p><h3>Building a future in Cloud & DevOps.</h3><p>MCA student working with Python, Linux and Flask, and developing skills in cloud infrastructure and automation.</p></div><a className="text-link" href="#about">Meet Paramjeet ↗</a><a className="text-link" href="#projects">Explore the work ↗</a></div>}
+      {showIntroduction && <div className="workspace-introduction"><div><p className="eyebrow">Paramjeet Kaur</p><h3>{professionalTitle}</h3><p>{introduction}</p></div><a className="text-link" href="#about">About Me ↗</a><a className="text-link" href="#projects">View Projects ↗</a></div>}
     </div>
     <div className="workspace-controls" role="group" aria-label="Explore office objects">{destinations.map(item => <button key={item.id} aria-pressed={selected === item.id} aria-controls="workspace-detail" onClick={() => setSelected(item.id)}>{item.object}<span>{item.title}</span></button>)}<button disabled={walking} onClick={resetView}>Reset view</button></div>
     <div id="workspace-detail" className="workspace-detail" aria-live="polite">{destination ? <><div><h3>{destination.title}</h3><p>{destination.description}</p></div><a className="text-link" href={'#' + destination.id}>{destination.link} ↗</a><button className="dismiss-note" aria-label="Dismiss office detail" onClick={() => setSelected(null)}>×</button></> : <p>Select an office object or use the controls above to explore.</p>}</div>

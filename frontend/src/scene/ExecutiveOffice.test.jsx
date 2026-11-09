@@ -22,11 +22,11 @@ afterEach(() => { cleanup(); simulation.error = null; vi.useRealTimers(); vi.res
 
 test('loading, closed entrance, enter, skip and replay preserve the portfolio', () => {
   render(<ExecutiveOffice/> )
-  expect(screen.getByText('Building the entrance')).toBeVisible()
+  expect(screen.getByText('Loading the 3D office')).toBeVisible()
   fireEvent.click(screen.getByText('Scene ready'))
   expect(screen.getByTestId('executive')).toHaveAttribute('data-phase', 'closed')
-  expect(screen.getByRole('heading', { name: /WELCOME TO/ })).toBeVisible()
-  fireEvent.click(screen.getByRole('button', { name: 'ENTER MY WORLD' }))
+  expect(screen.getByRole('heading', { name: /Explore My Portfolio/ })).toBeVisible()
+  fireEvent.click(screen.getByRole('button', { name: 'Enter Portfolio' }))
   expect(screen.getByTestId('executive')).toHaveAttribute('data-phase', 'entering')
   fireEvent.click(screen.getByRole('button', { name: 'Skip Intro' }))
   expect(screen.getByTestId('executive')).toHaveAttribute('data-phase', 'explore')
@@ -39,8 +39,8 @@ test('all six object panels contain complete information and restore keyboard fo
   fireEvent.click(screen.getByRole('button', { name: 'Skip Intro' }))
   for (const [object, title, id] of [
     ['Workstation monitor', 'About Me', 'about'], ['Server rack', 'Projects', 'projects'],
-    ['Technical display', 'Skills', 'skills'], ['Wall timeline', 'Education', 'education'],
-    ['Certificate display', 'Certifications', 'certifications'], ['Contact terminal', 'Contact', 'contact'],
+    ['Technical display', 'Technical Skills', 'skills'], ['Wall timeline', 'Education', 'education'],
+    ['Certificate display', 'Certifications', 'certifications'], ['Contact terminal', 'Get in Touch', 'contact'],
   ]) {
     const button = screen.getByRole('button', { name: new RegExp(object) })
     fireEvent.click(button)
@@ -86,7 +86,7 @@ test('unsupported WebGL retains all six 2D exhibit destinations', () => {
   expect(screen.getByText(/3D unavailable\. Use/)).toBeVisible()
   expect(screen.getByRole('group', { name: 'Executive office exhibits' }).querySelectorAll('button')).toHaveLength(7)
   fireEvent.click(screen.getByRole('button', { name: /Contact terminal/ }))
-  expect(screen.getByRole('dialog', { name: 'Contact' })).toBeVisible()
+  expect(screen.getByRole('dialog', { name: 'Get in Touch' })).toBeVisible()
   expect(screen.getByRole('link', { name: 'param1539064@gmail.com' })).toHaveAttribute('href', 'mailto:param1539064@gmail.com')
 })
 

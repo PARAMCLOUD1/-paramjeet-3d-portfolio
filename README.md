@@ -37,14 +37,14 @@ Open http://127.0.0.1:5173. Use `npm.cmd` because this machine blocks `npm.ps1`.
 ## Current experience
 
 The Midnight Executive hero pairs career copy with an interactive office on desktop.
-Mobile and save-data users start with the real portrait; **Enter My World** loads the
-office and begins the entrance. **Explore Projects**, editorial sections, education,
+Mobile and save-data users start with the real portrait; **Explore Portfolio** loads the
+office and begins the entrance. **View Projects**, page sections, education,
 certifications and direct contact links remain available with reduced-motion support.
 
 The project showcase contains all seven supplied names, six verified source links,
 a real electricity-dashboard preview and the previously verified demo. V8 adds
 the supplied stack/algorithm details and a labelled additional demo URL. Project
-notes and nine skills categories use native keyboard-operable disclosures. Missing
+details and six skills categories use native keyboard-operable disclosures. Missing
 source evidence, issuers and images are not fabricated; see PROJECT_SOURCES.md.
 
 The room has physical double doors with animated handles, a workstation, server

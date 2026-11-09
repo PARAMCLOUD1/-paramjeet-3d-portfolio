@@ -18,7 +18,7 @@ test('reduced motion leaves hero content visible without an entrance tween', () 
   const heading = screen.getByRole('heading', { level: 1 })
   expect(heading.style.opacity).toBe('')
   expect(heading.style.transform).toBe('')
-  expect(screen.getByRole('link', { name: 'Explore Projects' })).toBeVisible()
+  expect(screen.getByRole('link', { name: 'View Projects' })).toBeVisible()
 })
 
 test('motion preference changes revert an active entrance and unmount removes listeners', () => {

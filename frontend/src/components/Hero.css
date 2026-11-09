@@ -37,7 +37,7 @@
   line-height: 1.5;
 }
 .hero-role span { color: var(--muted); }
-.hero-tagline { font: 12px/1.8 Consolas, monospace; color: var(--muted); margin: -12px 0 32px; }
+.hero-tagline { max-width: 48ch; font-size: 16px; line-height: 1.65; color: var(--muted); margin: -12px 0 32px; }
 .hero .actions { gap: 12px; }
 .hero .button { min-height: 44px; padding: 8px 16px; gap: 20px; }
 .hero .primary { background: var(--champagne); border-color: var(--champagne); color: var(--midnight); }

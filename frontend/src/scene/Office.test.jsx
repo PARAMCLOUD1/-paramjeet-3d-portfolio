@@ -1,4 +1,4 @@
-import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { afterEach, beforeEach, expect, test, vi } from 'vitest'
 import Office from './Office'
 
@@ -45,18 +45,18 @@ test('every office destination remains available when WebGL is unsupported', () 
   expect(screen.getByText(/^3D unavailable\. Use/)).toBeVisible()
   expect(console.error).toHaveBeenCalledWith('[portfolio:3d] scene-render', simulation.error, expect.objectContaining({ componentStack: expect.any(String) }))
   for (const [object, link, href] of [
-    ['Monitor', 'View project areas', '#projects'],
-    ['Portrait', 'Read about me', '#about'],
-    ['Server', 'Explore my skills', '#skills'],
-    ['Books', 'View my education', '#education'],
+    ['Monitor', 'View Projects', '#projects'],
+    ['Portrait', 'About Me', '#about'],
+    ['Server', 'Technical Skills', '#skills'],
+    ['Books', 'View Education', '#education'],
   ]) {
     const button = screen.getByRole('button', { name: new RegExp(object) })
     fireEvent.click(button)
     expect(button).toHaveAttribute('aria-pressed', 'true')
-    expect(screen.getByRole('link', { name: new RegExp(link) })).toHaveAttribute('href', href)
+    expect(within(document.getElementById('workspace-detail')).getByRole('link', { name: new RegExp(link) })).toHaveAttribute('href', href)
   }
   fireEvent.click(screen.getByRole('button', { name: 'Dismiss office detail' }))
-  expect(screen.queryByRole('link', { name: /View my education/ })).not.toBeInTheDocument()
+  expect(screen.queryByRole('link', { name: /View Education/ })).not.toBeInTheDocument()
   expect(screen.getByText(/Select an office object/)).toBeVisible()
 })
 
@@ -67,16 +67,16 @@ test('loading, entrance, arrival, replay and skip preserve office navigation', (
   fireEvent.click(screen.getByRole('button', { name: 'Model ready' }))
   expect(screen.getByTestId('scene')).toHaveAttribute('data-mode', 'walking')
   expect(screen.getByRole('button', { name: 'Reset view' })).toBeDisabled()
-  expect(screen.queryByRole('heading', { name: /Building a future/ })).not.toBeInTheDocument()
+  expect(screen.queryByRole('heading', { name: /MCA Student/ })).not.toBeInTheDocument()
   fireEvent.click(screen.getByRole('button', { name: 'Character arrived' }))
-  expect(screen.getByRole('heading', { name: /Building a future/ })).toBeVisible()
-  expect(screen.getByRole('link', { name: /Meet Paramjeet/ })).toHaveAttribute('href', '#about')
+  expect(screen.getByRole('heading', { name: /MCA Student/ })).toBeVisible()
+  expect(screen.getByRole('link', { name: /About Me/ })).toHaveAttribute('href', '#about')
   fireEvent.click(screen.getByRole('button', { name: 'Replay entrance' }))
   expect(screen.getByTestId('scene')).toHaveAttribute('data-mode', 'walking')
   fireEvent.click(screen.getByRole('button', { name: 'Skip entrance' }))
   expect(screen.getByTestId('scene')).toHaveAttribute('data-mode', 'idle')
   fireEvent.click(screen.getByRole('button', { name: /Monitor/ }))
-  expect(screen.getByRole('link', { name: /View project areas/ })).toBeVisible()
+  expect(within(document.getElementById('workspace-detail')).getByRole('link', { name: /View Projects/ })).toBeVisible()
   fireEvent.click(screen.getByRole('button', { name: 'Low graphics' }))
   expect(screen.getByTestId('scene')).toHaveAttribute('data-shadows', 'false')
   expect(screen.getByTestId('scene')).toHaveAttribute('data-dpr', '1')
@@ -88,7 +88,7 @@ test('reduced motion starts at the workstation and disables replay', () => {
   render(<Office/> )
   fireEvent.click(screen.getByRole('button', { name: 'Model ready' }))
   expect(screen.getByTestId('scene')).toHaveAttribute('data-mode', 'idle')
-  expect(screen.getByRole('heading', { name: /Building a future/ })).toBeVisible()
+  expect(screen.getByRole('heading', { name: /MCA Student/ })).toBeVisible()
   expect(screen.getByRole('button', { name: 'Replay entrance' })).toBeDisabled()
 })
 
@@ -101,7 +101,7 @@ test('a stalled model load releases the loading screen and retains destinations'
   expect(screen.queryByText('Loading the 3D workspace')).not.toBeInTheDocument()
   expect(screen.getByText(/load-timeout:/)).toBeVisible()
   expect(console.error).toHaveBeenCalledWith('[portfolio:3d] load-timeout', expect.any(Error), expect.objectContaining({ canvasCreated: false }))
-  expect(screen.getByRole('link', { name: /View my education/ })).toHaveAttribute('href', '#education')
+  expect(screen.getByRole('link', { name: /View Education/ })).toHaveAttribute('href', '#education')
 })
 
 test('context loss is caught before the character loads and reports its reason', () => {
@@ -125,7 +125,7 @@ test.each(['cube', 'office'])('development isolation stage %s selects only the r
   render(<Office/> )
   expect(screen.getByTestId('scene')).toHaveAttribute('data-stage', stage)
   fireEvent.click(screen.getByRole('button', { name: 'Model ready' }))
-  expect(screen.getByRole('heading', { name: /Building a future/ })).toBeVisible()
+  expect(screen.getByRole('heading', { name: /MCA Student/ })).toBeVisible()
 })
 
 test('rendering pauses outside the viewport and resumes when visible', () => {

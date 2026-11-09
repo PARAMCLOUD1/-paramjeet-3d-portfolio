@@ -9,7 +9,7 @@ test('filtering the collection keeps the real featured project and restores all 
   const collection = within(screen.getByRole('region', { name: 'Project collection' }))
   fireEvent.click(screen.getByRole('button', { name: 'Systems' }))
   expect(screen.getByRole('button', { name: 'Systems' })).toHaveAttribute('aria-pressed', 'true')
-  expect(screen.getByRole('status')).toHaveTextContent('1 project in the collection')
+  expect(screen.getByRole('status')).toHaveTextContent('1 project shown')
   expect(collection.getAllByRole('article')).toHaveLength(1)
   expect(screen.getByRole('heading', { name: 'Server Health Monitoring System' })).toBeVisible()
   expect(screen.queryByRole('heading', { name: 'Pathfinding Visualizer' })).not.toBeInTheDocument()
@@ -22,7 +22,7 @@ test('only verified project sources and demo are linked; real preview reserves d
   render(<Projects/> )
   expect(screen.getByRole('link', { name: 'View Mini Banking System source on GitHub' })).toHaveAttribute('href', 'https://github.com/PARAMCLOUD1/mini-banking-system')
   expect(screen.getByRole('link', { name: /Open the electricity dashboard/ })).toHaveAttribute('href', 'https://paramsmartelectricitysystem.onrender.com/')
-  const preview = screen.getByAltText(/Actual VOLT/)
+  const preview = screen.getByAltText(/Electricity dashboard/)
   expect(preview).toHaveAttribute('src', '/images/projects/electricity.webp')
   expect(preview).toHaveAttribute('width', '1280')
   expect(preview).toHaveAttribute('height', '720')
@@ -32,7 +32,7 @@ test('only verified project sources and demo are linked; real preview reserves d
 
 test('project notes can be opened using native details', () => {
   render(<Projects/> )
-  const summary = screen.getByText('Inside the project')
+  const summary = within(screen.getByRole('heading', { name: 'Smart Electricity Load Management System' }).closest('article')).getByText('Implementation details')
   const detail = summary.closest('details')
   expect(detail.open).toBe(false)
   fireEvent.click(summary)

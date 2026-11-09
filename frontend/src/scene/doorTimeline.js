@@ -43,10 +43,10 @@ export function createDoorTimeline({ left, right, handleLeft, handleRight, camer
 }
 
 export const officeDestinations = [
-  { id: 'about', object: 'Workstation monitor', title: 'About Me', description: 'Paramjeet Kaur — MCA Cloud Computing & DevOps student, seeking a Cloud & DevOps Engineer / Intern opportunity.', camera: [1.6, 1.85, .9], target: [0, 1.25, -2] },
+  { id: 'about', object: 'Workstation monitor', title: 'About Me', description: 'Paramjeet Kaur — MCA Cloud Computing & DevOps student, seeking internships in Cloud and DevOps.', camera: [1.6, 1.85, .9], target: [0, 1.25, -2] },
   { id: 'projects', object: 'Server rack', title: 'Projects', description: 'Explore my electricity simulator, Linux monitor, banking system, visualizer and other application projects.', camera: [1.9, 1.85, .8], target: [3.2, 1.2, -3.7] },
-  { id: 'skills', object: 'Technical display', title: 'Skills', description: 'Python, Linux, databases, backend development and Git, with AWS, Docker, Kubernetes and CI/CD currently being learned.', camera: [1.4, 2, .8], target: [.2, 2.65, -4.8] },
+  { id: 'skills', object: 'Technical display', title: 'Technical Skills', description: 'I work with Python, Linux, databases, backend development, and Git. I am learning AWS, Docker, Kubernetes, and CI/CD.', camera: [1.4, 2, .8], target: [.2, 2.65, -4.8] },
   { id: 'education', object: 'Wall timeline', title: 'Education', description: 'MCA — Chandigarh University, expected 2028; BCA — DAV College, 2026; Class XII — 2023; Class X — 2021.', camera: [-1.7, 1.8, 1], target: [-4.3, 1.9, -1.7] },
-  { id: 'certifications', object: 'Certificate display', title: 'Certifications', description: 'Cloud computing, Python, data science, AI and related coursework, plus MS Office Basic & Advanced covering Word, Excel and PowerPoint.', camera: [-.9, 1.9, .8], target: [-2, 2.15, -4.8] },
-  { id: 'contact', object: 'Contact terminal', title: 'Contact', description: 'Email param1539064@gmail.com, call +91 7814433864, or connect through GitHub and LinkedIn.', camera: [2.3, 1.8, .9], target: [1.1, 1, -1.75] },
+  { id: 'certifications', object: 'Certificate display', title: 'Certifications', description: 'My certifications in cloud computing, programming, and related subjects.', camera: [-.9, 1.9, .8], target: [-2, 2.15, -4.8] },
+  { id: 'contact', object: 'Contact terminal', title: 'Get in Touch', description: 'Email param1539064@gmail.com, call +91 7814433864, or connect through GitHub and LinkedIn.', camera: [2.3, 1.8, .9], target: [1.1, 1, -1.75] },
 ]

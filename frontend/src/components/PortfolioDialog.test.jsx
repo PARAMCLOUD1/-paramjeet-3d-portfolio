@@ -32,10 +32,10 @@ test('dialog locks scrolling, traps focus, closes on Escape and restores focus a
 })
 
 test.each([
-  ['about', /My career objective is to work as a Cloud & DevOps Engineer/],
+  ['about', /with the goal of starting my career in Cloud and DevOps engineering/],
   ['projects', /Smart Delivery Route Optimizer/],
   ['skills', /CentOS/], ['education', /87.6%/],
-  ['certifications', /Introduction to RPA/], ['contact', /LET'S BUILD SOMETHING GREAT/],
+  ['certifications', /Introduction to RPA/], ['contact', /open to internship opportunities/],
 ])('%s opens its complete content in the shared panel', (id, content) => {
   render(<Fixture id={id}/> )
   fireEvent.click(screen.getByRole('button', { name: 'Open panel' }))

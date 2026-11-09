@@ -54,9 +54,9 @@ export default function useOfficeMaterials() {
     warm: new MeshBasicMaterial({ color: '#c9a66b' }),
     branding: label('PARAMJEET.DEV'),
     timeline: label('2021   /   2023   /   2026   /   2028'),
-    certificates: label('CONTINUING TO LEARN\nCertifications'),
-    contact: label('LET’S CONNECT\nparam1539064@gmail.com', '#4ea8de'),
-    skills: label('CODE  /  LINUX  /  CLOUD', '#4ea8de'),
+    certificates: label('Certifications'),
+    contact: label('Contact\nparam1539064@gmail.com', '#4ea8de'),
+    skills: label('Technical Skills', '#4ea8de'),
   }), [])
   useEffect(() => () => {
     for (const material of Object.values(materials)) { material.map?.dispose(); material.dispose() }
