@@ -1,6 +1,6 @@
 .hero {
   min-height: 0;
-  background: var(--midnight);
+  background: radial-gradient(ellipse at 95% 5%, color-mix(in srgb, var(--accent-primary) 14%, var(--bg-primary)), transparent 62%), linear-gradient(135deg, var(--bg-primary), color-mix(in srgb, var(--lavender) 14%, var(--bg-primary)));
   color: var(--ivory);
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -72,7 +72,7 @@
 }
 .portrait figcaption span:last-child { color: var(--border-subtle); }
 
-header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
+header :focus-visible, .hero :focus-visible { outline-color: var(--accent-soft); }
 
 @media (min-width: 801px) and (max-height: 740px) {
   .hero { padding-top: 40px; row-gap: 32px; }
@@ -92,7 +92,7 @@ header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
   .hero-introduction { margin-bottom: 24px; }
   .hero-role { margin-block: 24px; max-width: 320px; }
   .portrait { max-width: 340px; margin-inline: auto; }
-  header :focus-visible, .hero :focus-visible { outline-color: var(--champagne); }
+  header :focus-visible, .hero :focus-visible { outline-color: var(--accent-soft); }
 
 }
 

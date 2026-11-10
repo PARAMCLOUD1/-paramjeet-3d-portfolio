@@ -44,7 +44,7 @@ header {
 }
 .brand { font: 600 20px/1 Arial, sans-serif; letter-spacing: -.04em; white-space: nowrap; }
 .studio-wordmark { color: var(--text-primary); font-family: Arial, Helvetica, sans-serif; font-weight: 600; letter-spacing: .015em; white-space: nowrap; }
-.studio-wordmark .studio-wordmark-accent { color: var(--accent-primary); font-weight: 500; }
+.studio-wordmark .studio-wordmark-accent { color: var(--accent-soft); font-weight: 500; }
 header a:hover { color: var(--champagne); }
 nav { display: flex; align-items: center; gap: 24px; font-size: 13px; }
 nav a { display: inline-flex; align-items: center; min-height: 44px; }
@@ -240,10 +240,10 @@ footer a { min-height: 44px; }
 .contact-grid dl { margin: 0; }
 .contact-grid dl > div { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 12px; padding: 8px 0; }
 .contact-grid dt { display: flex; align-items: center; gap: 8px; font: 12px/1.6 Consolas, monospace; color: var(--text-primary); }
-.contact-grid dt svg { flex-shrink: 0; color: var(--accent-primary); }
+.contact-grid dt svg { flex-shrink: 0; color: var(--accent-soft); }
 .contact-grid dd { min-width: 0; margin: 0; font-size: 14px; color: var(--text-primary); }
 .contact-grid dd a { display: inline-flex; align-items: center; min-height: 44px; max-width: 100%; overflow-wrap: anywhere; }
-.contact-grid dd a:hover { color: var(--accent-primary); }
+.contact-grid dd a:hover { color: var(--accent-soft); }
 .contact-grid--panel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 0; }
 .contact-grid--panel dl > div { grid-template-columns: minmax(0, 1fr); gap: 0; }
 .footer-wordmark { display: block; padding-bottom: 40px; font: 600 clamp(24px, 3vw, 36px)/1 Arial, Helvetica, sans-serif; letter-spacing: -.065em; color: var(--ivory); }
@@ -290,7 +290,9 @@ footer a { min-height: 44px; }
 .door-welcome { position: absolute; left: 24px; right: 24px; bottom: 24px; pointer-events: none; }
 .door-welcome p { font: 11px/1.6 Consolas, monospace; color: var(--champagne); margin: 0 0 8px; }
 .door-welcome h2 { font: 400 clamp(20px, 2vw, 28px)/1.2 var(--display-font); letter-spacing: 0; margin: 0 0 16px; color: var(--ivory); }
-.door-welcome button { pointer-events: auto; min-height: 44px; background: var(--champagne); color: var(--midnight); border-color: var(--champagne); font-size: 12px; }
+.door-welcome button { pointer-events: auto; min-height: 44px; background: var(--accent-soft); color: var(--bg-primary); border-color: var(--accent-soft); font-size: 12px; }
+.door-welcome button:hover, .door-welcome button:focus-visible, .door-welcome button:active { background: var(--accent-primary); color: var(--bg-primary); border-color: var(--accent-primary); }
+.door-welcome button:focus-visible { outline-color: var(--text-primary); }
 .back-to-office { min-height: 44px; padding: 8px 12px; border: 1px solid var(--rule); background: transparent; color: var(--ivory); border-radius: 4px; font-size: 12px; }
 .back-to-office:hover { background: var(--graphite); }
 .backend-note, .scene-module-error { padding: 0 var(--gutter); }
@@ -324,3 +326,10 @@ footer a { min-height: 44px; }
   .executive-office .entrance-toolbar p { max-width: none; }
   .door-welcome { left: 16px; right: 16px; bottom: 16px; }
 }
+
+/* Appearance only: the original layout, dimensions, and interaction styles remain. */
+.hero { background: radial-gradient(ellipse at 95% 5%, color-mix(in srgb, var(--accent-primary) 14%, var(--bg-primary)), transparent 62%), linear-gradient(135deg, var(--bg-primary), color-mix(in srgb, var(--lavender) 14%, var(--bg-primary))); }
+.hero-world { box-shadow: var(--shadow-soft); }
+.project-row { background: linear-gradient(110deg, color-mix(in srgb, var(--bg-primary) 20%, var(--bg-secondary)), var(--bg-secondary)); }
+.featured-project { box-shadow: 0 8px 24px rgb(48 35 67 / 12%); }
+.preview-link { background: var(--blush); }
