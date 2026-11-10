@@ -1,11 +1,13 @@
-// Midnight Atelier material and lighting colors, matching theme.css.
+// Sakura Sunset material and lighting colors, matching theme.css.
 export const palette = Object.freeze({
-  background: '#0D1724',
-  secondary: '#131F2D',
-  surface: '#1D2938',
-  accent: '#B18B60',
-  text: '#F3EDE3',
-  muted: '#ADB5BD',
-  border: '#354050',
-  walnut: '#382C26',
+  background: '#302343',
+  secondary: '#3B2C4F',
+  surface: '#443451',
+  accent: '#E996B6',
+  soft: '#D7C5E9',
+  blush: '#F4B5A5',
+  text: '#FFF5FA',
+  muted: '#D7C5E9',
+  border: '#74618F',
+  walnut: '#74618F',
 })
