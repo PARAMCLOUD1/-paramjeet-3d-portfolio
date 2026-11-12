@@ -1,4 +1,4 @@
-import { palette } from '../palette'
+import { usePalette } from '../theme'
 import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useThree } from '@react-three/fiber'
 import { RoundedBox } from '@react-three/drei'
@@ -15,16 +15,16 @@ function Box({ at, size, material, ...props }) {
 function Environment({ compact }) {
   const { gl, scene, invalidate } = useThree()
   useEffect(() => {
-    if (compact) return
+    if (!gl.isWebGLRenderer) return
     const generator = new PMREMGenerator(gl)
     const environment = new RoomEnvironment()
-    const target = generator.fromScene(environment, .04)
+    const target = generator.fromScene(environment, .04, .1, 100, { size: compact ? 64 : 128 })
     const previous = scene.environment
     const previousIntensity = scene.environmentIntensity
     // Three's external scene is mutable renderer state, not React state/props.
     /* eslint-disable react-hooks/immutability */
     scene.environment = target.texture
-    scene.environmentIntensity = .35
+    scene.environmentIntensity = .5
     /* eslint-enable react-hooks/immutability */
     invalidate()
     environment.dispose(); generator.dispose()
@@ -36,6 +36,7 @@ function Environment({ compact }) {
 
 function Exhibit({ id, onSelect, enabled, children, ...props }) {
   const { gl, scene, invalidate } = useThree()
+  const palette = usePalette()
   const group = useRef(null)
   const selected = useContext(SelectedExhibit)
   const [hovered, setHovered] = useState(false)
@@ -47,7 +48,7 @@ function Exhibit({ id, onSelect, enabled, children, ...props }) {
     scene.add(outline)
     invalidate()
     return () => { scene.remove(outline); outline.geometry.dispose(); outline.material.dispose(); invalidate() }
-  }, [enabled, hovered, id, invalidate, scene, selected])
+  }, [enabled, hovered, id, invalidate, palette, scene, selected])
   useEffect(() => () => gl.domElement.style.removeProperty('cursor'), [gl])
   return <group ref={group} name={id} userData={{ destination: id }} {...props}
     onClick={event => { if (enabled) { event.stopPropagation(); onSelect(id) } }}
@@ -58,8 +59,8 @@ function Exhibit({ id, onSelect, enabled, children, ...props }) {
 function Door({ side, doorRef, handleRef, materials: m }) {
   const direction = side === 'left' ? 1 : -1
   return <group name={`${side}-door-hinge`} ref={doorRef} position={[-direction * 1.4, 0, 4]}>
-    <Box at={[direction * .7, 1.6, 0]} size={[1.4, 3.2, .11]} material={m.wood}/>
-    <Box at={[direction * .7, 1.6, .067]} size={[1.16, 2.9, .024]} material={m.wood}/>
+    <Box at={[direction * .7, 1.6, 0]} size={[1.4, 3.2, .11]} material={m.door}/>
+    <Box at={[direction * .7, 1.6, .067]} size={[1.16, 2.9, .024]} material={m.doorPanel}/>
     {[.13, 1.27].map(x => <Box key={x} at={[direction * x, 1.6, .084]} size={[.012, 2.86, .012]} material={m.champagne}/>)}
     {[.38, 1.6, 2.82].map(y => <mesh key={y} position={[0, y, 0]} material={m.champagne}><cylinderGeometry args={[.025, .025, .13, 12]}/></mesh>)}
     <group ref={handleRef} name={`${side}-handle`} position={[direction * 1.17, 1.45, .09]}>
@@ -71,25 +72,27 @@ function Door({ side, doorRef, handleRef, materials: m }) {
 }
 
 export default function ExecutiveRoom({ refs, onReady, compact, onSelect, selected, enabled }) {
+  const palette = usePalette()
   const m = useOfficeMaterials()
   useEffect(() => { onReady() }, [onReady])
   return <SelectedExhibit.Provider value={selected}>
-    <color attach="background" args={[palette.background]}/>
-    <fog attach="fog" args={[palette.background, 16, 34]}/>
+    <color attach="background" args={[palette.sceneBackground]}/>
+    <fog attach="fog" args={[palette.sceneBackground, 16, 34]}/>
     <Environment compact={compact}/>
-    <hemisphereLight args={[palette.text, palette.walnut, 1.15]}/>
-    <directionalLight position={[-2, 5, 3]} color={palette.text} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.03} shadow-camera-left={-6} shadow-camera-right={6} shadow-camera-top={6} shadow-camera-bottom={-6}/>
-    <pointLight position={[-3.8, 3.1, -.8]} color={palette.accent} intensity={10} distance={8}/>
-    <pointLight position={[3.7, 3.1, -2.5]} color={palette.text} intensity={8} distance={7}/>
+    <hemisphereLight args={[palette.sky, palette.walnut, .55]}/>
+    <directionalLight position={[-3.5, 6, 8]} color={palette.light} intensity={3} castShadow={!compact} shadow-mapSize={[2048, 2048]} shadow-radius={3} shadow-bias={-.0001} shadow-normalBias={.006} shadow-camera-left={-6} shadow-camera-right={6} shadow-camera-top={6} shadow-camera-bottom={-6}/>
+    <pointLight position={[3.8, 2.6, 6]} color={palette.sky} intensity={4} distance={10}/>
+    <pointLight position={[-3.8, 3.1, -.8]} color={palette.glow} intensity={8} distance={8}/>
+    <pointLight position={[3.7, 3.1, -2.5]} color={palette.glow} intensity={8} distance={7}/>
     <Box at={[0, -.13, 2.4]} size={[9, .26, 15]} material={m.floor}/>
     <Box at={[0, .012, -1.1]} size={[4.8, .018, 4]} material={m.rug} castShadow={false}/>
-    <Box at={[0, 1.9, -5]} size={[9, 3.8, .18]} material={m.navy}/>
+    <Box at={[0, 1.9, -5]} size={[9, 3.8, .18]} material={m.backWall}/>
     <Box at={[-4.5, 1.9, -.5]} size={[.18, 3.8, 9]} material={m.wall}/>
     <Box at={[0, 3.88, -.5]} size={[9, .16, 9]} material={m.wall} castShadow={false}/>
     {[-3, 3].map(x => <Box key={x} at={[x, 1.9, 4]} size={[3.2, 3.8, .22]} material={m.wall}/>)}
     <Box at={[0, 3.58, 4]} size={[2.8, .76, .22]} material={m.wall}/>
-    {[-1.47, 1.47].map(x => <Box key={x} at={[x, 1.64, 4.02]} size={[.12, 3.36, .24]} material={m.champagne}/>)}
-    <Box at={[0, 3.3, 4.02]} size={[3.06, .1, .24]} material={m.champagne}/>
+    {[-1.47, 1.47].map(x => <Box key={x} at={[x, 1.64, 4.02]} size={[.12, 3.36, .24]} material={m.doorFrame}/>)}
+    <Box at={[0, 3.3, 4.02]} size={[3.06, .1, .24]} material={m.doorFrame}/>
     <Box at={[0, .018, 4]} size={[2.8, .036, .28]} material={m.champagne}/>
     <Box at={[0, 3.57, 4.14]} size={[2.2, .25, .025]} material={m.branding}/>
     <Door side="left" doorRef={refs.left} handleRef={refs.handleLeft} materials={m}/>
@@ -138,10 +141,10 @@ export default function ExecutiveRoom({ refs, onReady, compact, onSelect, select
       <Box at={[.2, 2.65, -4.86]} size={[2.25, .72, .06]} material={m.metal}/>
       <Box at={[.2, 2.65, -4.82]} size={[2.1, .58, .015]} material={m.skills}/>
     </Exhibit>
-    <Exhibit id="education" onSelect={onSelect} enabled={enabled} position={[-4.36, 1.9, -1.7]} rotation={[0, Math.PI / 2, 0]}>
+    <group name="education" position={[-4.36, 1.9, -1.7]} rotation={[0, Math.PI / 2, 0]}>
       <Box at={[0, 0, 0]} size={[2.3, .8, .04]} material={m.wood}/>
       <Box at={[0, 0, .03]} size={[2.16, .65, .012]} material={m.timeline}/>
-    </Exhibit>
+    </group>
     <Exhibit id="certifications" onSelect={onSelect} enabled={enabled}>
       <Box at={[-2.03, 2.18, -4.86]} size={[1.6, .8, .07]} material={m.champagne}/>
       <Box at={[-2.03, 2.18, -4.81]} size={[1.48, .68, .016]} material={m.certificates}/>

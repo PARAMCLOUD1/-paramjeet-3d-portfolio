@@ -34,7 +34,7 @@ test('dialog locks scrolling, traps focus, closes on Escape and restores focus a
 test.each([
   ['about', /with the goal of starting my career in Cloud and DevOps engineering/],
   ['projects', /Smart Delivery Route Optimizer/],
-  ['skills', /CentOS/], ['education', /87.6%/],
+  ['skills', /CentOS/],
   ['certifications', /Introduction to RPA/], ['contact', /open to internship opportunities/],
 ])('%s opens its complete content in the shared panel', (id, content) => {
   render(<Fixture id={id}/> )

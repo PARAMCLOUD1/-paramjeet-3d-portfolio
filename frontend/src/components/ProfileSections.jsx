@@ -1,4 +1,4 @@
-import { certifications, education, profile, skillCategories } from '../content'
+import { certifications, profile, skillCategories } from '../content'
 import ContactDescription from './ContactDescription'
 import ContactDetails from './ContactDetails'
 
@@ -17,7 +17,6 @@ export default function ProfileSections() {
         {profile.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
         <p className="objective">Seeking internships in Cloud and DevOps</p>
         <dl className="about-facts"><div><dt>Studying</dt><dd>MCA Cloud Computing &amp; DevOps<br/>Chandigarh University · Expected 2028</dd></div><div><dt>Foundation</dt><dd>BCA · DAV College · 2026</dd></div></dl>
-        <a className="text-link" href="#education">View Education <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
@@ -27,11 +26,6 @@ export default function ProfileSections() {
         <summary><span className="skill-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><h3>{category.title}</h3><span className="detail-symbol" aria-hidden="true">+</span></summary>
         <div className="skill-content"><p>{category.description}</p><ul>{category.tools.map(tool => <li key={tool}>{tool}</li>)}{category.learning?.map(tool => <li key={tool}>{tool}<span>Currently learning</span></li>)}</ul></div>
       </details>)}</div>
-    </section>
-
-    <section id="education" className="section learning" aria-labelledby="education-title">
-      <div data-scroll-reveal><p className="eyebrow">05 / Academic Qualifications</p><h2 id="education-title">Education</h2><p className="timeline-year">2028<span>Expected MCA graduation</span></p></div>
-      <ol className="education-timeline">{education.map(item => <li key={item.date} data-scroll-reveal><p className="eyebrow">{item.date}</p><h3>{item.title}</h3><p>{item.school}</p><span>{item.result}</span></li>)}</ol>
     </section>
 
     <section id="certifications" className="section certifications" aria-labelledby="certifications-title">

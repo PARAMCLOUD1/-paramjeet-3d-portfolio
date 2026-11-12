@@ -8,7 +8,7 @@ vi.mock('./scene/ExecutiveOffice',()=>({default:()=> <p>Office loaded on request
 test('hero project link preserves lazy office loading and office action loads it', async () => {
   render(<App/> )
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Paramjeet Kaur')
-  expect(screen.getByText("Developing practical skills in Linux, backend development, cloud infrastructure, and automation.")).toBeVisible()
+  expect(screen.getByText("I'm interested in how software is designed, developed, and maintained. My focus is on backend development, cloud computing, and gaining practical experience through projects that challenge me to learn and improve.")).toBeVisible()
   expect(screen.getByRole('link', { name: 'View Projects' })).toHaveAttribute('href', '#projects')
   expect(screen.queryByText('Office loaded on request')).not.toBeInTheDocument()
   const office = screen.getByRole('link', { name: 'Explore Portfolio' })
@@ -29,7 +29,7 @@ test('navigation toggles and closes after a destination is chosen',()=>{render(<
 test('all conventional navigation destinations open shared panels without WebGL', () => {
   render(<App/> )
   const nav = within(screen.getByRole('navigation', { name: 'Main navigation' }))
-  for (const label of ['About', 'Projects', 'Skills', 'Education', 'Certifications', 'Contact']) {
+  for (const label of ['About', 'Projects', 'Skills', 'Certifications', 'Contact']) {
     const trigger = nav.getByRole('link', { name: label, exact: true })
     fireEvent.click(trigger)
     expect(screen.getByRole('dialog', { name: label === 'About' ? 'About Me' : label === 'Skills' ? 'Technical Skills' : label === 'Contact' ? 'Get in Touch' : label })).toBeVisible()
@@ -44,7 +44,7 @@ test('a mobile navigation panel returns focus to the collapsed menu control', ()
   render(<App/> )
   const menu = screen.getByRole('button', { name: /Menu/ })
   fireEvent.click(menu)
-  fireEvent.click(within(screen.getByRole('navigation')).getByRole('link', { name: 'Education' }))
+  fireEvent.click(within(screen.getByRole('navigation')).getByRole('link', { name: 'Certifications' }))
   expect(menu).toHaveAttribute('aria-expanded', 'false')
   fireEvent.click(screen.getByRole('button', { name: 'Close information panel' }))
   expect(menu).toHaveFocus()

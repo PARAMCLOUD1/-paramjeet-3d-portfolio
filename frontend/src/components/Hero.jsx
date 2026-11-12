@@ -37,11 +37,13 @@ export default function Hero({ onEnterOffice, world }) {
       </div>
       <div className="hero-social"><a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/paramjeet-kaur-cloud/" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
     </div>
-    <div id="workspace" className="hero-media">
-    {world || <figure className="portrait" data-hero-reveal>
+    <div className="hero-visual">
+      <div className="clay-shapes" aria-hidden="true"><span className="clay clay--sage"/><span className="clay clay--cream"/><span className="clay clay--olive"/></div>
+      <figure className="portrait" data-hero-reveal>
       <img src="/images/profile.webp" alt="Paramjeet Kaur wearing a pink sweater" width="850" height="990" fetchPriority="high"/>
       <figcaption><span>Paramjeet Kaur</span><span>MCA Student</span></figcaption>
-    </figure>}
+      </figure>
     </div>
+    <div id="workspace" className="hero-media">{world}</div>
   </section>
 }

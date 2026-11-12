@@ -48,7 +48,6 @@ test('every office destination remains available when WebGL is unsupported', () 
     ['Monitor', 'View Projects', '#projects'],
     ['Portrait', 'About Me', '#about'],
     ['Server', 'Technical Skills', '#skills'],
-    ['Books', 'View Education', '#education'],
   ]) {
     const button = screen.getByRole('button', { name: new RegExp(object) })
     fireEvent.click(button)
@@ -97,11 +96,11 @@ test('a stalled model load releases the loading screen and retains destinations'
   simulation.webgl = true
   render(<Office/> )
   act(() => vi.advanceTimersByTime(25000))
-  fireEvent.click(screen.getByRole('button', { name: /Books/ }))
+  fireEvent.click(screen.getByRole('button', { name: /Monitor/ }))
   expect(screen.queryByText('Loading the 3D workspace')).not.toBeInTheDocument()
   expect(screen.getByText(/load-timeout:/)).toBeVisible()
   expect(console.error).toHaveBeenCalledWith('[portfolio:3d] load-timeout', expect.any(Error), expect.objectContaining({ canvasCreated: false }))
-  expect(screen.getByRole('link', { name: /View Education/ })).toHaveAttribute('href', '#education')
+  expect(within(document.getElementById('workspace-detail')).getByRole('link', { name: /View Projects/ })).toHaveAttribute('href', '#projects')
 })
 
 test('context loss is caught before the character loads and reports its reason', () => {

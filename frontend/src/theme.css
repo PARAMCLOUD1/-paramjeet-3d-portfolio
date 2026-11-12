@@ -1,16 +1,30 @@
 :root {
-  --bg-primary: #302343;
-  --bg-secondary: #3B2C4F;
-  --surface: #443451;
-  --accent-primary: #E996B6;
-  --text-primary: #FFF5FA;
-  --text-secondary: #D7C5E9;
-  --border-subtle: #74618F;
-  --walnut: #74618F;
-  --accent-soft: #D7C5E9;
-  --lavender: #B7A1D9;
-  --blush: #F4B5A5;
-  --shadow-soft: 0 8px 24px rgb(48 35 67 / 18%);
+  color-scheme: dark;
+  --color-scheme: dark;
+  --sage: #D5DFC3;
+  --sage-raised: #B4C69B;
+  --olive: #738B53;
+  --forest: #354B27;
+  --cream: #EAE5D7;
+  --ivory-paper: #F7F5ED;
+  --bg-primary: #17251B;
+  --bg-secondary: #243429;
+  --surface: #2C3D30;
+  --card-surface: #243429;
+  --light-surface: #1D2D22;
+  --accent-primary: #AFC49D;
+  --accent-soft: #AFC49D;
+  --text-primary: #F7F5ED;
+  --text-secondary: #AFC49D;
+  --border-subtle: #45583F;
+  --button-bg: #F7F5ED;
+  --button-hover: #D5DFC3;
+  --button-ink: #25301F;
+  --button-border: #F7F5ED;
+  --portrait-bg: #F7F5ED;
+  --portrait-muted: #58634D;
+  --shadow-soft: 0 12px 32px rgb(9 18 12 / 18%);
+  --card-shadow: 0 2px 6px rgb(9 18 12 / 12%), 0 16px 40px rgb(9 18 12 / 10%);
   --midnight: var(--bg-primary);
   --graphite: var(--surface);
   --navy: var(--bg-secondary);
@@ -21,5 +35,46 @@
   --blue-ink: var(--accent-soft);
   --paper: var(--bg-secondary);
   --ink: var(--text-primary);
+  --blush: var(--card-surface);
   --display-font: Georgia, 'Times New Roman', serif;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-scheme: light;
+  --bg-primary: #D5DFC3;
+  --bg-secondary: #EAE5D7;
+  --surface: #F7F5ED;
+  --card-surface: #EAE5D7;
+  --light-surface: #F7F5ED;
+  --accent-primary: #354B27;
+  --accent-soft: #354B27;
+  --text-primary: #25301F;
+  --text-secondary: #58634D;
+  --border-subtle: #C4CCB8;
+  --button-bg: #354B27;
+  --button-hover: #25301F;
+  --button-ink: #F7F5ED;
+  --button-border: #354B27;
+  --shadow-soft: 0 12px 32px rgb(37 48 31 / 8%);
+  --card-shadow: 0 2px 6px rgb(37 48 31 / 5%), 0 16px 40px rgb(37 48 31 / 7%);
+}
+.theme-toggle {
+  display: inline-flex;
+  align-self: flex-start;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+.theme-toggle:hover { background: var(--button-bg); color: var(--button-ink); border-color: var(--button-border); }
+@media (prefers-reduced-motion: no-preference) {
+  :where(body, header, footer, section, dialog, .hero-world, .scene-label, .entrance-toolbar, .workspace-controls, .technology-tags li) {
+    transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+  }
 }

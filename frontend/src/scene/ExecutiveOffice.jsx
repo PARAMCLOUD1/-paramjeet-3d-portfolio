@@ -88,8 +88,8 @@ function ExecutiveExperience({ entranceRequest = 0, selected = null, onSelect = 
         <button aria-pressed={lightweight} onClick={() => setLightweight(value => !value)}>Low graphics</button>
       </div>
     </div>
-    <div className="canvas-wrap" role="group" aria-label="Executive office: physical double doors, workstation, server racks, technical display, education timeline, certificate display and contact terminal. Equivalent keyboard controls follow.">
-      {failure ? <div className="scene-fallback" role="status"><p>3D unavailable. Use the six exhibit controls or the portfolio sections below.</p>{import.meta.env.DEV && <small>{failure.reason}: {failure.message}</small>}</div> : <SceneBoundary onFailure={onFailure}>
+    <div className="canvas-wrap" role="group" aria-label="Executive office: physical double doors, workstation, server racks, technical display, decorative wall timeline, certificate display and contact terminal. Equivalent keyboard controls follow.">
+      {failure ? <div className="scene-fallback" role="status"><p>3D unavailable. Use the five exhibit controls or the portfolio sections below.</p>{import.meta.env.DEV && <small>{failure.reason}: {failure.message}</small>}</div> : <SceneBoundary onFailure={onFailure}>
         <Canvas camera={initialCamera} gl={renderer} shadows={!lowQuality} dpr={lowQuality ? 1 : [1, 1.5]} frameloop={active ? 'demand' : 'never'} onCreated={onCreated} fallback={<CanvasFallback/>}>
           <ExecutiveRoom refs={refs} onReady={onReady} compact={lowQuality} onSelect={select} selected={selected} enabled={exploring && !moving && !selected}/>
           <CinematicRig refs={refs} controls={controls} phase={phase} run={run} reducedMotion={reducedMotion} compact={compact} active={active && !selected} onEntered={onEntered} onMoving={onMoving}/>
@@ -97,8 +97,8 @@ function ExecutiveExperience({ entranceRequest = 0, selected = null, onSelect = 
         </Canvas>
       </SceneBoundary>}
       {!failure && !ready && <div className="office-loading" role="status"><p>Loading the 3D office</p><span>Preparing materials and lighting</span><a href="#projects">Continue to projects ↓</a></div>}
-      {!failure && ready && phase === 'closed' && !reducedMotion && <div className="door-welcome"><p style={{ visibility: 'hidden' }}><BrandWordmark/></p><h2>Explore My Portfolio</h2><button className="button" onClick={enter} aria-label="Enter Portfolio"><span style={{ visibility: 'hidden' }}>Enter Portfolio</span> <span aria-hidden="true">↗</span></button></div>}
     </div>
+    {!failure && ready && phase === 'closed' && !reducedMotion && <div className="door-welcome"><p style={{ visibility: 'hidden' }}><BrandWordmark/></p><h2>Explore My Portfolio</h2><button className="button" onClick={enter} aria-label="Enter Portfolio"><span>Enter Portfolio</span> <span aria-hidden="true">↗</span></button></div>}
     {(exploring || failure) && <><div className="workspace-controls" role="group" aria-label="Executive office exhibits">
       {officeDestinations.map(item => <button key={item.id} ref={node => { objectButtons.current[item.id] = node }} aria-pressed={selected === item.id} aria-haspopup="dialog" aria-controls={selected ? 'portfolio-dialog' : undefined} onClick={() => select(item.id)}>{item.object}<span>{item.title}</span></button>)}
       <button onClick={reset} disabled={!ready || Boolean(failure) || !exploring || moving}>Reset view</button>

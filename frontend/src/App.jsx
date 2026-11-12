@@ -8,6 +8,7 @@ import useScrollMotion from './useScrollMotion'
 import SceneBoundary from './scene/SceneBoundary'
 import PortfolioDialog from './components/PortfolioDialog'
 import { portfolioViews } from './content'
+import ThemeToggle from './components/ThemeToggle'
 
 const Office = lazy(() => import('./scene/ExecutiveOffice'))
 const navigation = portfolioViews.map(([id, title]) => [id === 'about' ? 'About' : id === 'skills' ? 'Skills' : id === 'contact' ? 'Contact' : title, id])
@@ -39,6 +40,7 @@ export default function App() {
       <nav id="navigation" className={menu ? 'open' : ''} aria-label="Main navigation">
         {navigation.map(([label, id]) => <a key={id} href={'#' + id} aria-haspopup="dialog" aria-controls={selected ? 'portfolio-dialog' : undefined} onClick={event => { event.preventDefault(); openContent(id, event.currentTarget) }}>{label}</a>)}
         <a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <ThemeToggle/>
       </nav>
     </header>
     <main ref={main} id="main">

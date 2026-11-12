@@ -1,6 +1,6 @@
 .hero {
   min-height: 0;
-  background: radial-gradient(ellipse at 95% 5%, color-mix(in srgb, var(--accent-primary) 14%, var(--bg-primary)), transparent 62%), linear-gradient(135deg, var(--bg-primary), color-mix(in srgb, var(--lavender) 14%, var(--bg-primary)));
+  background: var(--light-surface);
   color: var(--ivory);
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -40,8 +40,8 @@
 .hero-tagline { max-width: 48ch; font-size: 16px; line-height: 1.65; color: var(--muted); margin: -12px 0 32px; }
 .hero .actions { gap: 12px; }
 .hero .button { min-height: 44px; padding: 8px 16px; gap: 20px; }
-.hero .primary { background: var(--champagne); border-color: var(--champagne); color: var(--midnight); }
-.hero .primary:hover { background: var(--text-primary); border-color: var(--text-primary); }
+.hero .primary { background: var(--button-bg); border-color: var(--button-border); color: var(--button-ink); }
+.hero .primary:hover { background: var(--button-hover); border-color: var(--button-border); }
 .hero .secondary { color: var(--ivory); border-color: var(--border-subtle); }
 .hero .secondary:hover { background: var(--graphite); color: var(--ivory); border-color: var(--muted); }
 
@@ -49,9 +49,9 @@
   width: 100%;
   max-width: 340px;
   padding: 12px 12px 0;
-  background: var(--ivory);
+  background: var(--portrait-bg);
   margin: 0 0 0 auto;
-  color: var(--midnight);
+  color: var(--button-ink);
 }
 .portrait img {
   display: block;
@@ -70,7 +70,7 @@
   padding: 16px 0;
   font: 12px/1.5 Consolas, monospace;
 }
-.portrait figcaption span:last-child { color: var(--border-subtle); }
+.portrait figcaption span:last-child { color: var(--portrait-muted); }
 
 header :focus-visible, .hero :focus-visible { outline-color: var(--accent-soft); }
 

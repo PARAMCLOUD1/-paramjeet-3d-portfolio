@@ -1,9 +1,10 @@
-import { palette } from '../palette'
+import { usePalette } from '../theme'
 import { useEffect } from 'react'
 import { reportScene } from './diagnostics'
 
 // No loaders, textures, lights, animation hooks, or office components.
 export default function DiagnosticCube({ onReady }) {
+  const palette = usePalette()
   useEffect(() => {
     reportScene('cube-mounted', { assets: 0 })
     onReady()

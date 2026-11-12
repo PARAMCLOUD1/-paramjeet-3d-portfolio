@@ -7,7 +7,7 @@
   background: var(--midnight);
   font-synthesis: none;
   line-height: 1.6;
-  color-scheme: dark;
+  color-scheme: var(--color-scheme);
   --gutter: max(24px, calc((100% - 1200px) / 2));
   --paper: var(--bg-secondary);
   --ink: var(--text-primary);
@@ -40,7 +40,7 @@ header {
   background: var(--midnight);
   color: var(--ivory);
   border-bottom: 1px solid var(--rule);
-  color-scheme: dark;
+  color-scheme: var(--color-scheme);
 }
 .brand { font: 600 20px/1 Arial, sans-serif; letter-spacing: -.04em; white-space: nowrap; }
 .studio-wordmark { color: var(--text-primary); font-family: Arial, Helvetica, sans-serif; font-weight: 600; letter-spacing: .015em; white-space: nowrap; }
@@ -58,8 +58,8 @@ nav a { display: inline-flex; align-items: center; min-height: 44px; }
 .section-heading > p { max-width: 320px; margin: 0; color: var(--muted); font-size: 15px; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--border-subtle); border-radius: 4px; font-size: 14px; }
-.primary { background: var(--ivory); color: var(--midnight); border-color: var(--ivory); }
-.primary:hover { background: var(--accent-primary); color: var(--midnight); }
+.primary { background: var(--button-bg); color: var(--button-ink); border-color: var(--button-border); }
+.primary:hover { background: var(--button-hover); color: var(--button-ink); }
 .secondary { background: transparent; color: var(--ivory); }
 .secondary:hover { background: var(--surface); }
 .text-link { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 0; color: var(--blue); font-size: 14px; gap: 12px; }
@@ -110,7 +110,7 @@ nav a { display: inline-flex; align-items: center; min-height: 44px; }
 .projects { background: var(--navy); }
 .project-filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .project-filters button { min-height: 44px; padding: 8px 16px; border: 1px solid var(--border-subtle); border-radius: 4px; color: var(--text-secondary); background: transparent; font-size: 14px; }
-.project-filters button[aria-pressed=true] { background: var(--ivory); color: var(--midnight); border-color: var(--ivory); }
+.project-filters button[aria-pressed=true] { background: var(--button-bg); color: var(--button-ink); border-color: var(--button-border); }
 .project-filters button:hover { border-color: var(--muted); }
 .result-count { font: 12px/1.6 Consolas, monospace; color: var(--muted); margin: 24px 0 0; }
 .project-list { margin: 16px 0 40px; }
@@ -119,7 +119,7 @@ nav a { display: inline-flex; align-items: center; min-height: 44px; }
 .project-row p { max-width: 600px; margin-top: 0; color: var(--muted); }
 .tool-list { display: flex; flex-wrap: wrap; gap: 12px 20px; list-style: none; padding: 0; margin: 24px 0 0; }
 .tool-list li { font: 13px/1.6 Consolas, monospace; color: var(--text-secondary); border-bottom: 1px solid var(--rule); padding-bottom: 4px; }
-.about, .skills { background: var(--paper); color: var(--text-primary); color-scheme: dark; }
+.about, .skills { background: var(--paper); color: var(--text-primary); color-scheme: var(--color-scheme); }
 .about { display: grid; grid-template-columns: minmax(240px, 280px) minmax(0, 1fr); align-items: start; gap: 40px; }
 .about-heading { grid-column: 1 / -1; }
 .about p { color: var(--text-secondary); margin-top: 0; font-size: 16px; }
@@ -182,7 +182,7 @@ footer a { min-height: 44px; }
 .featured-project { border-bottom: 1px solid var(--rule); }
 .project-preview { display: block; position: relative; overflow: hidden; border: 1px solid var(--rule); border-radius: 6px; background: var(--midnight); }
 .project-preview img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 600ms cubic-bezier(.22, 1, .36, 1); }
-.preview-link { position: absolute; right: 24px; bottom: 24px; display: inline-flex; align-items: center; gap: 24px; padding: 8px 16px; min-height: 48px; border-radius: 4px; background: var(--ivory); color: var(--midnight); font-size: 14px; }
+.preview-link { position: absolute; right: 24px; bottom: 24px; display: inline-flex; align-items: center; gap: 24px; padding: 8px 16px; min-height: 48px; border-radius: 4px; background: var(--blush); color: var(--button-ink); font-size: 14px; }
 .featured-copy { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; padding: 40px 0 48px; }
 .featured-copy h3 { font: 500 clamp(20px, 2vw, 24px)/1.1 Arial, Helvetica, sans-serif; letter-spacing: -.04em; }
 .featured-copy p { color: var(--muted); margin-top: 0; }
@@ -287,11 +287,11 @@ footer a { min-height: 44px; }
 .executive-office .workspace-detail { padding: 16px; min-height: 100px; }
 .executive-office .workspace-detail p { font-size: 13px; }
 .executive-office .workspace-detail .text-link { margin-left: 0; }
-.door-welcome { position: absolute; left: 24px; right: 24px; bottom: 24px; pointer-events: none; }
-.door-welcome p { font: 11px/1.6 Consolas, monospace; color: var(--champagne); margin: 0 0 8px; }
+.door-welcome { padding: 20px 24px; text-align: center; background: var(--bg-secondary); border-top: 1px solid var(--rule); }
+.door-welcome p { display: none; font: 11px/1.6 Consolas, monospace; color: var(--champagne); margin: 0 0 8px; }
 .door-welcome h2 { font: 400 clamp(20px, 2vw, 28px)/1.2 var(--display-font); letter-spacing: 0; margin: 0 0 16px; color: var(--ivory); }
-.door-welcome button { pointer-events: auto; min-height: 44px; background: var(--accent-soft); color: var(--bg-primary); border-color: var(--accent-soft); font-size: 12px; }
-.door-welcome button:hover, .door-welcome button:focus-visible, .door-welcome button:active { background: var(--accent-primary); color: var(--bg-primary); border-color: var(--accent-primary); }
+.door-welcome button { pointer-events: auto; min-height: 44px; background: var(--button-bg); color: var(--button-ink); border-color: var(--button-border); font-size: 12px; }
+.door-welcome button:hover, .door-welcome button:focus-visible, .door-welcome button:active { background: var(--button-hover); color: var(--button-ink); border-color: var(--button-border); }
 .door-welcome button:focus-visible { outline-color: var(--text-primary); }
 .back-to-office { min-height: 44px; padding: 8px 12px; border: 1px solid var(--rule); background: transparent; color: var(--ivory); border-radius: 4px; font-size: 12px; }
 .back-to-office:hover { background: var(--graphite); }
@@ -324,12 +324,5 @@ footer a { min-height: 44px; }
   .executive-office .canvas-wrap { height: 320px; }
   .executive-office .entrance-toolbar { flex-direction: column; gap: 12px; }
   .executive-office .entrance-toolbar p { max-width: none; }
-  .door-welcome { left: 16px; right: 16px; bottom: 16px; }
+  .door-welcome { padding: 20px 16px; }
 }
-
-/* Appearance only: the original layout, dimensions, and interaction styles remain. */
-.hero { background: radial-gradient(ellipse at 95% 5%, color-mix(in srgb, var(--accent-primary) 14%, var(--bg-primary)), transparent 62%), linear-gradient(135deg, var(--bg-primary), color-mix(in srgb, var(--lavender) 14%, var(--bg-primary))); }
-.hero-world { box-shadow: var(--shadow-soft); }
-.project-row { background: linear-gradient(110deg, color-mix(in srgb, var(--bg-primary) 20%, var(--bg-secondary)), var(--bg-secondary)); }
-.featured-project { box-shadow: 0 8px 24px rgb(48 35 67 / 12%); }
-.preview-link { background: var(--blush); }

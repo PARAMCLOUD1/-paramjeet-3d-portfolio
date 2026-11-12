@@ -1,11 +1,11 @@
 // Sources and verification limits are recorded in PROJECT_SOURCES.md.
 export const portfolioViews = [
   ['about', 'About Me'], ['projects', 'Projects'], ['skills', 'Technical Skills'],
-  ['education', 'Education'], ['certifications', 'Certifications'], ['contact', 'Get in Touch'],
+  ['certifications', 'Certifications'], ['contact', 'Get in Touch'],
 ]
 
 export const professionalTitle = 'MCA Student | Cloud Computing & DevOps'
-export const introduction = 'Developing practical skills in Linux, backend development, cloud infrastructure, and automation.'
+export const introduction = "I'm interested in how software is designed, developed, and maintained. My focus is on backend development, cloud computing, and gaining practical experience through projects that challenge me to learn and improve."
 export const contactIntroduction = {
   opening: "I'm open to internship opportunities and professional collaborations in ",
   fields: 'Software Engineering, Backend Development, Full-Stack Development, Cloud Computing, and DevOps',
@@ -94,5 +94,4 @@ export const destinations = [
   { id: 'projects', object: 'Monitor', title: 'Projects', description: 'My application, algorithm, and Linux projects.', link: 'View Projects' },
   { id: 'about', object: 'Portrait', title: 'About Me', description: 'My studies, technical interests, and career plans.', link: 'About Me' },
   { id: 'skills', object: 'Server', title: 'Technical Skills', description: 'Tools I use and cloud technologies I am learning.', link: 'Technical Skills' },
-  { id: 'education', object: 'Books', title: 'Education', description: 'My academic qualifications and current MCA studies.', link: 'View Education' },
 ]

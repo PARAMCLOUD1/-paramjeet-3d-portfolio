@@ -4,6 +4,8 @@ import * as THREE from 'three'
 import { expect, test, vi } from 'vitest'
 import { gsap } from 'gsap'
 import ExecutiveRoom from './ExecutiveRoom'
+import { initializeTheme, setTheme, THEME_KEY } from '../theme'
+import { palettes } from '../palette'
 import CinematicRig from './CinematicRig'
 import { constrainOfficePosition, createDoorTimeline, DOOR_ANGLE, ENTRY_START, OFFICE_VIEW, officeDestinations } from './doorTimeline'
 
@@ -21,7 +23,43 @@ async function room({ onSelect = () => {}, selected = null } = {}) {
   return { root, state, refs, renderer, element, ready, close: async () => { await act(async () => root.unmount()) } }
 }
 
-test('six exhibit meshes raycast and bubble a single correct destination, with selection highlight', async () => {
+test('theme changes recolor the live scene without replacing geometry, moving the camera or enabling the Education object', async () => {
+  window.localStorage.setItem(THEME_KEY, 'light')
+  initializeTheme()
+  const fixture = await room()
+  try {
+    const { state, refs } = fixture
+    const door = refs.left.current.children.find(node => node.isMesh)
+    const geometry = door.geometry
+    const color = door.material.map.image.data.slice(0, 4)
+    const textures = [door.material.map, door.material.bumpMap, door.material.roughnessMap]
+    const disposed = textures.map(texture => vi.spyOn(texture, 'dispose'))
+    const camera = state.camera.position.toArray()
+    const position = refs.left.current.position.toArray()
+    const rotation = refs.left.current.rotation.toArray()
+    const decoration = state.scene.getObjectByName('education')
+    expect(decoration).toBeDefined()
+    expect(decoration.children).toHaveLength(2)
+    expect(decoration.userData.destination).toBeUndefined()
+    expect(decoration.__r3f.handlers.onClick).toBeUndefined()
+    expect(state.scene.background.getHexString()).toBe(palettes.light.sceneBackground.slice(1).toLowerCase())
+    await act(async () => setTheme('dark'))
+    for (const dispose of disposed) expect(dispose).toHaveBeenCalledOnce()
+    expect(state.scene.background.getHexString()).toBe(palettes.dark.sceneBackground.slice(1).toLowerCase())
+    expect(door.geometry).toBe(geometry)
+    expect(door.material.map.image.data.slice(0, 4)).not.toEqual(color)
+    expect(state.camera.position.toArray()).toEqual(camera)
+    expect(refs.left.current.position.toArray()).toEqual(position)
+    expect(refs.left.current.rotation.toArray()).toEqual(rotation)
+    expect(state.scene.getObjectByName('education')).toBe(decoration)
+  } finally {
+    await fixture.close()
+    window.localStorage.removeItem(THEME_KEY)
+    delete document.documentElement.dataset.theme
+  }
+})
+
+test('five exhibit meshes raycast and bubble a single correct destination, with selection highlight', async () => {
   const select = vi.fn()
   const fixture = await room({ onSelect: select, selected: 'about' })
   try {
@@ -33,7 +71,7 @@ test('six exhibit meshes raycast and bubble a single correct destination, with s
       group.traverse(node => { if (!mesh && node.isMesh) mesh = node })
       // Aim at a physical surface, not the empty gap between server cabinets.
       const center = new THREE.Box3().setFromObject(mesh).getCenter(new THREE.Vector3())
-      const origin = center.clone().add(destination.id === 'education' ? new THREE.Vector3(2, 0, 0) : new THREE.Vector3(0, 0, 2))
+      const origin = center.clone().add(new THREE.Vector3(0, 0, 2))
       const ray = new THREE.Raycaster(origin, center.clone().sub(origin).normalize())
       expect(ray.intersectObject(group, true).length).toBeGreaterThan(0)
       const event = { stopPropagation: vi.fn() }
@@ -41,12 +79,12 @@ test('six exhibit meshes raycast and bubble a single correct destination, with s
       expect(event.stopPropagation).toHaveBeenCalledOnce()
       expect(select).toHaveBeenLastCalledWith(destination.id)
     }
-    expect(select).toHaveBeenCalledTimes(6)
+    expect(select).toHaveBeenCalledTimes(5)
     await act(async () => fixture.root.render(cloneElement(fixture.element, { enabled: false, selected: 'projects' })))
     expect(fixture.state.scene.getObjectByName('about-highlight')).toBeUndefined()
     expect(fixture.state.scene.getObjectByName('projects-highlight')).toBeDefined()
     fixture.state.scene.getObjectByName('about').__r3f.handlers.onClick({ stopPropagation: vi.fn() })
-    expect(select).toHaveBeenCalledTimes(6)
+    expect(select).toHaveBeenCalledTimes(5)
   } finally { await fixture.close() }
 })
 
@@ -66,7 +104,7 @@ test('opening and closing information leaves an explored camera position untouch
   } finally { await fixture.close() }
 })
 
-test('the real R3F scene contains volumetric hinged doors, six exhibits and bounded geometry', async () => {
+test('the real R3F scene contains volumetric hinged doors, five exhibits and bounded geometry', async () => {
   const fixture = await room()
   try {
     const { state, refs, ready, renderer } = fixture

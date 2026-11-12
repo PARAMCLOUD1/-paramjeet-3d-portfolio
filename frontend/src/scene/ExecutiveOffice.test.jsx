@@ -26,6 +26,7 @@ test('loading, closed entrance, enter, skip and replay preserve the portfolio', 
   fireEvent.click(screen.getByText('Scene ready'))
   expect(screen.getByTestId('executive')).toHaveAttribute('data-phase', 'closed')
   expect(screen.getByRole('heading', { name: /Explore My Portfolio/ })).toBeVisible()
+  expect(screen.getByText('Enter Portfolio', { exact: true })).toBeVisible()
   fireEvent.click(screen.getByRole('button', { name: 'Enter Portfolio' }))
   expect(screen.getByTestId('executive')).toHaveAttribute('data-phase', 'entering')
   fireEvent.click(screen.getByRole('button', { name: 'Skip Intro' }))
@@ -34,12 +35,13 @@ test('loading, closed entrance, enter, skip and replay preserve the portfolio', 
   expect(screen.getByTestId('executive')).toHaveAttribute('data-phase', 'entering')
 })
 
-test('all six object panels contain complete information and restore keyboard focus', () => {
+test('all five object panels contain complete information and restore keyboard focus', () => {
   render(<ExecutiveOffice/> )
   fireEvent.click(screen.getByRole('button', { name: 'Skip Intro' }))
+  expect(screen.queryByRole('button', { name: /Education|Wall timeline/ })).not.toBeInTheDocument()
   for (const [object, title, id] of [
     ['Workstation monitor', 'About Me', 'about'], ['Server rack', 'Projects', 'projects'],
-    ['Technical display', 'Technical Skills', 'skills'], ['Wall timeline', 'Education', 'education'],
+    ['Technical display', 'Technical Skills', 'skills'],
     ['Certificate display', 'Certifications', 'certifications'], ['Contact terminal', 'Get in Touch', 'contact'],
   ]) {
     const button = screen.getByRole('button', { name: new RegExp(object) })
@@ -79,12 +81,12 @@ test('skipping a requested intro during loading does not restart it when ready',
   expect(screen.getByTestId('executive')).toHaveAttribute('data-phase', 'explore')
 })
 
-test('unsupported WebGL retains all six 2D exhibit destinations', () => {
+test('unsupported WebGL retains all five 2D exhibit destinations', () => {
   vi.spyOn(console, 'error').mockImplementation(() => {})
   simulation.error = new Error('WebGL2 unavailable')
   render(<ExecutiveOffice/> )
   expect(screen.getByText(/3D unavailable\. Use/)).toBeVisible()
-  expect(screen.getByRole('group', { name: 'Executive office exhibits' }).querySelectorAll('button')).toHaveLength(7)
+  expect(screen.getByRole('group', { name: 'Executive office exhibits' }).querySelectorAll('button')).toHaveLength(6)
   fireEvent.click(screen.getByRole('button', { name: /Contact terminal/ }))
   expect(screen.getByRole('dialog', { name: 'Get in Touch' })).toBeVisible()
   expect(screen.getByRole('link', { name: 'param1539064@gmail.com' })).toHaveAttribute('href', 'mailto:param1539064@gmail.com')

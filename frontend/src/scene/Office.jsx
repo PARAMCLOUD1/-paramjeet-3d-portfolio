@@ -1,4 +1,4 @@
-import { palette } from '../palette'
+import { usePalette } from '../theme'
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Image, OrbitControls } from '@react-three/drei'
@@ -18,6 +18,7 @@ function Hotspot({ id, onSelect, children }) {
   return <group onClick={event => { event.stopPropagation(); onSelect(id) }}>{children}</group>
 }
 function Room({ onSelect, controls, mode, compact, character, stage, onFailure }) {
+  const palette = usePalette()
   const { onReady } = character
   useEffect(() => {
     reportScene('office-mounted', { stage })
@@ -25,7 +26,7 @@ function Room({ onSelect, controls, mode, compact, character, stage, onFailure }
   }, [stage, onReady])
   return <>
     <color attach="background" args={[palette.background]}/>
-    <hemisphereLight args={[palette.text, palette.walnut, 1.6]}/><directionalLight position={[2, 7, 5]} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.035} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5}/>
+    <hemisphereLight args={[palette.soft, palette.walnut, 1.6]}/><directionalLight position={[2, 7, 5]} intensity={2.6} castShadow={!compact} shadow-mapSize={[1024, 1024]} shadow-bias={-.0003} shadow-normalBias={.035} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5}/>
     <Box position={[0, -0.15, 0]} size={[8, 0.3, 6]} color={palette.surface}/>
     <Box position={[0, 1.8, -2.7]} size={[8, 3.6, 0.15]} color={palette.background}/>
     <Box position={[-3.9, 1.8, -0.8]} size={[0.15, 3.6, 3.8]} color={palette.background}/>
@@ -69,9 +70,9 @@ function Room({ onSelect, controls, mode, compact, character, stage, onFailure }
       {['workspace', 'character'].includes(stage) && <SceneBoundary stage="portrait-load" onFailure={onFailure}><Suspense fallback={null}><Image url={PORTRAIT_URL} position={[-1.7, 2.6, -2.485]} scale={[0.9, 1.05]} toneMapped={false}/></Suspense></SceneBoundary>}
     </Hotspot>
     <Box position={[1.6, 2.5, -2.4]} size={[1.5, 0.08, 0.45]} color={palette.walnut}/>
-    <Hotspot id="education" onSelect={onSelect}>
+    <group name="education">
       {[palette.surface, palette.accent, palette.text, palette.border].map((color, i) => <Box key={color} position={[1.1 + i * 0.23, 2.85, -2.4]} size={[0.18, 0.62 - i * 0.04, 0.32]} color={color}/>)}
-    </Hotspot>
+    </group>
     <mesh position={[2.8, 0.36, -0.8]} castShadow><cylinderGeometry args={[0.28, 0.22, 0.7, 12]}/><meshStandardMaterial color={palette.accent}/></mesh>
     {[0, 1, 2].map(i => <mesh key={i} position={[2.8 + (i - 1) * 0.14, 0.95 + i * 0.12, -0.8]} rotation={[0, i, (i - 1) * 0.3]} castShadow><sphereGeometry args={[0.23, 12, 8]}/><meshStandardMaterial color={palette.secondary}/></mesh>)}
     {stage === 'character' && <SceneBoundary stage="character-load-or-animation" onFailure={onFailure}><Suspense fallback={null}><Character {...character} mode={mode} compact={compact} controls={controls}/></Suspense></SceneBoundary>}
@@ -79,6 +80,7 @@ function Room({ onSelect, controls, mode, compact, character, stage, onFailure }
   </>
 }
 function CloudDiagram() {
+  const palette = usePalette()
   return <group position={[.7, 1.65, -2.55]}>
     <Box position={[0, 0, 0]} size={[1.65, 1.05, .035]} color={palette.secondary}/>
     <group position={[0, .22, .05]}>
