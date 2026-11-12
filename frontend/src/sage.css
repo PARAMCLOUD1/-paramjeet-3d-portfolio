@@ -3,7 +3,11 @@
 body { background: var(--bg-primary); }
 h2 { font-family: var(--display-font); font-weight: 400; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.12; letter-spacing: -.025em; }
 h3 { letter-spacing: -.015em; }
-header { background: var(--light-surface); padding-block: 16px; }
+header { display: grid; grid-template-columns: auto minmax(0, 1fr) 44px; grid-template-areas: "brand navigation theme"; background: var(--light-surface); padding-block: 16px; }
+header > .brand { grid-area: brand; }
+header > nav { grid-area: navigation; justify-self: end; }
+header > .theme-toggle { grid-area: theme; align-self: center; width: 44px; height: 44px; }
+header > .menu-button { grid-area: menu; }
 .brand { font-size: 18px; letter-spacing: -.025em; }
 .studio-wordmark { letter-spacing: 0; }
 nav { font-size: 14px; gap: 24px; }
@@ -156,19 +160,28 @@ footer { padding-block: 48px 32px; }
   .certificate-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 800px) {
-  header { gap: 16px; padding-block: 16px; }
+  header { grid-template-columns: minmax(0, 1fr) 44px 44px; grid-template-areas: "brand theme menu"; column-gap: 8px; row-gap: 0; padding-block: 16px; }
+  header > nav { grid-area: auto; grid-row: 2; grid-column: 1 / -1; justify-self: stretch; padding-top: 12px; }
   .brand { font-size: clamp(16px, 4.2vw, 18px); }
-  .menu-button { border-radius: 10px; }
+  .menu-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 10px; border-radius: 10px; }
   nav { gap: 4px; }
-  .hero, .hero:has(.hero-world) { grid-template-columns: minmax(0, 1fr); padding-block: 48px; gap: 40px; }
+  .hero, .hero:has(.hero-world) { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); padding-block: 40px; column-gap: clamp(12px, 3vw, 24px); row-gap: 40px; }
   .hero-copy { max-width: 600px; }
-  .hero h1 { font-size: clamp(40px, 8.5vw, 56px); }
-  .hero-role { margin-block: 24px 16px; max-width: none; }
-  .hero-tagline { font-size: 16px; margin-bottom: 24px; }
-  .hero .button { gap: 16px; }
-  .hero-visual { justify-self: center; max-width: 420px; min-height: 440px; }
-  .portrait { width: min(100% - 56px, 304px); max-width: 304px; margin: 0; }
-  .hero-media { grid-column: 1; }
+  .hero h1 { font-size: clamp(26px, 4.8vw, 40px); }
+  .hero-role { margin-block: 16px 12px; max-width: none; padding-left: 8px; font-size: clamp(12px, 2vw, 16px); }
+  .hero-tagline { font-size: clamp(12px, 2vw, 16px); line-height: 1.75; margin-bottom: 16px; }
+  .hero .actions { gap: 8px; }
+  .hero .button { min-height: 44px; padding: 8px 10px; gap: 8px; font-size: clamp(12px, 1.8vw, 14px); }
+  .hero-social { flex-wrap: wrap; gap: 8px 12px; margin-top: 12px; font-size: 12px; }
+  .hero-visual { justify-self: end; max-width: 420px; min-height: 0; padding-block: 12px; }
+  .hero-visual .portrait { width: 100%; max-width: 304px; margin: 0; padding: clamp(4px, 1.2vw, 10px) clamp(4px, 1.2vw, 10px) 0; border-radius: clamp(12px, 3vw, 20px); box-shadow: 0 4px 12px rgb(37 48 31 / 12%); }
+  .hero-visual .portrait img { border-radius: clamp(8px, 2vw, 12px); }
+  .hero-visual .portrait figcaption { gap: 4px 8px; padding: 8px 0; font-size: clamp(11px, 1.5vw, 12px); }
+  .hero-visual .clay-shapes { inset: -8px; overflow: clip; }
+  .hero-visual .clay--sage { width: 100%; height: 80%; left: 0; top: 0; }
+  .hero-visual .clay--cream { width: 50%; height: 45%; right: 0; bottom: 0; }
+  .hero-visual .clay--olive { width: 26%; height: 32%; left: 0; bottom: 0; }
+  .hero-media { grid-column: 1 / -1; }
   .hero-world { border-radius: 20px; }
   .executive-office .canvas-wrap { height: 360px; }
   .executive-office .entrance-toolbar, .executive-office .workspace-controls { padding: 16px; }
@@ -196,14 +209,11 @@ footer { padding-block: 48px 32px; }
 }
 @media (max-width: 375px) {
   :root { --gutter: 20px; }
-  .hero-visual { min-height: 380px; }
-  .portrait { width: calc(100% - 40px); }
-  .clay--sage { width: 220px; height: 260px; }
-  .clay--cream { width: 120px; height: 160px; }
-  .clay--olive { width: 56px; height: 88px; left: 0; bottom: 8px; }
-  .hero .actions { align-items: stretch; flex-direction: column; }
-  .hero .button { width: 100%; }
   .featured-project, .project-row { padding: 20px; }
   .project-filters button { padding-inline: 12px; font-size: 13px; }
+}
+@media (max-width: 430px) {
+  .hero .actions { align-items: stretch; flex-direction: column; }
+  .hero .button { width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { .clay { animation: none; } .project-preview { transform: none; } }

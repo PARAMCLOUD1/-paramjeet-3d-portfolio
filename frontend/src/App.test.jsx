@@ -26,6 +26,19 @@ test('hero project link preserves lazy office loading and office action loads it
 test('real contact links and portrait are accessible without loading WebGL',()=>{render(<App/>);expect(screen.getByRole('link',{name:/param1539064/})).toHaveAttribute('href','mailto:param1539064@gmail.com');expect(screen.getByAltText(/pink sweater/)).toHaveAttribute('src','/images/profile.webp');expect(screen.getByRole('link',{name:'Explore Portfolio'})).toBeVisible()})
 test('navigation toggles and closes after a destination is chosen',()=>{render(<App/>);const menu=screen.getByRole('button',{name:/Menu/});fireEvent.click(menu);expect(menu).toHaveAttribute('aria-expanded','true');fireEvent.click(screen.getByRole('link',{name:'About'}));expect(menu).toHaveAttribute('aria-expanded','false')})
 
+test('the single header theme control remains outside navigation when the menu opens and closes', () => {
+  render(<App/> )
+  const toggle = screen.getByRole('button', { name: /Switch to (light|dark) mode/ })
+  const menu = screen.getByRole('button', { name: 'Menu' })
+  expect(toggle.parentElement.tagName).toBe('HEADER')
+  expect(within(screen.getByRole('navigation')).queryByRole('button', { name: /Switch to/ })).not.toBeInTheDocument()
+  for (let i = 0; i < 2; i++) {
+    fireEvent.click(menu)
+    expect(screen.getAllByRole('button', { name: /Switch to (light|dark) mode/ })).toEqual([toggle])
+    expect(toggle).toBeVisible()
+  }
+})
+
 test('all conventional navigation destinations open shared panels without WebGL', () => {
   render(<App/> )
   const nav = within(screen.getByRole('navigation', { name: 'Main navigation' }))

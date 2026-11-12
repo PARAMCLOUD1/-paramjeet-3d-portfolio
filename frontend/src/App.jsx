@@ -36,11 +36,13 @@ export default function App() {
     <a className="skip-link" href="#main">Skip to content</a>
     <header>
       <a className="brand" href="#main"><BrandWordmark/></a>
-      <button ref={menuButton} className="menu-button" aria-expanded={menu} aria-controls="navigation" onClick={() => setMenu(!menu)}>Menu {menu ? '−' : '+'}</button>
+      <ThemeToggle/>
+      <button ref={menuButton} className="menu-button" aria-label="Menu" aria-expanded={menu} aria-controls="navigation" onClick={() => setMenu(!menu)}>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d={menu ? 'M6 6l12 12M18 6 6 18' : 'M4 6h16M4 12h16M4 18h16'}/></svg>
+      </button>
       <nav id="navigation" className={menu ? 'open' : ''} aria-label="Main navigation">
         {navigation.map(([label, id]) => <a key={id} href={'#' + id} aria-haspopup="dialog" aria-controls={selected ? 'portfolio-dialog' : undefined} onClick={event => { event.preventDefault(); openContent(id, event.currentTarget) }}>{label}</a>)}
         <a href="https://github.com/PARAMCLOUD1" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-        <ThemeToggle/>
       </nav>
     </header>
     <main ref={main} id="main">
