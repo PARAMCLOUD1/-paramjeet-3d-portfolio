@@ -83,11 +83,47 @@ export const education = [
   { date: '2021', title: 'Class X', school: 'Sir McAuliffe High School', result: '87.6%' },
 ]
 
-// Names supplied by Paramjeet; no issuer, credential URL or certificate image inferred.
+// Documented credentials use the supplied original PDFs. Existing entries without
+// documents remain listed without inferring an issuer, completion date or URL.
 export const certifications = [
-  'Fundamentals of Cloud Computing', 'Python Programming', 'Introduction to Data Science',
-  'Introduction to Artificial Intelligence', 'Introduction to NLP', 'Computer Vision 101',
-  'Introduction to Deep Learning', 'Introduction to RPA', 'Microsoft Office (MS Office) — Basic & Advanced',
+  { id: 'cloud-computing', title: 'Fundamentals of Cloud Computing' },
+  {
+    id: 'python-programming', title: 'Python Programming Fundamental',
+    issuer: 'Chandigarh University, offered through Coursera', completedAt: '2026-10-11',
+    pdf: '/certificates/coursera-python-programming-fundamental.pdf',
+    verificationUrl: 'https://coursera.org/verify/M41EOXMPNZ3C',
+  },
+  {
+    id: 'data-science', title: 'Introduction to Data Science',
+    issuer: 'Infosys Springboard', completedAt: '2026-09-19',
+    pdf: '/certificates/infosys-introduction-to-data-science.pdf',
+  },
+  {
+    id: 'artificial-intelligence', title: 'Introduction to Artificial Intelligence',
+    issuer: 'Infosys Springboard', completedAt: '2026-09-19',
+    pdf: '/certificates/infosys-introduction-to-artificial-intelligence.pdf',
+  },
+  {
+    id: 'natural-language-processing', title: 'Introduction to Natural Language Processing',
+    issuer: 'Infosys Springboard', completedAt: '2026-09-19',
+    pdf: '/certificates/infosys-introduction-to-natural-language-processing.pdf',
+  },
+  {
+    id: 'computer-vision', title: 'Computer Vision 101',
+    issuer: 'Infosys Springboard', completedAt: '2026-09-20',
+    pdf: '/certificates/infosys-computer-vision-101.pdf',
+  },
+  {
+    id: 'deep-learning', title: 'Introduction to Deep Learning',
+    issuer: 'Infosys Springboard', completedAt: '2026-09-20',
+    pdf: '/certificates/infosys-introduction-to-deep-learning.pdf',
+  },
+  {
+    id: 'robotic-process-automation', title: 'Introduction to Robotic Process Automation',
+    issuer: 'Infosys Springboard', completedAt: '2026-09-20',
+    pdf: '/certificates/infosys-introduction-to-robotic-process-automation.pdf',
+  },
+  { id: 'microsoft-office', title: 'Microsoft Office (MS Office) — Basic & Advanced' },
 ]
 
 export const destinations = [

@@ -1,121 +1,142 @@
-# PARAMJEET.DEV — Midnight Executive × Obsidian Cloud
+# PARAMJEET Portfolio
 
-V8 refines the existing portfolio with professional proportions and one shared
-information panel system. Hero text is 48–64px on desktop and 32–40px on mobile;
-sections use 30–40px / 24–30px. Buttons retain 44px touch targets and content is
-capped at 1200px. Projects, skills, education and certificates use compact layouts.
+Personal portfolio of **Paramjeet Kaur**, MCA Student | Cloud Computing & DevOps.
+The Sage Green and Cream interface combines a responsive project showcase with an
+interactive architectural office built in Three.js.
 
-About, Projects, Skills, Education, Certifications and Contact navigation opens
-the same complete HTML content as the corresponding 3D exhibit. Native modal
-dialogs sit above the canvas, with internal scrolling, Close/Escape, keyboard
-cycling, focus restoration and reduced-motion-aware GSAP transitions. Opening a
-panel pauses the scene and disables orbit controls; closing preserves the view.
-Direct page sections remain available independently of WebGL.
+[Visit the portfolio](https://paramjeet-studio.vercel.app/) · [GitHub repository](https://github.com/PARAMCLOUD1/-paramjeet-3d-portfolio)
 
-The existing door/handle/camera sequence, verified assets, development-only legacy
-character preview and Flask backend are preserved. Office proportions use metres;
-see PROJECT_REPORT.md for dimensions, architecture and remaining verification.
-No new runtime dependency or hosting deployment is introduced.
+## Features
 
-## Run locally (Windows PowerShell)
+- A two-column introduction and original portrait, with responsive sizing down to 320px.
+- An always-visible Dark/Light Mode toggle, device preference on first visit and saved `localStorage` preference.
+- Seven existing projects with technology tags, implementation details, filters and original repository/demo links. The electricity dashboard includes its real project preview.
+- About, technical skills, certifications and direct contact details, available independently of WebGL.
+- Keyboard-accessible information dialogs with focus trapping, Escape/Close controls and focus restoration.
+- Reduced-motion support, on-demand mobile 3D loading, Low Graphics mode and a 2D fallback.
 
-Backend, from `paramjeet-3d-portfolio/backend`:
+## Interactive 3D experience
 
-```powershell
-..\.venv\Scripts\python.exe app.py
+The cinematic double doors lead into a sage-and-cream office with a workstation,
+server racks, technical display, certificate display and contact terminal. Five
+interactive exhibits open the same portfolio content as the page navigation.
+The scene supports Skip Intro, Replay Intro, Reset View and equivalent keyboard
+controls. Camera travel, door animations and office interactions are preserved.
+
+Lighting and materials follow the selected theme. Rendering pauses when the scene
+is hidden or offscreen; compact graphics reduce pixel density and disable shadows.
+Reduced motion skips the animated entrance. A retained character preview is
+development-only; its [asset provenance](frontend/public/models/LICENSE.md) and
+build/verification scripts remain in the repository.
+
+## Certifications
+
+The page and 3D certificate panel share `frontend/src/content.js`. Seven original
+certificate PDFs open in a new tab from the cards. The six Infosys documents are
+individual, unaltered pages split from the supplied six-page PDF; the Coursera
+document is an unchanged copy of the original.
+
+| Certificate | Issuer | Completed | Document / credential |
+| --- | --- | --- | --- |
+| Introduction to Data Science | Infosys Springboard | September 19, 2026 | [PDF](https://paramjeet-studio.vercel.app/certificates/infosys-introduction-to-data-science.pdf) |
+| Introduction to Natural Language Processing | Infosys Springboard | September 19, 2026 | [PDF](https://paramjeet-studio.vercel.app/certificates/infosys-introduction-to-natural-language-processing.pdf) |
+| Introduction to Artificial Intelligence | Infosys Springboard | September 19, 2026 | [PDF](https://paramjeet-studio.vercel.app/certificates/infosys-introduction-to-artificial-intelligence.pdf) |
+| Computer Vision 101 | Infosys Springboard | September 20, 2026 | [PDF](https://paramjeet-studio.vercel.app/certificates/infosys-computer-vision-101.pdf) |
+| Introduction to Deep Learning | Infosys Springboard | September 20, 2026 | [PDF](https://paramjeet-studio.vercel.app/certificates/infosys-introduction-to-deep-learning.pdf) |
+| Introduction to Robotic Process Automation | Infosys Springboard | September 20, 2026 | [PDF](https://paramjeet-studio.vercel.app/certificates/infosys-introduction-to-robotic-process-automation.pdf) |
+| Python Programming Fundamental | Chandigarh University, offered through Coursera | October 11, 2026 | [PDF](https://paramjeet-studio.vercel.app/certificates/coursera-python-programming-fundamental.pdf) · [Verify credential](https://coursera.org/verify/M41EOXMPNZ3C) |
+
+Existing Fundamentals of Cloud Computing and Microsoft Office (MS Office) — Basic
+& Advanced entries are also retained. Their issuer, date and document links are
+omitted because those details have not been supplied. Generic issuer homepages
+are not presented as credential verification links.
+
+## Technology
+
+| Area | Stack |
+| --- | --- |
+| UI | React 19, Vite 7, Tailwind CSS 4 and custom CSS |
+| 3D and motion | Three.js, React Three Fiber, Drei, GSAP |
+| Quality | ESLint, Vitest, Testing Library, jsdom |
+| Asset tooling | Sharp, local GLB build and verification scripts |
+| Optional API | Python, Flask, Flask-CORS; pytest for its health endpoint |
+| Production hosting | Existing Vercel project `paramjeet-studio` |
+
+Exact dependency versions are recorded in `frontend/package-lock.json`. No remote
+model, texture or font download is required by the default office.
+
+## Project structure
+
+```text
+frontend/
+  public/
+    certificates/       # Seven public certificate PDFs
+    images/             # Original portrait, optimized portrait and project preview
+    models/             # Retained character asset and license
+  scripts/              # Character build and asset verification
+  src/
+    components/         # Header content, projects, certificates, dialogs and UI
+    scene/              # Entrance, office, materials, camera and graphics controls
+    content.js          # Shared portfolio and credential data
+    theme.js            # Theme preference and persistence
+    theme.css           # Light/dark design tokens
+    index.css           # Base layout and component styles
+    sage.css            # Sage presentation and responsive refinements
+    *.test.*            # Tests also live beside components and scene modules
+  vercel.json           # Existing Vite production configuration
+backend/
+  app.py                # Optional /api/health utility
+  tests/                # API tests
+assets/character/       # Source asset retained outside the public build
 ```
 
-Frontend, from `paramjeet-3d-portfolio/frontend`:
+## Local development
 
-```powershell
-npm.cmd ci # first setup or lockfile changes only
-npm.cmd run dev
+Use Node.js 22.12+ and npm. From the repository root:
+
+```sh
+cd frontend
+npm ci
+npm run dev
 ```
 
-Open http://127.0.0.1:5173. Use `npm.cmd` because this machine blocks `npm.ps1`. The Flask development API runs on port 5000; Vite proxies `/api` to it. Existing environment examples and backend behavior are unchanged.
+Open `http://127.0.0.1:5173`. On Windows PowerShell, use `npm.cmd` if script policy
+blocks `npm.ps1`.
 
-## Current experience
-
-The Midnight Executive hero pairs career copy with an interactive office on desktop.
-Mobile and save-data users start with the real portrait; **Explore Portfolio** loads the
-office and begins the entrance. **View Projects**, page sections, education,
-certifications and direct contact links remain available with reduced-motion support.
-
-The project showcase contains all seven supplied names, six verified source links,
-a real electricity-dashboard preview and the previously verified demo. V8 adds
-the supplied stack/algorithm details and a labelled additional demo URL. Project
-details and six skills categories use native keyboard-operable disclosures. Missing
-source evidence, issuers and images are not fabricated; see PROJECT_SOURCES.md.
-
-The room has physical double doors with animated handles, a workstation, server
-racks, technical display, wall timeline, certificate display and contact terminal.
-Each exhibit has an equivalent keyboard button and complete HTML information
-panel. **Skip Intro**, **Replay Intro**, **Low graphics**, **Reset view**, **Close**
-and **Switch to 2D** support exploration. Reduced motion opens a static
-office. Project filters, content and Flask API behavior are preserved.
-
-The historical generic businesswoman, rig and Walk/Idle entrance remain only in the explicit development preview at `http://127.0.0.1:5173/?scene=character#workspace`, with skip/replay controls. Production ignores this query and displays no substitute character. A personalized likeness is **not delivered**. See [CHARACTER.md](CHARACTER.md) and [asset provenance](frontend/public/models/LICENSE.md).
-
-## Rendering and fallback
-
-- 3D is in a separate module, loaded automatically on desktop and on request on mobile/save-data. Switch to 2D unloads it. No remote model/CDN, texture, font or decoder is requested at runtime.
-- Retained preview GLB: 3,561,764 bytes; 46,997 triangles; 14 joints; named `Walk` and `Idle` clips. It is not fetched by the default office. The 15,594,944-byte source stays outside the public/build directory.
-- Demand rendering; offscreen and hidden scenes stop rendering. The dev character preview targets 30 animation updates per second, or 24 with compact graphics; this is not a universal GPU performance guarantee.
-- DPR capped at 1.5; compact screens, low CPU-core hints and the Low graphics control select DPR 1 and disable shadows. No postprocessing, physics, extra lights with shadows, or new runtime dependencies.
-- Reduced-motion users start at the workstation, without camera travel or animated idle. Replay is disabled while that preference is active.
-- Error boundary, WebGL fallback, 25-second model timeout, and graphics-context loss handling retain all 2D content and workspace navigation. Unload/reload the workspace to retry after a graphics failure.
-- Shared model resources stay in the loader cache; per-instance skeleton resources are disposed on unmount.
-
-## Architecture
-
-- `App.jsx`: shared selected-content state, navigation, responsive office loading and 2D toggle.
-- `components/PortfolioDialog.jsx`: top-layer modal lifecycle, keyboard and focus handling.
-- `components/PortfolioContent.jsx`: complete content for all six destinations.
-- `content.js`: shared profile, education, projects, skills and course names.
-- `scene/ExecutiveOffice.jsx`: entrance state, six accessible exhibits and fallbacks.
-- `scene/ExecutiveRoom.jsx` / `officeMaterials.js`: physical room and local materials.
-- `scene/CinematicRig.jsx` / `doorTimeline.js`: camera and door animation, visibility pause/resume.
-- `components/Hero.jsx` / `Hero.css`: responsive hero and scoped GSAP entrance.
-- `scene/Office.jsx`: existing room/hotspots, new laptop/cloud diagram, loading/error UI and entrance orchestration.
-- `scene/Character.jsx`: local GLB loading, cloned skeleton, animation crossfade and camera/route updates.
-- `scene/entrance.js`: doorway-to-workstation route and camera constants.
-- `scene/useScenePreferences.js`: motion preference, compact-device hints and scene visibility.
-- `scripts/build-character.mjs`: reproducible texture optimization, approximate rigging and clip authoring from the preserved CC0 source; uses existing Sharp and Three.js.
-- `scripts/verify-character.mjs`: real Three.js loader, skeleton, deformation, crossfade and asset-budget verification without a GPU.
-- `backend/app.py`: unchanged read-only health API and origin allowlist. No contact submissions are collected.
-
-## Verify
-
-For fallback root cause, development-only context/error logs and the cube ->
-office -> character isolation URLs, see [DEBUGGING_3D.md](DEBUGGING_3D.md).
-Native Canvas fallback content is passive; mounting it never disables WebGL.
-
-From `frontend`:
-
-```powershell
-npm.cmd run lint
-npm.cmd test
+```sh
+npm run lint
+npm test
+npm run build
+npm run preview
 node scripts/verify-character.mjs
-npm.cmd run build
 ```
 
-From `backend`:
+The build writes `frontend/dist/`, including the public certificate PDFs.
+Tests cover portfolio content, navigation, dialogs, themes, certificate metadata
+and assets, graphics preferences and entrance behavior.
 
-```powershell
-..\.venv\Scripts\python.exe -m pytest -q
-Invoke-RestMethod http://127.0.0.1:5000/api/health
-Invoke-RestMethod http://127.0.0.1:5173/api/health
-```
+The portfolio does not require the optional API. To run the retained health utility,
+use Python 3.11+, create a virtual environment at the repository root, install
+`backend/requirements.txt`, then run `python backend/app.py`. Vite proxies `/api`
+to `http://127.0.0.1:5000`; run API tests from `backend/` with `python -m pytest tests -q`.
+The existing environment examples document API configuration.
 
-To rebuild the optimized character, run `node scripts/build-character.mjs` from `frontend`.
+## Vercel deployment
 
-Build warning: the optional Three.js office chunk exceeds Vite's 500 KB advisory
-threshold and stays outside the initial landing bundle. Rendered desktop/mobile
-layout, browser console and GPU performance remain unverified: the browser host is
-unavailable and native app inventory timed out. See PROJECT_REPORT.md for limits.
+Production uses the existing **paramjeet-studio** Vercel project, with source on
+this repository's `main` branch. Deploy from the locally linked `frontend`
+directory; the project's root setting is `.` relative to that upload.
+`frontend/vercel.json` selects Vite and overrides the dashboard defaults with
+`npm ci`, `npm run build` and the `dist` output directory. Certificate files under
+`frontend/public/certificates/` are copied directly into the production build.
 
-## Git and remaining work
+After checks pass, push `main` and run `vercel --prod --scope paramjeet-kaur` from
+the already linked `frontend` directory. Verify the production alias and each PDF
+after deployment; a GitHub push alone is not the production verification step.
+No separate hosting project or backend deployment is needed for this update.
 
-Configured origin: https://github.com/PARAMCLOUD1/-paramjeet-3d-portfolio.git (note the leading hyphen). Access to its existing `main` branch was verified. Save meaningful verified milestones as minor/major commits and push without force. No hosting deployment is authorized by a Git push alone.
+## Author
 
-Remaining: seventh-project source/stack evidence, contact endpoint/delivery integration if required, personalized model and artist-reviewed rig/foot contacts, and rendered desktop/mobile verification. Generic substitution is prohibited by the current brief. See [AUDIT.md](AUDIT.md) for verification history and limitations.
+**Paramjeet Kaur** · MCA Student | Cloud Computing & DevOps
+
+[GitHub](https://github.com/PARAMCLOUD1) · [LinkedIn](https://www.linkedin.com/in/paramjeet-kaur-cloud/) · [Email](mailto:param1539064@gmail.com) · [Phone](tel:+917814433864)

@@ -25,6 +25,7 @@ nav a:hover { text-decoration: underline; text-decoration-color: var(--olive); t
 
 /* The portrait and the genuine office remain the two visual moments. */
 .hero, .hero:has(.hero-world) {
+  min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   align-items: center;
@@ -36,18 +37,21 @@ nav a:hover { text-decoration: underline; text-decoration-color: var(--olive); t
   overflow: clip;
 }
 .hero-copy { min-width: 0; max-width: 600px; }
-.hero h1 { font-size: clamp(48px, 5.5vw, 72px); line-height: 1.04; font-weight: 400; letter-spacing: -.035em; }
+.hero h1 { margin: 0; font-family: var(--display-font); font-size: clamp(48px, 5.5vw, 72px); line-height: 1.04; font-weight: 400; letter-spacing: -.035em; }
+.hero h1 > span { display: block; }
 .hero-title-last { color: var(--accent-primary); }
-.hero-role { margin: 28px 0 20px; padding-left: 16px; border-left: 2px solid var(--olive); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; }
-.hero-tagline { margin: 0 0 28px; max-width: 51ch; font-size: 16px; line-height: 1.8; }
+.hero-role { margin: 28px 0 20px; padding-left: 16px; border-left: 2px solid var(--olive); color: var(--ivory); font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; }
+.hero-tagline { margin: 0 0 28px; max-width: 51ch; font-size: 16px; line-height: 1.8; color: var(--muted); }
 .hero .actions { gap: 12px; }
 .hero .button { min-height: 48px; padding: 12px 20px; gap: 24px; }
-.hero .secondary { background: transparent; border-color: var(--accent-primary); }
+.hero .secondary { background: transparent; color: var(--ivory); border-color: var(--accent-primary); }
+.hero .secondary:hover { background: var(--graphite); color: var(--ivory); border-color: var(--muted); }
+header :focus-visible, .hero :focus-visible { outline-color: var(--accent-soft); }
 .hero-social { margin-top: 20px; gap: 24px; }
 .hero-visual { position: relative; isolation: isolate; display: grid; place-items: center; width: 100%; max-width: 472px; min-height: 480px; justify-self: end; }
 .portrait { position: relative; z-index: 1; width: min(100% - 72px, 320px); max-width: 320px; margin: 0; padding: 12px 12px 0; border: 1px solid #C4CCB8; border-radius: 24px; background: #F7F5ED; color: #25301F; box-shadow: 0 4px 12px rgb(37 48 31 / 8%), 0 24px 56px rgb(37 48 31 / 14%); }
-.portrait img { width: 100%; height: auto; border-radius: 14px; object-fit: contain; filter: none; mix-blend-mode: normal; }
-.portrait figcaption { padding: 16px 4px; color: #25301F; font: 12px/1.5 "Segoe UI", Arial, sans-serif; border: 0; }
+.portrait img { display: block; width: 100%; height: auto; border-radius: 14px; object-fit: contain; object-position: center; filter: none; mix-blend-mode: normal; }
+.portrait figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; padding: 16px 4px; color: #25301F; font: 12px/1.5 "Segoe UI", Arial, sans-serif; border: 0; }
 .portrait figcaption span:last-child { color: #58634D; }
 .clay-shapes { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .clay { position: absolute; box-shadow: inset -12px -16px 28px rgb(37 48 31 / 10%), 0 16px 24px rgb(37 48 31 / 10%); }
@@ -61,7 +65,7 @@ nav a:hover { text-decoration: underline; text-decoration-color: var(--olive); t
 .entrance-toolbar, .scene-label { background: var(--light-surface); }
 .executive-office .entrance-toolbar { padding: 16px 20px; }
 .executive-office .workspace-controls { padding: 20px; gap: 12px; }
-.workspace-controls button, .entrance-toolbar button, .back-to-office { border-radius: 10px; }
+.workspace-controls button, .entrance-toolbar button { border-radius: 10px; }
 .workspace-controls button[aria-pressed=true], .entrance-toolbar button[aria-pressed=true] { border-color: var(--accent-primary); }
 .door-welcome { padding: 24px; background: var(--card-surface); }
 .door-welcome h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 20px; }
@@ -114,6 +118,12 @@ nav a:hover { text-decoration: underline; text-decoration-color: var(--olive); t
 .certificate-list li { padding: 24px; min-height: 128px; border: 1px solid var(--border-subtle); border-radius: 16px; background: var(--card-surface); gap: 12px; }
 .certificate-list h3 { font-size: 17px; font-weight: 500; }
 .certificate-number { padding-top: 3px; }
+.certificate-links { display: flex; flex-wrap: wrap; gap: 0 16px; margin-top: 12px; }
+.certificate-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-primary); font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+.certificate-links a:hover { text-decoration-thickness: 2px; }
+.certificate-list.certificate-list--panel { grid-template-columns: minmax(0, 1fr); }
+.certificate-list--panel h3 { font-size: 17px; margin: 0; }
+.certificate-list--panel p { font-size: 13px; margin: 8px 0 0; }
 .contact, footer {
   --text-primary: #F7F5ED;
   --text-secondary: #D5DFC3;

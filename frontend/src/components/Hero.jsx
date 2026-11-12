@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
-import './Hero.css'
 import { introduction, professionalTitle } from '../content'
 
 export default function Hero({ onEnterOffice, world }) {

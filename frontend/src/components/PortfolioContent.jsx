@@ -1,4 +1,5 @@
-import { certifications, profile, projects, skillCategories, professionalTitle } from '../content'
+import { profile, projects, skillCategories, professionalTitle } from '../content'
+import CertificateList from './CertificateList'
 import ContactDescription from './ContactDescription'
 import ContactDetails from './ContactDetails'
 
@@ -20,11 +21,11 @@ export default function PortfolioContent({ id }) {
     <div className="panel-links">{project.repository && <a href={project.repository} target="_blank" rel="noreferrer">GitHub ↗</a>}{project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Live demo ↗</a>}{project.suppliedDemo && <a href={project.suppliedDemo} target="_blank" rel="noreferrer">Alternative demo ↗</a>}</div>
   </article>)}</div>
   if (id === 'skills') return <div className="panel-skills">{skillCategories.map(category => <section key={category.title}><h3>{category.title}</h3><p>{category.description}</p><Tags items={category.tools}/>{category.learning && <><p className="panel-meta">Currently learning</p><Tags items={category.learning}/></>}</section>)}</div>
-  if (id === 'certifications') return <><ul className="panel-certificates">{certifications.map(name => <li key={name}>{name}</li>)}</ul></>
+  if (id === 'certifications') return <CertificateList panel/>
   if (id === 'contact') return <div className="contact-grid contact-grid--panel"><div><ContactDescription/></div><ContactDetails/></div>
   return null
 }
 
-export function Tags({ items }) {
+function Tags({ items }) {
   return items.length ? <ul className="technology-tags">{items.map(item => <li key={item}>{item}</li>)}</ul> : null
 }

@@ -25,7 +25,7 @@ test('Education is removed while its source data and Certifications are preserve
   expect(portfolioViews.some(([id]) => id === 'education')).toBe(false)
   expect(education).toHaveLength(4)
   const section = screen.getByRole('heading', { name: 'Certifications' }).closest('section')
-  expect(within(section).getAllByRole('heading', { level: 3 }).map(node => node.textContent)).toEqual(certifications)
+  expect(within(section).getAllByRole('heading', { level: 3 }).map(node => node.textContent)).toEqual(certifications.map(certificate => certificate.title))
   expect(within(section).getAllByRole('listitem')).toHaveLength(9)
   expect(screen.getByRole('link', { name: /param1539064/ })).toHaveAttribute('href', 'mailto:param1539064@gmail.com')
   expect(screen.getByRole('link', { name: /7814433864/ })).toHaveAttribute('href', 'tel:+917814433864')

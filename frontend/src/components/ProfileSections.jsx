@@ -1,4 +1,5 @@
-import { certifications, profile, skillCategories } from '../content'
+import { profile, skillCategories } from '../content'
+import CertificateList from './CertificateList'
 import ContactDescription from './ContactDescription'
 import ContactDetails from './ContactDetails'
 
@@ -30,7 +31,7 @@ export default function ProfileSections() {
 
     <section id="certifications" className="section certifications" aria-labelledby="certifications-title">
       <div className="section-heading" data-scroll-reveal><div><p className="eyebrow">06 / Certifications</p><h2 id="certifications-title">Certifications</h2></div></div>
-      <ol className="certificate-list">{certifications.map((name, index) => <li key={name}><span className="certificate-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><div><h3>{name}</h3></div></li>)}</ol>
+      <CertificateList/>
     </section>
 
     <section id="contact" className="contact section" aria-labelledby="contact-title">
